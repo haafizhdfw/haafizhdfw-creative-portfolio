@@ -365,7 +365,7 @@
       background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
       background-size: 12.5% 100%;
       background-repeat: repeat-x;
-      min-height: clamp(120px, 15vw, 260px);
+      min-height: clamp(90px, 11.5vw, 205px);
     }
     .gs-word {
       grid-row: 1;
@@ -376,7 +376,7 @@
       color: var(--black);
       white-space: nowrap;
       z-index: 2;
-      padding: 8px 0 8px 20px;
+      padding: 4px 0 4px 20px;
     }
     .gs-dot {
       grid-row: 1;
@@ -1918,13 +1918,29 @@
       io.observe(el);
     });
 
-    /* Grid showcase — diagonal scroll pan */
+    /* Grid showcase — diagonal scroll pan (ranges exactly across the real content: Engineer → the Growth → of Digital → Marketing.) */
     (function () {
       const section = document.querySelector('.grid-showcase');
       const pan = document.querySelector('.gs-pan');
       if (!section || !pan) return;
       const desktopQuery = window.matchMedia('(min-width: 901px)');
       let raf = null;
+      let maxX = 0, maxY = 0;
+
+      function measure() {
+        if (!desktopQuery.matches) return;
+        const panRect = pan.getBoundingClientRect();
+        const items = pan.querySelectorAll('.gs-word, .gs-dot');
+        let right = panRect.left, bottom = panRect.top;
+        items.forEach(function (el) {
+          const r = el.getBoundingClientRect();
+          if (r.right > right) right = r.right;
+          if (r.bottom > bottom) bottom = r.bottom;
+        });
+        const viewportH = window.innerHeight - 88;
+        maxX = Math.max(0, (right - panRect.left) - section.clientWidth);
+        maxY = Math.max(0, (bottom - panRect.top) - viewportH);
+      }
 
       function update() {
         raf = null;
@@ -1938,8 +1954,6 @@
         let progress = scrollable > 0 ? -rect.top / scrollable : 0;
         progress = Math.max(0, Math.min(1, progress));
 
-        const maxX = Math.max(0, pan.scrollWidth - section.clientWidth);
-        const maxY = Math.max(0, pan.scrollHeight - vh);
         pan.style.transform =
           'translate(' + (-progress * maxX) + 'px, calc(-50% - ' + (progress * maxY) + 'px))';
       }
@@ -1948,8 +1962,14 @@
         if (raf === null) raf = requestAnimationFrame(update);
       }
 
+      function onResize() {
+        measure();
+        onScroll();
+      }
+
       window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll);
+      window.addEventListener('resize', onResize);
+      measure();
       update();
     })();
 
