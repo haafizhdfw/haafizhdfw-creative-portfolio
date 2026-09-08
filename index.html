@@ -693,81 +693,6 @@
       padding-bottom: 8px;
     }
 
-    .project-list { display: flex; flex-direction: column; gap: 2px; }
-
-    .proj-row {
-      position: relative; overflow: hidden;
-      height: 260px; cursor: pointer;
-      display: flex; align-items: flex-end;
-      border-top: 1px solid var(--line);
-      transition: background .3s;
-    }
-    .proj-row:hover { background: #e8e7e1; }
-    .proj-row.with-img { height: 400px; border-top: none; }
-
-    .proj-bg {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      filter: brightness(.5);
-      transition: filter .5s, transform .6s;
-    }
-    .proj-row.with-img:hover .proj-bg {
-      filter: brightness(.6);
-      transform: scale(1.03);
-    }
-
-    .proj-inner {
-      position: relative; z-index: 2;
-      width: 100%; padding: 36px 48px;
-      display: flex; align-items: flex-end;
-      justify-content: space-between;
-    }
-
-    .proj-left { display: flex; flex-direction: column; gap: 6px; }
-    .proj-num {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
-      color: var(--lgray);
-    }
-    .proj-row.with-img .proj-num { color: rgba(255,255,255,.4); }
-    .proj-cat {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
-      color: var(--gray); text-transform: uppercase;
-    }
-    .proj-row.with-img .proj-cat { color: rgba(255,255,255,.5); }
-    .proj-name {
-      font-size: clamp(28px, 3.5vw, 48px);
-      font-weight: 800; letter-spacing: var(--ls-tight);
-      color: var(--black); line-height: 1;
-    }
-    .proj-row.with-img .proj-name { color: var(--white); }
-
-    .proj-right {
-      display: flex; align-items: flex-end; gap: 20px;
-    }
-    .proj-year {
-      font-size: 13px; color: var(--gray); font-weight: 500;
-      letter-spacing: var(--ls-normal);
-    }
-    .proj-row.with-img .proj-year { color: rgba(255,255,255,.4); }
-    .proj-arrow {
-      width: 48px; height: 48px;
-      border: 1.5px solid var(--line);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; color: var(--black);
-      transition: all .25s;
-    }
-    .proj-row.with-img .proj-arrow {
-      border-color: rgba(255,255,255,.25);
-      color: var(--white);
-    }
-    .proj-row:hover .proj-arrow {
-      background: var(--black); color: var(--white);
-      border-color: var(--black);
-      transform: rotate(45deg);
-    }
-    .proj-row.with-img:hover .proj-arrow {
-      background: var(--white); color: var(--black);
-    }
 
     /* ─────────────────────────────────────────────
        PROJECT GRID (card layout, ala Lumora)
@@ -845,6 +770,24 @@
       background: rgba(255,255,255,.05);
     }
 
+    /* Featured card (Supersub) — spans full grid width */
+    .proj-card-featured {
+      grid-column: 1 / -1;
+      min-height: 480px;
+    }
+    .proj-card-head {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; gap: 18px;
+    }
+    .proj-card-metrics {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: flex-end;
+    }
+    .proj-card-tagline {
+      font-size: 14px; color: rgba(255,255,255,.55);
+      margin: -6px 0 16px; max-width: 480px; line-height: 1.5;
+    }
+
     /* ─────────────────────────────────────────────
        PROJECT CATEGORY LABELS
     ───────────────────────────────────────────── */
@@ -868,23 +811,7 @@
       letter-spacing: var(--ls-normal); margin-left: 4px;
     }
 
-    /* Featured Supersub card */
-    .proj-featured {
-      height: 480px !important;
-    }
-    .proj-tagline {
-      font-size: 13px; color: rgba(255,255,255,.5);
-      margin-top: 6px; max-width: 480px;
-      line-height: 1.5; letter-spacing: var(--ls-normal);
-    }
-
-    /* Metrics chips in top-right of featured card */
-    .proj-metrics {
-      position: absolute; top: 32px; right: 48px;
-      display: flex; flex-wrap: wrap; gap: 8px;
-      justify-content: flex-end; z-index: 3;
-      max-width: 380px;
-    }
+    /* Metric chips (used in the featured Supersub card) */
     .metric-chip {
       padding: 6px 14px;
       border: 1px solid rgba(255,255,255,.2);
@@ -1076,7 +1003,6 @@
       .logos-label { padding: 0 24px; }
       .projects-head { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
       .projects-desc { text-align: left; max-width: 100%; }
-      .proj-inner { padding: 28px 24px; }
       .project-grid { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 20px; }
       .proj-card { min-height: 360px; padding: 28px; }
       #contact { padding: 80px 24px; }
@@ -1233,17 +1159,6 @@
       .cat-name { font-size: 20px; }
       .cat-desc { font-size: 13px; margin-left: 0; width: 100%; }
 
-      /* Project cards */
-      .proj-row { height: 200px; }
-      .proj-row.with-img { height: 280px; }
-      .proj-featured { height: 320px !important; }
-      .proj-inner { padding: 20px 20px; }
-      .proj-name { font-size: clamp(22px, 7vw, 36px); }
-      .proj-cat { font-size: 10px; letter-spacing: 0.08em; }
-      .proj-num { font-size: 10px; }
-      .proj-year { font-size: 11px; }
-      .proj-arrow { width: 36px; height: 36px; font-size: 14px; }
-
       /* Project grid cards */
       .project-grid { padding: 0 20px 40px; gap: 16px; }
       .proj-card { min-height: 300px; padding: 22px; border-radius: 24px; }
@@ -1252,14 +1167,9 @@
       .proj-card-badge { width: 36px; height: 36px; font-size: 13px; }
       .proj-card-tag { font-size: 11px; padding: 5px 12px; }
       .proj-card-watermark { font-size: 60px; }
-      .proj-tagline { font-size: 12px; max-width: 90%; }
-
-      /* Metrics chips */
-      .proj-metrics {
-        top: 16px; right: 16px;
-        gap: 6px; max-width: 260px;
-      }
-      .metric-chip { font-size: 9px; padding: 4px 10px; }
+      .proj-card-featured { min-height: 400px; }
+      .proj-card-tagline { font-size: 12px; margin-bottom: 12px; }
+      .proj-card-metrics .metric-chip { font-size: 9px; padding: 4px 10px; }
 
       /* ── CONTACT ── */
       #contact {
@@ -1326,9 +1236,7 @@
       .about-hi { font-size: clamp(30px, 9.5vw, 42px); }
       .projects-title { font-size: clamp(64px, 20vw, 110px); }
       .contact-headline { font-size: clamp(32px, 10vw, 46px); }
-      .proj-row { height: 180px; }
-      .proj-row.with-img { height: 240px; }
-      .proj-featured { height: 280px !important; }
+      .proj-card-featured { min-height: 340px; }
     }
   </style>
 </head>
@@ -1629,27 +1537,34 @@
       <span class="cat-desc">Strategy · Campaigns · CRM · Automation</span>
     </div>
 
-    <div class="project-list">
+    <div class="project-grid">
       <!-- Supersub — featured card -->
-      <a href="supersub.html" class="proj-row proj-featured with-img reveal" style="text-decoration:none;">
-        <div class="proj-bg" style="background-image:url('supersub-bg.png');"></div>
-        <!-- Metrics overlay top-right -->
-        <div class="proj-metrics">
-          <div class="metric-chip">292K TikTok Views</div>
-          <div class="metric-chip">1,478 Leads</div>
-          <div class="metric-chip">$3.87 Avg CPL</div>
-          <div class="metric-chip">3 Yrs · NZ Construction</div>
-        </div>
-        <div class="proj-inner">
-          <div class="proj-left">
-            <div class="proj-num">/001/</div>
-            <div class="proj-cat">{ Social Media } { Paid Ads } { CRM } { SEO } { AI Automation }</div>
-            <div class="proj-name">Supersub NZ</div>
-            <div class="proj-tagline">Full-stack digital marketing — built the systems, ran the channels, read the data.</div>
+      <a href="supersub.html" class="proj-card proj-card-featured reveal">
+        <div class="proj-card-bg" style="background-image:url('supersub-bg.png');"></div>
+        <div class="proj-card-overlay"></div>
+        <div class="proj-card-watermark">hd.</div>
+        <div class="proj-card-head">
+          <div class="proj-card-top">
+            <span class="proj-card-meta">001 — 2022–Present</span>
+            <span class="proj-card-badge">↗</span>
           </div>
-          <div class="proj-right">
-            <div class="proj-year">/2022–Present</div>
-            <div class="proj-arrow">↗</div>
+          <div class="proj-card-metrics">
+            <span class="metric-chip">292K TikTok Views</span>
+            <span class="metric-chip">1,478 Leads</span>
+            <span class="metric-chip">$3.87 Avg CPL</span>
+            <span class="metric-chip">3 Yrs · NZ Construction</span>
+          </div>
+        </div>
+        <div class="proj-card-bottom">
+          <h3 class="proj-card-name">Supersub NZ</h3>
+          <p class="proj-card-tagline">Full stack digital marketing. Built the systems, ran the channels, read the data.</p>
+          <div class="proj-card-tags">
+            <span class="proj-card-tag">Social Media</span>
+            <span class="proj-card-tag">Paid Ads</span>
+            <span class="proj-card-tag">CRM</span>
+            <span class="proj-card-tag">SEO</span>
+            <span class="proj-card-tag">AI Automation</span>
+            <span class="proj-card-tag">Email Automation</span>
           </div>
         </div>
       </a>
