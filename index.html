@@ -315,6 +315,62 @@
     }
 
     /* ─────────────────────────────────────────────
+       GRID SHOWCASE — big staggered headline w/ grid lines + dots
+    ───────────────────────────────────────────── */
+    .grid-showcase {
+      padding: 90px 0 100px;
+      background: var(--bg);
+    }
+    .gs-labels {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      padding: 0 48px;
+      margin-bottom: 10px;
+    }
+    .gs-labels span {
+      font-size: 13px; font-weight: 600;
+      letter-spacing: .05em; color: var(--gray);
+    }
+    .gs-labels span:first-child { visibility: hidden; }
+
+    .gs-grid {
+      margin: 0 48px;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+    }
+    .gs-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
+      background-size: 20% 100%;
+      background-repeat: repeat-x;
+      min-height: clamp(64px, 9vw, 130px);
+    }
+    .gs-word {
+      grid-row: 1;
+      font-size: clamp(38px, 6vw, 92px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--black);
+      white-space: nowrap;
+      z-index: 2;
+      padding: 8px 0 8px 20px;
+    }
+    .gs-dot {
+      grid-row: 1;
+      place-self: center;
+      width: clamp(26px, 3.4vw, 52px);
+      height: clamp(26px, 3.4vw, 52px);
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    /* ─────────────────────────────────────────────
        ABOUT
     ───────────────────────────────────────────── */
     #about {
@@ -1003,6 +1059,10 @@
       .projects-desc { text-align: left; max-width: 100%; }
       .project-grid { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 20px; }
       .proj-card { min-height: 360px; padding: 28px; }
+      .grid-showcase { padding: 60px 0 70px; }
+      .gs-labels { padding: 0 24px; }
+      .gs-grid { margin: 0 24px; }
+      .gs-word { padding-left: 14px; }
       #contact { padding: 80px 24px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -1117,6 +1177,18 @@
       .about-card-socials a { width: 36px; height: 36px; }
       .about-card-body { padding: 16px 24px 24px; }
       .about-card-services-list li { font-size: 14px; padding: 12px 0; }
+
+      /* ── GRID SHOWCASE ── */
+      .grid-showcase { padding: 48px 0 56px; }
+      .gs-labels { display: none; }
+      .gs-grid { margin: 0 20px; border-left: none; border-right: none; }
+      .gs-row {
+        display: flex; flex-wrap: wrap; align-items: center;
+        gap: 8px 12px; background-image: none;
+        min-height: auto; padding: 14px 20px;
+      }
+      .gs-word { font-size: clamp(26px, 9vw, 40px); padding: 0; white-space: normal; }
+      .gs-dot { width: 18px; height: 18px; }
 
       /* ── LOGOS ── */
       #logos { padding: 32px 0; }
@@ -1330,6 +1402,33 @@
       <div class="stat-item"><span class="stat-n">3+</span><span class="stat-slash">/</span><span class="stat-l">Years of Experience</span></div>
     </div>
   </div>
+
+  <!-- ══════════════ GRID SHOWCASE ══════════════ -->
+  <section class="grid-showcase">
+    <div class="gs-labels">
+      <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+    </div>
+    <div class="gs-grid reveal">
+      <div class="gs-row">
+        <div class="gs-word" style="grid-column: 1;">Engineer</div>
+      </div>
+      <div class="gs-row">
+        <div class="gs-word" style="grid-column: 2;">the</div>
+        <div class="gs-dot" style="grid-column: 3; background:#E6322A;"></div>
+        <div class="gs-word" style="grid-column: 4;">Growth</div>
+      </div>
+      <div class="gs-row">
+        <div class="gs-dot" style="grid-column: 2; background:#CBFF00;"></div>
+        <div class="gs-word" style="grid-column: 3;">of</div>
+        <div class="gs-dot" style="grid-column: 4; background:#2663FF;"></div>
+        <div class="gs-word" style="grid-column: 5;">Digital</div>
+      </div>
+      <div class="gs-row">
+        <div class="gs-dot" style="grid-column: 4; background:#E6322A;"></div>
+        <div class="gs-word" style="grid-column: 5;">Marketing.</div>
+      </div>
+    </div>
+  </section>
 
   <!-- ══════════════ ABOUT ══════════════ -->
   <section id="about">
