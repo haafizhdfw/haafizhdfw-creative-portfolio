@@ -330,7 +330,8 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-top: 40px;
     }
     .gs-labels {
       display: grid;
@@ -347,6 +348,7 @@
     .gs-viewport {
       position: relative;
       overflow: hidden;
+      height: min(56vh, 540px);
     }
     .gs-pan {
       position: absolute;
@@ -1936,21 +1938,21 @@
       io.observe(el);
     });
 
-    /* Grid showcase — shifts from "Engineer the Growth" to "of Digital Marketing." on scroll */
+    /* Grid showcase — smoothly slides from "Engineer the Growth" to "of Digital Marketing." as you scroll */
     (function () {
       const section = document.querySelector('.grid-showcase');
       const pan = document.querySelector('.gs-pan');
       const viewport = document.querySelector('.gs-viewport');
-      const sceneA = document.querySelector('.gs-scene-a');
-      if (!section || !pan || !viewport || !sceneA) return;
+      if (!section || !pan || !viewport) return;
       const desktopQuery = window.matchMedia('(min-width: 901px)');
       let raf = null;
       let maxY = 0;
 
       function measure() {
         if (!desktopQuery.matches) return;
-        maxY = sceneA.getBoundingClientRect().height;
-        viewport.style.height = maxY + 'px';
+        const contentHeight = pan.scrollHeight;
+        const viewportHeight = viewport.clientHeight;
+        maxY = Math.max(0, contentHeight - viewportHeight);
       }
 
       function update() {
