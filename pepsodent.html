@@ -166,22 +166,21 @@
     .section-lead strong { color: var(--black); font-weight: 600; }
 
     /* ── Stat row ── */
-    .stat-row { display: grid; gap: 2px; margin-bottom: 48px; }
+    .stat-row { display: grid; gap: 10px; margin-bottom: 48px; }
     .stat-row-4 { grid-template-columns: repeat(4,1fr); }
     .stat-row-3 { grid-template-columns: repeat(3,1fr); }
     .stat-cell {
       background: var(--white); padding: 28px 24px;
-      border: 1px solid var(--line);
+      border: 1px solid var(--black);
+      border-radius: 14px;
     }
-    .stat-cell.dark { background: var(--black); }
-    .stat-cell:first-child { border-radius: 14px 0 0 14px; }
-    .stat-cell:last-child  { border-radius: 0 14px 14px 0; }
+    .stat-cell.dark { background: var(--white); }
     .stat-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lgray); margin-bottom: 8px; }
-    .stat-cell.dark .stat-label { color: rgba(255,255,255,.3); }
+    .stat-cell.dark .stat-label { color: var(--lgray); }
     .stat-value { font-size: clamp(24px,3vw,40px); font-weight: 900; letter-spacing: var(--ls-tight); color: var(--black); line-height: 1; margin-bottom: 4px; }
-    .stat-cell.dark .stat-value { color: var(--white); }
+    .stat-cell.dark .stat-value { color: var(--black); }
     .stat-note { font-size: 12px; color: var(--lgray); letter-spacing: var(--ls-normal); }
-    .stat-cell.dark .stat-note { color: rgba(255,255,255,.3); }
+    .stat-cell.dark .stat-note { color: var(--lgray); }
 
     /* ── Role list ── */
     .role-list { display: flex; flex-direction: column; margin-bottom: 0; }
