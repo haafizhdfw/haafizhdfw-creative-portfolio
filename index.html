@@ -748,26 +748,81 @@
 
     .projects-head {
       padding: 0 48px;
-      display: flex; align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 40px;
     }
     .projects-title {
-      font-size: 180px;
+      font-size: clamp(36px, 4.5vw, 56px);
       font-weight: 500;
-      letter-spacing: -0.07em;
-      line-height: 0.88;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
       color: var(--black);
     }
     .projects-title .proj-dot {
       color: #FF0000;
     }
-    .projects-desc {
-      font-size: 22px; color: var(--gray);
-      max-width: 480px; text-align: right;
-      line-height: 1.6; font-weight: 400;
+    .projects-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    .projects-all-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 600;
       letter-spacing: var(--ls-normal);
-      padding-bottom: 8px;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .link-arrow-circle {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      transition: all .25s;
+      flex-shrink: 0;
+    }
+    .projects-all-link:hover .link-arrow-circle {
+      background: var(--black); color: var(--white); border-color: var(--black);
+    }
+    .projects-focus {
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    }
+    .focus-label {
+      font-size: 14px; font-weight: 600; color: var(--black);
+      letter-spacing: var(--ls-normal);
+    }
+    .focus-tag {
+      font-size: 14px; color: var(--gray); font-weight: 400;
+      letter-spacing: var(--ls-normal);
+    }
+    .focus-tag sup {
+      font-size: 10px; margin-left: 2px; color: var(--lgray);
+    }
+    .projects-filmstrip {
+      display: flex;
+      padding-left: 48px;
+      margin-bottom: 64px;
+      overflow: hidden;
+    }
+    .filmstrip-img {
+      flex: 0 0 auto;
+      width: clamp(140px, 14vw, 220px);
+      height: clamp(180px, 18vw, 280px);
+      background-size: cover;
+      background-position: center;
+      background-color: #e5e5e0;
+      clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
+      margin-right: -20px;
     }
 
 
@@ -1076,8 +1131,8 @@
       .about-card-outer { max-width: 420px; position: static; margin-top: 0; }
       #logos { padding: 40px 0; }
       .logos-label { padding: 0 24px; }
-      .projects-head { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
-      .projects-desc { text-align: left; max-width: 100%; }
+      .projects-head { padding: 0 24px; gap: 16px; }
+      .projects-filmstrip { padding-left: 24px; }
       .project-grid { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 20px; }
       .proj-card { min-height: 360px; padding: 28px; }
       .grid-showcase { height: auto; padding: 60px 0 48px; }
@@ -1229,20 +1284,15 @@
       #projects { padding: 56px 0 0; }
       .projects-head {
         padding: 0 20px;
-        flex-direction: column;
-        align-items: flex-start;
         gap: 16px;
-        margin-bottom: 40px;
+        margin-bottom: 32px;
       }
       .projects-title {
-        font-size: clamp(72px, 22vw, 130px);
-        letter-spacing: -0.07em;
+        font-size: clamp(30px, 9vw, 40px);
+        letter-spacing: -0.02em;
       }
-      .projects-desc {
-        font-size: 16px;
-        max-width: 100%;
-        text-align: left;
-      }
+      .projects-meta-row { flex-direction: column; align-items: flex-start; gap: 12px; border-top: none; padding-top: 0; }
+      .projects-filmstrip { display: none; }
 
       /* Category labels */
       .proj-category-label {
@@ -1329,7 +1379,7 @@
       .hero-subtitle { font-size: clamp(24px, 8vw, 36px); }
       .hero-photo { height: 46vh; }
       .about-hi { font-size: clamp(30px, 9.5vw, 42px); }
-      .projects-title { font-size: clamp(64px, 20vw, 110px); }
+      .projects-title { font-size: clamp(26px, 9vw, 34px); }
       .contact-headline { font-size: clamp(32px, 10vw, 46px); }
       .proj-card-featured { min-height: 340px; }
     }
@@ -1659,9 +1709,22 @@
   <section id="projects">
     <div class="projects-head reveal">
       <div class="projects-title">projects<span class="proj-dot">.</span></div>
-      <div class="projects-desc">
-        I've helped businesses to grow<br>their presence across digital channels.<br>Here are some of my projects.
+      <div class="projects-meta-row">
+        <a href="#projects" class="projects-all-link">All projects <span class="link-arrow-circle">→</span></a>
+        <div class="projects-focus">
+          <span class="focus-label">See my focus areas</span>
+          <span class="focus-tag">Digital Marketing<sup>2</sup></span>
+          <span class="focus-tag">Creative Content<sup>6</sup></span>
+        </div>
       </div>
+    </div>
+
+    <div class="projects-filmstrip reveal">
+      <div class="filmstrip-img"style="background-image:url('supersub-bg.png');"></div>
+      <div class="filmstrip-img"style="background-image:url('sepasi-cafe-bg.jpeg');"></div>
+      <div class="filmstrip-img"style="background-image:url('npure-bg.jpeg');"></div>
+      <div class="filmstrip-img"style="background-image:url('granova-bg.jpeg');"></div>
+      <div class="filmstrip-img"style="background-image:url('voilen-etoile-bg.jpeg');"></div>
     </div>
 
     <!-- ── CATEGORY 01: DIGITAL MARKETING ── -->
