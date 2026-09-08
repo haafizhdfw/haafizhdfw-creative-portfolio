@@ -315,11 +315,12 @@
     }
 
     /* ─────────────────────────────────────────────
-       GRID SHOWCASE — big staggered headline, pans diagonally on scroll
+       GRID SHOWCASE — big staggered headline, shifts from
+       "Engineer the Growth" to "of Digital Marketing." on scroll
     ───────────────────────────────────────────── */
     .grid-showcase {
       position: relative;
-      height: 220vh;
+      height: 170vh;
       background: var(--bg);
     }
     .gs-sticky {
@@ -328,15 +329,8 @@
       height: calc(100vh - 88px);
       overflow: hidden;
       display: flex;
-      align-items: center;
-    }
-    .gs-pan {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 175vw;
-      transform: translate(0, -50%);
-      will-change: transform;
+      flex-direction: column;
+      justify-content: center;
     }
     .gs-labels {
       display: grid;
@@ -350,12 +344,25 @@
     }
     .gs-labels span:first-child { visibility: hidden; }
 
+    .gs-viewport {
+      position: relative;
+      overflow: hidden;
+    }
+    .gs-pan {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transform: translateY(0);
+      will-change: transform;
+    }
     .gs-grid {
       margin: 0 48px;
-      border-top: 1px solid var(--line);
       border-left: 1px solid var(--line);
       border-right: 1px solid var(--line);
     }
+    .gs-scene-a { border-top: 1px solid var(--line); }
+    .gs-scene-b { border-top: 1px solid var(--line); }
     .gs-row {
       position: relative;
       display: flex;
@@ -1080,6 +1087,7 @@
       .proj-card { min-height: 360px; padding: 28px; }
       .grid-showcase { height: auto; padding: 60px 0 70px; }
       .gs-sticky { position: static; height: auto; overflow: visible; display: block; top: auto; }
+      .gs-viewport { overflow: visible; height: auto !important; }
       .gs-pan { position: static; width: 100%; top: auto; left: auto; transform: none !important; }
       .gs-labels { grid-template-columns: repeat(5, 1fr); padding: 0 24px; }
       .gs-grid { margin: 0 24px; }
@@ -1593,30 +1601,36 @@
   <!-- ══════════════ GRID SHOWCASE ══════════════ -->
   <section class="grid-showcase">
     <div class="gs-sticky">
-      <div class="gs-pan">
-        <div class="gs-labels">
-          <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span>
-        </div>
-        <div class="gs-grid">
-          <div class="gs-row gs-row-1">
-            <div class="gs-dot" style="background:#CBFF00;"></div>
-            <div class="gs-word">Engineer</div>
-          </div>
-          <div class="gs-row gs-row-2">
-            <div class="gs-dot" style="background:#2663FF;"></div>
-            <div class="gs-word">the</div>
-            <div class="gs-dot" style="background:#E6322A;"></div>
-            <div class="gs-word">Growth</div>
-          </div>
-          <div class="gs-row gs-row-3">
-            <div class="gs-dot" style="background:#CBFF00;"></div>
-            <div class="gs-word">of</div>
-            <div class="gs-dot" style="background:#2663FF;"></div>
-            <div class="gs-word">Digital</div>
-          </div>
-          <div class="gs-row gs-row-4">
-            <div class="gs-dot" style="background:#E6322A;"></div>
-            <div class="gs-word">Marketing.</div>
+      <div class="gs-labels">
+        <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span>
+      </div>
+      <div class="gs-viewport">
+        <div class="gs-pan">
+          <div class="gs-grid">
+            <div class="gs-scene gs-scene-a">
+              <div class="gs-row gs-row-1">
+                <div class="gs-dot" style="background:#CBFF00;"></div>
+                <div class="gs-word">Engineer</div>
+              </div>
+              <div class="gs-row gs-row-2">
+                <div class="gs-dot" style="background:#2663FF;"></div>
+                <div class="gs-word">the</div>
+                <div class="gs-dot" style="background:#E6322A;"></div>
+                <div class="gs-word">Growth</div>
+              </div>
+            </div>
+            <div class="gs-scene gs-scene-b">
+              <div class="gs-row gs-row-3">
+                <div class="gs-dot" style="background:#CBFF00;"></div>
+                <div class="gs-word">of</div>
+                <div class="gs-dot" style="background:#2663FF;"></div>
+                <div class="gs-word">Digital</div>
+              </div>
+              <div class="gs-row gs-row-4">
+                <div class="gs-dot" style="background:#E6322A;"></div>
+                <div class="gs-word">Marketing.</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1922,28 +1936,21 @@
       io.observe(el);
     });
 
-    /* Grid showcase — diagonal scroll pan (ranges exactly across the real content: Engineer → the Growth → of Digital → Marketing.) */
+    /* Grid showcase — shifts from "Engineer the Growth" to "of Digital Marketing." on scroll */
     (function () {
       const section = document.querySelector('.grid-showcase');
       const pan = document.querySelector('.gs-pan');
-      if (!section || !pan) return;
+      const viewport = document.querySelector('.gs-viewport');
+      const sceneA = document.querySelector('.gs-scene-a');
+      if (!section || !pan || !viewport || !sceneA) return;
       const desktopQuery = window.matchMedia('(min-width: 901px)');
       let raf = null;
-      let maxX = 0, maxY = 0;
+      let maxY = 0;
 
       function measure() {
         if (!desktopQuery.matches) return;
-        const panRect = pan.getBoundingClientRect();
-        const items = pan.querySelectorAll('.gs-word, .gs-dot');
-        let right = panRect.left, bottom = panRect.top;
-        items.forEach(function (el) {
-          const r = el.getBoundingClientRect();
-          if (r.right > right) right = r.right;
-          if (r.bottom > bottom) bottom = r.bottom;
-        });
-        const viewportH = window.innerHeight - 88;
-        maxX = Math.max(0, (right - panRect.left) - section.clientWidth);
-        maxY = Math.max(0, (bottom - panRect.top) - viewportH);
+        maxY = sceneA.getBoundingClientRect().height;
+        viewport.style.height = maxY + 'px';
       }
 
       function update() {
@@ -1958,8 +1965,7 @@
         let progress = scrollable > 0 ? -rect.top / scrollable : 0;
         progress = Math.max(0, Math.min(1, progress));
 
-        pan.style.transform =
-          'translate(' + (-progress * maxX) + 'px, calc(-50% - ' + (progress * maxY) + 'px))';
+        pan.style.transform = 'translateY(' + (-progress * maxY) + 'px)';
       }
 
       function onScroll() {
