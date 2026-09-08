@@ -234,15 +234,35 @@
       letter-spacing: var(--ls-normal);
     }
 
-    /* ── Role list ── */
+    /* ── Role list (accordion style) ── */
     .role-list { display: flex; flex-direction: column; margin-bottom: 0; }
     .role-row {
-      display: flex; align-items: flex-start; gap: 20px;
-      padding: 22px 0; border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
     }
     .role-row:first-child { border-top: none; }
-    .role-icon { font-size: 20px; flex-shrink: 0; padding-top: 2px; width: 32px; }
-    .role-title { font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); margin-bottom: 4px; }
+    .role-row-head {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 0;
+      transition: padding-left 0.2s;
+    }
+    .role-row:hover .role-row-head { padding-left: 8px; }
+    .role-row-head::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .role-row.open .role-row-head::after { transform: rotate(45deg); }
+    .role-icon { font-size: 20px; flex-shrink: 0; width: 28px; }
+    .role-title { font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); flex: 1 1 auto; margin-bottom: 0; }
+    .role-desc-wrap {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0; padding-left: 44px;
+    }
+    .role-row.open .role-desc-wrap { max-height: 300px; padding-bottom: 20px; }
     .role-desc { font-size: 14px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
     .role-desc strong { color: var(--black); font-weight: 600; }
 
@@ -489,44 +509,56 @@
 
     <div class="role-list">
       <div class="role-row">
-        <div class="role-icon">✍️</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">✍️</div>
           <div class="role-title">Script Writing</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Wrote creative scripts for both videos — <strong>15 seconds (4D Expert Clean)</strong> and <strong>30 seconds (Gum Expert)</strong> — scene-by-scene, voice over scripts, and behind-the-scene content storylines aligned to each product's key messages.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🔍</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">🔍</div>
           <div class="role-title">Reference Research</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Sourced visual references from <strong>YouTube, TikTok, Instagram, and Pinterest</strong> — focused on product cinematography, oral care advertising, lab setup aesthetics, and talent expressions for each campaign tone (fun/casual vs elegant/clean).</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🗂️</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">🗂️</div>
           <div class="role-title">Curation in Eagle</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Collected and tagged all references in <strong>Eagle</strong> by scene, product, and shot type — building a structured visual library the production team and director could access anytime.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🎬</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">🎬</div>
           <div class="role-title">Storyboard & Moodboard</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Built storyboards per scene — shot type, focal length, movement, props, background, and talent direction — plus visual moodboard for each scene in script order.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">👗</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">👗</div>
           <div class="role-title">Talent, Wardrobe & Location Direction</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Defined references for <strong>talent, wardrobe, makeup, and hairdo</strong>, plus the <strong>shoot location</strong> for each campaign — 4D Expert at Villa Arendelle Casares, Gum Expert with a professional laboratory setup.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🎨</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">🎨</div>
           <div class="role-title">PPT Deck Design</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Designed two Creative Decks in PowerPoint that are <strong>visual, on-brand</strong>, and polished enough to present directly to Pepsodent — covering creative brief, key messages, voice over script, storyboard, and moodboard references.</div>
         </div>
       </div>
@@ -697,6 +729,15 @@
         const isOpen = li.classList.contains('open');
         document.querySelectorAll('.stat-list li').forEach(el => el.classList.remove('open'));
         if (!isOpen) li.classList.add('open');
+      });
+    });
+
+    /* Role list toggle */
+    document.querySelectorAll('.role-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const isOpen = row.classList.contains('open');
+        document.querySelectorAll('.role-row').forEach(el => el.classList.remove('open'));
+        if (!isOpen) row.classList.add('open');
       });
     });
   </script>
