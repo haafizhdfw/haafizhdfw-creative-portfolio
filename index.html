@@ -322,7 +322,7 @@
     .grid-showcase {
       position: relative;
       height: auto;
-      padding: 70px 0 20px;
+      padding: 70px 0 60px;
       background: var(--bg);
       overflow-x: hidden;
     }
@@ -367,6 +367,8 @@
       display: flex;
       align-items: center;
       gap: clamp(6px, 1vw, 16px);
+      width: max-content;
+      min-width: 100%;
       border-bottom: 1px solid var(--line);
       background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
       background-size: 12.5% 100%;
@@ -1077,7 +1079,7 @@
       .projects-desc { text-align: left; max-width: 100%; }
       .project-grid { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 20px; }
       .proj-card { min-height: 360px; padding: 28px; }
-      .grid-showcase { height: auto; padding: 60px 0 20px; }
+      .grid-showcase { height: auto; padding: 60px 0 48px; }
       .gs-sticky { position: static; height: auto; overflow: visible; display: block; top: auto; }
       .gs-viewport { overflow: visible; height: auto !important; }
       .gs-pan { position: static; width: 100%; top: auto; left: auto; transform: none !important; }
@@ -1201,7 +1203,7 @@
       .about-card-services-list li { font-size: 14px; padding: 12px 0; }
 
       /* ── GRID SHOWCASE ── */
-      .grid-showcase { padding: 48px 0 16px; }
+      .grid-showcase { padding: 48px 0 36px; }
       .gs-labels { display: none; }
       .gs-grid { margin: 0 20px; border-left: none; border-right: none; }
       .gs-row {
