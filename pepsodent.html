@@ -147,15 +147,16 @@
     }
     .section-title em { font-style: normal; color: var(--blue); }
     .section-title em.red { color: var(--red); }
-    .section-title-light { font-weight: 600; }
+    .section-title-light { font-weight: 600; font-size: clamp(32px, 3.8vw, 56px); }
 
     .section-head-row {
-      display: flex; align-items: flex-start; justify-content: space-between;
+      display: flex; align-items: flex-start; justify-content: flex-start;
       gap: 48px; margin-bottom: 28px;
     }
-    .section-head-row .section-title { margin-bottom: 0; flex: 1 1 auto; }
-    .section-lead-col { flex: 0 1 460px; padding-top: 6px; }
+    .section-head-row .section-title { margin-bottom: 0; flex: 0 1 auto; }
+    .section-lead-col { flex: 0 1 420px; padding-top: 6px; }
     .section-lead-col .section-lead:last-child { margin-bottom: 0; }
+    .section-lead-col .section-lead { font-size: 15px; }
 
     .section-lead {
       font-size: 17px; font-weight: 400; color: var(--gray);
@@ -395,7 +396,7 @@
       <span class="eyebrow-tag">The Project</span>
     </div>
     <div class="section-head-row">
-      <h2 class="section-title section-title-light">Creative Campaign Decks<br>for <em class="red">Pepsodent</em></h2>
+      <h2 class="section-title section-title-light">Creative Campaign<br>Decks for <em class="red">Pepsodent</em></h2>
       <div class="section-lead-col">
         <p class="section-lead">Pepsodent, a brand under <strong>Unilever</strong>. Needed two creative decks for two different products: <strong>4D Expert Clean</strong> (toothbrush, 15 seconds) and <strong>Gum Expert</strong> (toothpaste, 30 seconds).</p>
         <p class="section-lead">At Overlay Studio Limited, I handled the full creative pre-production, from script writing and visual reference research to moodboard curation and PPT deck design, ready to present to the client and production crew.</p>
