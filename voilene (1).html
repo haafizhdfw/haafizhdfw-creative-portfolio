@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voilène Etoile — Feeds Instagram Design · Davian Harris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #f3f4f3;
+      --black:  #0d0d0d;
+      --gray:   #6b6b6b;
+      --lgray:  #b8b8b2;
+      --blue:   #2563ff;
+      --gold:   #C4A882;
+      --white:  #ffffff;
+      --line:   #ddddd5;
+      --ls-tight:  -0.08em;
+      --ls-normal: -0.03em;
+      --nav-h:     88px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--black);
+      -webkit-font-smoothing: antialiased; cursor: none;
+    }
+
+    /* ── Cursor ── */
+    .cur-dot {
+      position: fixed; pointer-events: none; z-index: 9999;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--black); transform: translate(-50%,-50%);
+    }
+    .cur-ring {
+      position: fixed; pointer-events: none; z-index: 9998;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,.25); transform: translate(-50%,-50%);
+      transition: width .25s, height .25s;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--nav-h); display: flex; align-items: center;
+      padding: 0 52px; background: var(--bg);
+      box-shadow: 0 1px 0 var(--line), 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .nav-logo { display: flex; align-items: center; margin-right: auto; text-decoration: none; }
+    .nav-logo img { height: 60px; width: auto; display: block; }
+    .nav-center { flex: 1; display: flex; justify-content: center; gap: 56px; list-style: none; }
+    .nav-center a {
+      font-size: 18px; font-weight: 500; letter-spacing: var(--ls-normal);
+      color: var(--black); text-decoration: none; transition: opacity .2s;
+    }
+    .nav-center a:hover { opacity: .45; }
+    .nav-right { display: flex; align-items: center; flex-shrink: 0; }
+    .nav-btn {
+      display: inline-flex; align-items: center;
+      padding: 8px 8px 8px 28px; background: var(--blue); color: var(--white);
+      font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
+      text-decoration: none; border-radius: 100px;
+      transition: background .2s, transform .15s; white-space: nowrap;
+    }
+    .nav-btn:hover { background: #1a4de0; transform: scale(1.03); }
+    .nav-btn-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; background: var(--white);
+      border-radius: 50%; margin-left: 16px; transition: transform .2s;
+    }
+    .nav-btn:hover .nav-btn-icon { transform: rotate(45deg); }
+    .nav-btn-icon svg { width: 18px; height: 18px; color: var(--black); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; height: 520px; overflow: hidden;
+      background: #1a150f; margin-top: var(--nav-h);
+    }
+    .hero-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      filter: brightness(.28) saturate(.6);
+    }
+    .hero-inner {
+      position: relative; z-index: 2; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 56px 52px;
+    }
+    .hero-back {
+      position: absolute; top: 36px; left: 52px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; letter-spacing: var(--ls-normal);
+      color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s;
+    }
+    .hero-back:hover { color: var(--white); }
+    .hero-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-chip {
+      padding: 5px 14px; border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.08); backdrop-filter: blur(8px);
+      border-radius: 100px; font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; color: rgba(255,255,255,.8); text-transform: uppercase;
+    }
+    .hero-title {
+      font-size: clamp(48px, 6.5vw, 88px); font-weight: 900;
+      letter-spacing: var(--ls-tight); line-height: 0.9; color: var(--white);
+    }
+    .hero-title span { color: #C4A882; }
+
+    /* ── Stats bar ── */
+    .stats-bar { background: #1a150f; overflow: hidden; padding: 36px 0; }
+    .stats-inner {
+      display: flex; align-items: center; gap: 48px;
+      width: max-content; animation: marquee 30s linear infinite;
+    }
+    .stats-inner:hover { animation-play-state: paused; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .stat-bullet { width: 6px; height: 6px; border-radius: 50%; background: #C4A882; flex-shrink: 0; }
+    .stat-item { display: flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+    .stat-n { font-weight: 700; font-size: 26px; letter-spacing: var(--ls-tight); color: #C4A882; }
+    .stat-l { font-weight: 300; font-size: 26px; letter-spacing: var(--ls-tight); color: rgba(255,255,255,.5); }
+
+    /* ── Sections ── */
+    .section { padding: 80px 52px; border-top: 1px solid var(--line); }
+
+    .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .eyebrow-num { font-size: 11px; font-weight: 700; letter-spacing: .2em; color: var(--lgray); text-transform: uppercase; }
+    .eyebrow-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      padding: 3px 12px; border: 1px solid var(--line); border-radius: 100px; color: var(--gray);
+    }
+    .eyebrow-tag.gold  { background: #C4A882; color: var(--white); border-color: #C4A882; }
+    .eyebrow-tag.black { background: var(--black); color: var(--white); border-color: var(--black); }
+    .eyebrow-tag.blue  { background: var(--blue);  color: var(--white); border-color: var(--blue); }
+
+    .section-title {
+      font-size: clamp(40px, 5vw, 72px); font-weight: 900;
+      letter-spacing: var(--ls-tight); line-height: 0.92;
+      color: var(--black); margin-bottom: 20px;
+    }
+    .section-title em { font-style: normal; color: #C4A882; }
+
+    .section-lead {
+      font-size: 17px; font-weight: 400; color: var(--gray);
+      line-height: 1.7; letter-spacing: var(--ls-normal);
+      max-width: 640px; margin-bottom: 48px;
+    }
+    .section-lead strong { color: var(--black); font-weight: 600; }
+
+    /* ── Stat row ── */
+    .stat-row { display: grid; gap: 2px; margin-bottom: 48px; }
+    .stat-row-4 { grid-template-columns: repeat(4,1fr); }
+    .stat-row-3 { grid-template-columns: repeat(3,1fr); }
+    .stat-cell {
+      background: var(--white); padding: 28px 24px;
+      border: 1px solid var(--line);
+    }
+    .stat-cell.dark { background: #1a150f; }
+    .stat-cell.gold-cell { background: #C4A882; }
+    .stat-cell:first-child { border-radius: 14px 0 0 14px; }
+    .stat-cell:last-child  { border-radius: 0 14px 14px 0; }
+    .stat-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lgray); margin-bottom: 8px; }
+    .stat-cell.dark .stat-label     { color: rgba(255,255,255,.3); }
+    .stat-cell.gold-cell .stat-label { color: rgba(255,255,255,.7); }
+    .stat-value { font-size: clamp(20px,2.6vw,36px); font-weight: 900; letter-spacing: var(--ls-tight); color: var(--black); line-height: 1; margin-bottom: 4px; }
+    .stat-cell.dark .stat-value     { color: #C4A882; }
+    .stat-cell.gold-cell .stat-value { color: var(--white); }
+    .stat-note { font-size: 12px; color: var(--lgray); letter-spacing: var(--ls-normal); }
+    .stat-cell.dark .stat-note     { color: rgba(255,255,255,.25); }
+    .stat-cell.gold-cell .stat-note { color: rgba(255,255,255,.7); }
+
+    /* ── Role list ── */
+    .role-list { display: flex; flex-direction: column; margin-bottom: 48px; }
+    .role-row {
+      display: flex; align-items: flex-start; gap: 20px;
+      padding: 22px 0; border-bottom: 1px solid var(--line);
+    }
+    .role-row:first-child { border-top: 1px solid var(--line); }
+    .role-num {
+      font-size: 11px; font-weight: 800; letter-spacing: .14em;
+      color: #C4A882; flex-shrink: 0; padding-top: 3px; min-width: 28px;
+    }
+    .role-title { font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); margin-bottom: 4px; }
+    .role-desc { font-size: 14px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
+    .role-desc strong { color: var(--black); font-weight: 600; }
+    .role-tag {
+      display: inline-block; margin-top: 8px; padding: 3px 10px;
+      background: #f8f3ed; border: 1px solid #e8d9c8;
+      border-radius: 100px; font-size: 11px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase; color: #9a7a58;
+    }
+
+    /* ── Work gallery ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+    .gallery-item {
+      border-radius: 14px; overflow: hidden;
+      background: #e8e5e0; aspect-ratio: 1/1;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+
+    /* ── Dark CTA ── */
+    .cta-banner {
+      background: #1a150f; border-radius: 24px;
+      padding: 56px; position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: 'ETOILE'; position: absolute; right: -10px; bottom: -30px;
+      font-size: 160px; font-weight: 900; letter-spacing: var(--ls-tight);
+      color: rgba(255,255,255,.04); line-height: 1; pointer-events: none;
+    }
+    .cta-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; }
+    .cta-title { font-size: clamp(32px,4vw,56px); font-weight: 900; letter-spacing: var(--ls-tight); line-height: 0.93; color: var(--white); margin-bottom: 16px; }
+    .cta-title span { color: #C4A882; }
+    .cta-desc { font-size: 16px; color: rgba(255,255,255,.5); line-height: 1.65; letter-spacing: var(--ls-normal); max-width: 520px; margin-bottom: 32px; }
+    .cta-specs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cta-spec {
+      padding: 6px 16px; background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12); border-radius: 100px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: rgba(255,255,255,.65);
+    }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-center { display: none; }
+      .section { padding: 56px 24px; }
+      .hero-inner, .hero-back { left: 24px; }
+      .hero-inner { padding: 40px 24px; }
+      .stat-row-4 { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .cta-banner { padding: 36px 28px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="cur-dot" id="curDot"></div>
+  <div class="cur-ring" id="curRing"></div>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo-portfolio.svg" alt="Davian Harris" />
+    </a>
+    <ul class="nav-center">
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contacts</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="index.html#contact" class="nav-btn">
+        Contact Me
+        <span class="nav-btn-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 15L15 3M15 3H7M15 3v8"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <img src="voilene-bg.jpeg" alt="Voilène Etoile" class="hero-img" />
+    <div class="hero-inner">
+      <a href="index.html" class="hero-back">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"/></svg>
+        All Projects
+      </a>
+      <div class="hero-chips">
+        <div class="hero-chip">Social Media Design Post</div>
+        <div class="hero-chip">Graphic Design</div>
+        <div class="hero-chip">Fashion · 2022</div>
+      </div>
+      <h1 class="hero-title">Voilène<br><span>Etoile.</span></h1>
+    </div>
+  </div>
+
+  <!-- ══ STATS BAR ══ -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Graphic</span><span class="stat-l">Design</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Instagram</span><span class="stat-l">Feeds Design</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Photo</span><span class="stat-l">Retouch</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Moodboard</span><span class="stat-l">Instagram</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">6</span><span class="stat-l">Products Designed</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">2022</span><span class="stat-l">Project</span></div>
+      <!-- duplicate -->
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Graphic</span><span class="stat-l">Design</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Instagram</span><span class="stat-l">Feeds Design</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Photo</span><span class="stat-l">Retouch</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Moodboard</span><span class="stat-l">Instagram</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">6</span><span class="stat-l">Products Designed</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">2022</span><span class="stat-l">Project</span></div>
+    </div>
+  </div>
+
+  <!-- ══ 01 PROJECT ══ -->
+  <section class="section reveal">
+    <div class="eyebrow">
+      <span class="eyebrow-num">01</span>
+      <span class="eyebrow-tag">The Project</span>
+    </div>
+    <h2 class="section-title">Instagram Feeds for a<br><em>Women's Fashion Brand</em></h2>
+    <p class="section-lead">
+      Voilène Etoile is a women's fashion brand designed to <strong>spread positive aura and bring new colors to every woman's body</strong>. The brand philosophy: comfort, beauty, and empowerment — for women of all sizes. I handled the visual identity and Instagram feeds design to help the brand launch with a cohesive, elegant aesthetic.
+    </p>
+
+    <div class="stat-row stat-row-4">
+      <div class="stat-cell">
+        <div class="stat-label">Client</div>
+        <div class="stat-value" style="font-size:18px;">Voilène Etoile</div>
+        <div class="stat-note">Women's Fashion</div>
+      </div>
+      <div class="stat-cell dark">
+        <div class="stat-label">Platform</div>
+        <div class="stat-value" style="font-size:22px;">Instagram</div>
+        <div class="stat-note">Feeds Design</div>
+      </div>
+      <div class="stat-cell gold-cell">
+        <div class="stat-label">Products</div>
+        <div class="stat-value">6</div>
+        <div class="stat-note">Designed &amp; Retouched</div>
+      </div>
+      <div class="stat-cell dark">
+        <div class="stat-label">Year</div>
+        <div class="stat-value">2022</div>
+        <div class="stat-note">Personal Project</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 02 WHAT I DID ══ -->
+  <section class="section reveal">
+    <div class="eyebrow">
+      <span class="eyebrow-num">02</span>
+      <span class="eyebrow-tag gold">What I Did</span>
+    </div>
+    <h2 class="section-title">My <em>Scope of Work</em></h2>
+    <p class="section-lead">
+      Seluruh visual Instagram Voilène Etoile — dari moodboard hingga photo retouch — aku kerjakan untuk membangun brand image yang elegant, soft, dan konsisten.
+    </p>
+
+    <div class="role-list">
+      <div class="role-row">
+        <div class="role-num">01</div>
+        <div>
+          <div class="role-title">Instagram Moodboard</div>
+          <div class="role-desc">Membangun visual direction Voilène Etoile di Instagram — palet warna lembut (krem, sage, teal), tipografi serif elegan, dan grid aesthetic yang mencerminkan filosofi brand: <strong>comfort and beauty for every body</strong>.</div>
+          <span class="role-tag">Graphic Design</span>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-num">02</div>
+        <div>
+          <div class="role-title">Feeds Instagram Design</div>
+          <div class="role-desc">Mendesain seluruh konten feeds Instagram — product launch announcement, product collection posts (LAUNCHED, ADELINE, ANNELISE, BLANCHE, BLISSE, BIJOU) — dengan overlay tipografi yang konsisten dan on-brand di setiap post.</div>
+          <span class="role-tag">Graphic Design</span>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-num">03</div>
+        <div>
+          <div class="role-title">Photo Retouch</div>
+          <div class="role-desc">Melakukan retouching pada seluruh product photography — skin correction, color grading yang konsisten, dan crop framing untuk memastikan setiap foto tampil <strong>cohesive dan berkualitas tinggi</strong> di feed Instagram.</div>
+          <span class="role-tag">Graphic Design</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 03 GALLERY ══ -->
+  <section class="section reveal">
+    <div class="eyebrow">
+      <span class="eyebrow-num">03</span>
+      <span class="eyebrow-tag">Work Samples</span>
+    </div>
+    <h2 class="section-title">Selected <em>Output</em></h2>
+    <p class="section-lead">
+      Koleksi Instagram feeds yang diproduksi untuk Voilène Etoile — dari launch announcement hingga product collection series.
+    </p>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="voilene-1.jpeg" alt="Voilène Etoile — Launched" />
+      </div>
+      <div class="gallery-item">
+        <img src="voilene-2.jpeg" alt="Voilène Etoile — Adeline" />
+      </div>
+      <div class="gallery-item">
+        <img src="voilene-3.jpeg" alt="Voilène Etoile — Annelise" />
+      </div>
+      <div class="gallery-item">
+        <img src="voilene-4.jpeg" alt="Voilène Etoile — Blanche" />
+      </div>
+      <div class="gallery-item">
+        <img src="voilene-5.jpeg" alt="Voilène Etoile — Blisse" />
+      </div>
+      <div class="gallery-item">
+        <img src="voilene-6.jpeg" alt="Voilène Etoile — Bijou" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 04 OUTPUT ══ -->
+  <section class="section reveal">
+    <div class="eyebrow">
+      <span class="eyebrow-num">04</span>
+      <span class="eyebrow-tag black">Output</span>
+    </div>
+
+    <div class="cta-banner">
+      <div class="cta-eyebrow">Final Output</div>
+      <div class="cta-title">A Visual Identity<br><span>That Empowers</span></div>
+      <div class="cta-desc">
+        Dari moodboard hingga foto siap posting — semua dirancang untuk mencerminkan filosofi Voilène Etoile: <em style="font-style:italic; color:rgba(255,255,255,.6);">"See through your beauty in any size, and help every woman to glow like a star."</em> Setiap post konsisten, elegant, dan empowering.
+      </div>
+      <div class="cta-specs">
+        <div class="cta-spec">Instagram Moodboard</div>
+        <div class="cta-spec">Feeds Instagram Design</div>
+        <div class="cta-spec">Photo Retouch</div>
+        <div class="cta-spec">6 Products</div>
+        <div class="cta-spec">Women's Fashion</div>
+        <div class="cta-spec">2022</div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const dot = document.getElementById('curDot');
+    const ring = document.getElementById('curRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+    (function loop(){
+      rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+      dot.style.left=mx+'px'; dot.style.top=my+'px';
+      ring.style.left=rx+'px'; ring.style.top=ry+'px';
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a,button').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';});
+      el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';});
+    });
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+    },{threshold:.07});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  </script>
+
+</body>
+</html>

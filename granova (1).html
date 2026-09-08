@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Granova × Kopi Kenangan — Creative Deck · Davian Harris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #f3f4f3;
+      --black: #0d0d0d;
+      --gray:  #6b6b6b;
+      --lgray: #b8b8b2;
+      --blue:  #2563ff;
+      --amber: #d97706;
+      --white: #ffffff;
+      --line:  #ddddd5;
+      --ls-tight:  -0.08em;
+      --ls-normal: -0.03em;
+      --nav-h: 88px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--black);
+      -webkit-font-smoothing: antialiased; cursor: none;
+    }
+
+    /* ── Cursor ── */
+    .cur-dot {
+      position: fixed; pointer-events: none; z-index: 9999;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--black); transform: translate(-50%,-50%);
+    }
+    .cur-ring {
+      position: fixed; pointer-events: none; z-index: 9998;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,.25); transform: translate(-50%,-50%);
+      transition: width .25s, height .25s;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--nav-h); display: flex; align-items: center;
+      padding: 0 52px; background: var(--bg);
+      box-shadow: 0 1px 0 var(--line), 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .nav-logo { display: flex; align-items: center; margin-right: auto; text-decoration: none; }
+    .nav-logo img { height: 60px; width: auto; display: block; }
+    .nav-center { flex: 1; display: flex; justify-content: center; gap: 56px; list-style: none; }
+    .nav-center a {
+      font-size: 18px; font-weight: 500; letter-spacing: var(--ls-normal);
+      color: var(--black); text-decoration: none; transition: opacity .2s;
+    }
+    .nav-center a:hover { opacity: .45; }
+    .nav-right { display: flex; align-items: center; flex-shrink: 0; }
+    .nav-btn {
+      display: inline-flex; align-items: center;
+      padding: 8px 8px 8px 28px; background: var(--blue); color: var(--white);
+      font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
+      text-decoration: none; border-radius: 100px;
+      transition: background .2s, transform .15s; white-space: nowrap;
+    }
+    .nav-btn:hover { background: #1a4de0; transform: scale(1.03); }
+    .nav-btn-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; background: var(--white);
+      border-radius: 50%; margin-left: 16px;
+      transition: transform .2s;
+    }
+    .nav-btn:hover .nav-btn-icon { transform: rotate(45deg); }
+    .nav-btn-icon svg { width: 18px; height: 18px; color: var(--black); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; height: 520px; overflow: hidden;
+      background: #111; margin-top: var(--nav-h);
+    }
+    .hero-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; filter: brightness(.3) saturate(.6);
+    }
+    .hero-inner {
+      position: relative; z-index: 2; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 56px 52px;
+    }
+    .hero-back {
+      position: absolute; top: 36px; left: 52px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; letter-spacing: var(--ls-normal);
+      color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s;
+    }
+    .hero-back:hover { color: var(--white); }
+    .hero-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-chip {
+      padding: 5px 14px; border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.08); backdrop-filter: blur(8px);
+      border-radius: 100px; font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; color: rgba(255,255,255,.8); text-transform: uppercase;
+    }
+    .hero-title {
+      font-size: clamp(56px, 7vw, 96px); font-weight: 900;
+      letter-spacing: var(--ls-tight); line-height: 0.9; color: var(--white);
+    }
+    .hero-title span { color: #CCFF00; }
+
+    /* ── Stats bar ── */
+    .stats-bar { background: #222; overflow: hidden; padding: 36px 0; }
+    .stats-inner {
+      display: flex; align-items: center; gap: 48px;
+      width: max-content; animation: marquee 30s linear infinite;
+    }
+    .stats-inner:hover { animation-play-state: paused; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .stat-bullet { width: 16px; height: 16px; border-radius: 50%; background: #CCFF00; flex-shrink: 0; }
+    .stat-item { display: flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+    .stat-n { font-weight: 700; font-size: 30px; letter-spacing: var(--ls-tight); color: #CCFF00; }
+    .stat-l { font-weight: 300; font-size: 30px; letter-spacing: var(--ls-tight); color: #fff; }
+
+    /* ── Sections ── */
+    .section { padding: 48px 52px; }
+
+    .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .eyebrow-num { font-size: 11px; font-weight: 700; letter-spacing: .2em; color: var(--lgray); text-transform: uppercase; }
+    .eyebrow-tag {
+      font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      padding: 3px 12px; border: 1px solid var(--line); border-radius: 100px; color: var(--gray);
+    }
+    .eyebrow-tag.black  { background: var(--black);  color: var(--white); border-color: var(--black); }
+    .eyebrow-tag.blue   { background: var(--blue);   color: var(--white); border-color: var(--blue); }
+    .eyebrow-tag.amber  { background: var(--amber);  color: var(--white); border-color: var(--amber); }
+
+    .section-title {
+      font-size: clamp(40px, 5vw, 72px); font-weight: 900;
+      letter-spacing: var(--ls-tight); line-height: 0.92;
+      color: var(--black); margin-bottom: 20px;
+    }
+    .section-title em         { font-style: normal; color: var(--blue); }
+    .section-title em.amber   { color: var(--amber); }
+
+    .section-lead {
+      font-size: 17px; font-weight: 400; color: var(--gray);
+      line-height: 1.7; letter-spacing: var(--ls-normal);
+      max-width: 680px; margin-bottom: 28px;
+    }
+    .section-lead strong { color: var(--black); font-weight: 600; }
+
+    /* ── Stat row ── */
+    .stat-row { display: grid; gap: 2px; margin-bottom: 48px; }
+    .stat-row-4 { grid-template-columns: repeat(4,1fr); }
+    .stat-row-3 { grid-template-columns: repeat(3,1fr); }
+    .stat-cell {
+      background: var(--white); padding: 28px 24px;
+      border: 1px solid var(--line);
+    }
+    .stat-cell.dark { background: var(--black); }
+    .stat-cell:first-child { border-radius: 14px 0 0 14px; }
+    .stat-cell:last-child  { border-radius: 0 14px 14px 0; }
+    .stat-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lgray); margin-bottom: 8px; }
+    .stat-cell.dark .stat-label { color: rgba(255,255,255,.3); }
+    .stat-value { font-size: clamp(24px,3vw,40px); font-weight: 900; letter-spacing: var(--ls-tight); color: var(--black); line-height: 1; margin-bottom: 4px; }
+    .stat-cell.dark .stat-value { color: var(--white); }
+    .stat-note { font-size: 12px; color: var(--lgray); letter-spacing: var(--ls-normal); }
+    .stat-cell.dark .stat-note { color: rgba(255,255,255,.3); }
+
+    /* ── Role list ── */
+    .role-list { display: flex; flex-direction: column; margin-bottom: 0; }
+    .role-row {
+      display: flex; align-items: flex-start; gap: 20px;
+      padding: 22px 0; border-bottom: 1px solid var(--line);
+    }
+    .role-row:first-child { border-top: none; }
+    .role-icon { font-size: 20px; flex-shrink: 0; padding-top: 2px; width: 32px; }
+    .role-title { font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); margin-bottom: 4px; }
+    .role-desc { font-size: 14px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
+    .role-desc strong { color: var(--black); font-weight: 600; }
+
+    /* ── Single deck preview ── */
+    .deck-preview {
+      display: block; text-decoration: none;
+      border: 1px solid var(--line); border-radius: 20px;
+      overflow: hidden; margin-bottom: 24px;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .deck-preview:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+    }
+    .deck-preview-img {
+      position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden;
+      background: #e0e0e0;
+    }
+    .deck-preview-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .4s;
+    }
+    .deck-preview:hover .deck-preview-img img { transform: scale(1.03); }
+    .deck-preview-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .25s;
+    }
+    .deck-preview:hover .deck-preview-overlay { background: rgba(0,0,0,.35); }
+    .deck-preview-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 28px; background: var(--white); border-radius: 100px;
+      font-size: 15px; font-weight: 700; letter-spacing: var(--ls-tight);
+      color: var(--black);
+      opacity: 0; transform: translateY(8px);
+      transition: opacity .25s, transform .25s;
+    }
+    .deck-preview-btn svg { width: 16px; height: 16px; }
+    .deck-preview:hover .deck-preview-btn { opacity: 1; transform: none; }
+    .deck-preview-footer {
+      background: var(--white); padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--line);
+    }
+    .deck-preview-label {
+      font-size: 15px; font-weight: 700; letter-spacing: var(--ls-tight);
+      color: var(--black);
+    }
+    .deck-preview-sub {
+      font-size: 12px; font-weight: 500; color: var(--lgray);
+      letter-spacing: var(--ls-normal);
+    }
+
+    /* ── Dark CTA ── */
+    .cta-banner {
+      background: var(--black); border-radius: 24px;
+      padding: 56px; position: relative; overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .cta-banner::before {
+      content: 'GRANOVA'; position: absolute; right: -10px; bottom: -30px;
+      font-size: 120px; font-weight: 900; letter-spacing: var(--ls-tight);
+      color: rgba(255,255,255,.04); line-height: 1; pointer-events: none;
+    }
+    .cta-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; }
+    .cta-title { font-size: clamp(32px,4vw,56px); font-weight: 900; letter-spacing: var(--ls-tight); line-height: 0.93; color: var(--white); margin-bottom: 0; }
+    .cta-title span { color: #CCFF00; }
+    .cta-desc { font-size: 16px; color: rgba(255,255,255,.5); line-height: 1.65; letter-spacing: var(--ls-normal); margin-bottom: 32px; }
+    .cta-specs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cta-spec {
+      padding: 6px 16px; background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15); border-radius: 100px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: rgba(255,255,255,.75);
+    }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-center { display: none; }
+      .section { padding: 56px 24px; }
+      .hero-inner { padding: 40px 24px; }
+      .hero-back { left: 24px; }
+      .stat-row-4 { grid-template-columns: 1fr 1fr; }
+      .cta-banner { padding: 36px 28px; grid-template-columns: 1fr; gap: 28px; }
+      #contact { grid-template-columns: 1fr !important; padding: 56px 24px !important; gap: 48px !important; }
+      .cur-dot, .cur-ring { display: none; }
+      body { cursor: auto; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="cur-dot" id="curDot"></div>
+  <div class="cur-ring" id="curRing"></div>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo-portfolio.svg" alt="Davian Harris" />
+    </a>
+    <ul class="nav-center">
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contacts</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="index.html#contact" class="nav-btn">
+        Contact Me
+        <span class="nav-btn-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 15L15 3M15 3H7M15 3v8"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <img src="granova-bg.jpeg" alt="Granova x Kopi Kenangan" class="hero-img" />
+    <div class="hero-inner">
+      <a href="index.html" class="hero-back">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"/></svg>
+        All Projects
+      </a>
+      <div class="hero-chips">
+        <div class="hero-chip">Creative Campaign</div>
+        <div class="hero-chip">Storyboard · Moodboard · Script</div>
+        <div class="hero-chip">Overlay Studio 2024</div>
+        <div class="hero-chip">Granova · Kopi Kenangan</div>
+      </div>
+      <h1 class="hero-title">Granova ×<br><span>Kopi Kenangan</span></h1>
+    </div>
+  </div>
+
+  <!-- ══ STATS BAR ══ -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">1</span><span class="stat-l">Campaign Deck</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">1</span><span class="stat-l">Collab Product</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Script</span><span class="stat-l">Writing</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">PPT</span><span class="stat-l">Deck Design</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Eagle</span><span class="stat-l">Curation</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Storyboard</span><span class="stat-l">& Moodboard</span></div>
+      <!-- duplicate -->
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">1</span><span class="stat-l">Campaign Deck</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">1</span><span class="stat-l">Collab Product</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Script</span><span class="stat-l">Writing</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">PPT</span><span class="stat-l">Deck Design</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Eagle</span><span class="stat-l">Curation</span></div>
+      <div class="stat-bullet"></div><div class="stat-item"><span class="stat-n">Storyboard</span><span class="stat-l">& Moodboard</span></div>
+    </div>
+  </div>
+
+  <!-- ══ 01 PROJECT ══ -->
+  <section class="section reveal">
+    <div class="eyebrow">
+      <span class="eyebrow-num">01</span>
+      <span class="eyebrow-tag">The Project</span>
+    </div>
+    <h2 class="section-title">Creative Campaign Deck<br>for <em class="amber">Granova</em></h2>
+    <p class="section-lead">
+      Granova — a granola bar brand — collaborated with <strong>Kopi Kenangan</strong> to launch the <strong>Kenangan Mantan Coffee Bar</strong>, a coffee-flavored granola bar made with real Gula Aren. At Overlay Studio Limited, I handled the full creative pre-production: from writing the campaign script and curating visual references to building the storyboard and designing the final PPT deck — ready for client presentation and production.
+    </p>
+
+    <div class="stat-row stat-row-4" style="margin-bottom:0;">
+      <div class="stat-cell">
+        <div class="stat-label">Client</div>
+        <div class="stat-value" style="font-size:18px;">Granova ×<br>Kopi Kenangan</div>
+        <div class="stat-note">Collab campaign</div>
+      </div>
+      <div class="stat-cell dark">
+        <div class="stat-label">Output</div>
+        <div class="stat-value">1</div>
+        <div class="stat-note">Campaign deck</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Product</div>
+        <div class="stat-value" style="font-size:16px;">Kenangan Mantan<br>Coffee Bar</div>
+        <div class="stat-note">Coffee · Almond · Gula Aren</div>
+      </div>
+      <div class="stat-cell dark">
+        <div class="stat-label">Year</div>
+        <div class="stat-value">2024</div>
+        <div class="stat-note">Overlay Studio Ltd.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 02 WHAT I DID ══ -->
+  <section class="section reveal">
+    <div class="eyebrow">
+      <span class="eyebrow-num">02</span>
+      <span class="eyebrow-tag blue">What I Did</span>
+    </div>
+    <h2 class="section-title">My <em>Contribution</em></h2>
+    <p class="section-lead">
+      End-to-end creative pre-production for a collab launch campaign — from the first script draft to a polished deck the client could take straight to the shoot.
+    </p>
+
+    <div class="role-list">
+      <div class="role-row">
+        <div class="role-icon">✍️</div>
+        <div>
+          <div class="role-title">Script Writing</div>
+          <div class="role-desc">Wrote the creative campaign script for the <strong>Kenangan Mantan Coffee Bar</strong> launch video — covering scene flow, voice over, and key messaging that highlighted the product's identity as a coffee-meets-granola collab snack.</div>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-icon">🔍</div>
+        <div>
+          <div class="role-title">Reference Research</div>
+          <div class="role-desc">Sourced visual references from <strong>YouTube, TikTok, Instagram, and Pinterest</strong> — focusing on food product cinematography, lifestyle snack campaigns, café aesthetic, and collab brand tone that matched both Granova and Kopi Kenangan's identity.</div>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-icon">🗂️</div>
+        <div>
+          <div class="role-title">Curation in Eagle</div>
+          <div class="role-desc">Organized all visual references in <strong>Eagle</strong> by scene, shot type, and mood — creating a structured library the production team and director could navigate quickly on production day.</div>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-icon">🎬</div>
+        <div>
+          <div class="role-title">Storyboard & Moodboard</div>
+          <div class="role-desc">Built a full storyboard scene-by-scene — shot type, camera movement, focal length, talent direction, and props — plus a visual moodboard aligned to the warm, coffee-inspired campaign aesthetic.</div>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="role-icon">🎨</div>
+        <div>
+          <div class="role-title">PPT Deck Design</div>
+          <div class="role-desc">Designed the final Creative Deck in PowerPoint — <strong>visual, on-brand</strong>, and presentation-ready, covering the creative brief, script, storyboard, moodboard, and talent direction all in one polished document.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 03 RESULT ══ -->
+  <section class="section reveal">
+    <div class="eyebrow">
+      <span class="eyebrow-num">03</span>
+      <span class="eyebrow-tag">Result</span>
+    </div>
+    <h2 class="section-title" style="margin-bottom:12px;">One Deck,<br><em class="amber">Client Approved</em></h2>
+    <p class="section-lead">A full creative deck delivered for Granova's collab launch — covering everything from script to storyboard in a single polished presentation.</p>
+
+    <!-- Single deck preview -->
+    <a href="https://canva.link/n9wke4d8b727tfj" target="_blank" rel="noopener" class="deck-preview">
+      <div class="deck-preview-img">
+        <img src="granova-deck-thumb.jpeg" alt="Granova × Kopi Kenangan Creative Deck" />
+        <div class="deck-preview-overlay">
+          <div class="deck-preview-btn">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15L15 3M15 3H7M15 3v8"/></svg>
+            View Full Deck
+          </div>
+        </div>
+      </div>
+      <div class="deck-preview-footer">
+        <div class="deck-preview-label">Kenangan Mantan Coffee Bar — Creative Deck & Moodboard</div>
+        <div class="deck-preview-sub">Granova × Kopi Kenangan · Overlay Studio 2024 · Canva →</div>
+      </div>
+    </a>
+
+    <div class="cta-banner">
+      <div class="cta-left">
+        <div class="cta-eyebrow">Final Output</div>
+        <div class="cta-title">Creative Deck<br><span>& Moodboard</span></div>
+      </div>
+      <div class="cta-right">
+        <div class="cta-desc">
+          The deck was approved and used directly on the campaign's production day. Every shot angle, product styling, and talent direction was mapped in the storyboard — so the director and brand team from both Granova and Kopi Kenangan walked in fully aligned.
+        </div>
+        <div class="cta-specs">
+          <div class="cta-spec">Script Writing</div>
+          <div class="cta-spec">Storyboard</div>
+          <div class="cta-spec">Moodboard</div>
+          <div class="cta-spec">PPT Deck Design</div>
+          <div class="cta-spec">Eagle Curation</div>
+          <div class="cta-spec">Collab Campaign</div>
+          <div class="cta-spec">Overlay Studio 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ══ -->
+  <section id="contact" style="padding:100px 52px;border-top:1px solid var(--line);background:#0d0d0d;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+
+    <div style="display:flex;flex-direction:column;align-items:flex-start;text-align:left;">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#555;margin-bottom:32px;">Let's Work Together</div>
+      <h2 style="font-family:'Inter',sans-serif;font-size:60px;font-weight:500;letter-spacing:-0.09em;line-height:1.1;color:#fff;margin-bottom:48px;">
+        Ready to build your<br>one marketing system<br>with AI automation?<br><span style="color:#CCFF00;">Let's talk!</span>
+      </h2>
+      <a href="mailto:haafizhdfw13@gmail.com" style="display:inline-block;font-size:18px;font-weight:500;letter-spacing:-0.03em;color:#fff;text-decoration:none;border-bottom:1px solid #333;padding-bottom:4px;margin-bottom:40px;transition:border-color .2s;">haafizhdfw13@gmail.com</a>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;">
+        <a href="https://www.instagram.com/haafizhdfw/" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">Instagram</a>
+        <a href="#" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">Behance</a>
+        <a href="https://www.linkedin.com/in/haafizhdfw/" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">LinkedIn</a>
+        <a href="https://www.tiktok.com/@haafizhdfw" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">TikTok</a>
+      </div>
+    </div>
+
+    <div>
+      <form style="display:flex;flex-direction:column;gap:14px;" onsubmit="handleFormSubmit(event)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <input type="text" placeholder="Full Name" required style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;" />
+          <input type="email" placeholder="Email Address" required style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;" />
+        </div>
+        <input type="text" placeholder="Business / Brand Name" style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;" />
+        <select id="contactService" onchange="this.style.color='#0d0d0d'" style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#aaa;outline:none;-webkit-appearance:none;">
+          <option value="" disabled selected>What do you need?</option>
+          <option>Social Media Management</option>
+          <option>Paid Ads (Meta / Google)</option>
+          <option>SEO & Landing Page Optimization</option>
+          <option>CRM & AI Automation</option>
+          <option>Full-Stack Marketing System</option>
+          <option>Other</option>
+        </select>
+        <textarea placeholder="Tell me about your project..." style="width:100%;background:#fff;border:none;border-radius:20px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;resize:none;height:110px;line-height:1.6;"></textarea>
+        <button type="submit" id="granovaContactBtn" style="display:inline-flex;align-items:center;gap:0;padding:14px 14px 14px 28px;background:#CCFF00;color:#0d0d0d;font-family:'Inter',sans-serif;font-size:18px;font-weight:700;letter-spacing:-0.01em;border:none;border-radius:100px;cursor:pointer;width:fit-content;transition:background .2s,transform .15s;">
+          Let's Build
+          <span style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:#0d0d0d;border-radius:50%;margin-left:16px;flex-shrink:0;transition:transform .2s;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer style="background:#0d0d0d;padding:24px 52px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;">
+    <a href="index.html"><img src="logo-portfolio.svg" alt="hd." style="height:32px;opacity:.3;filter:invert(1);" /></a>
+    <p style="font-size:12px;color:#444;">© 2026 Davian Harris — Digital Marketing Systems Builder</p>
+    <p style="font-size:12px;color:#444;">Indonesia</p>
+  </footer>
+
+  <script>
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('granovaContactBtn');
+      btn.textContent = 'Sent! ✓';
+      btn.style.background = '#00ff88';
+      setTimeout(() => {
+        btn.innerHTML = 'Let\'s Build <span style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:#0d0d0d;border-radius:50%;margin-left:16px;"><svg viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>';
+        btn.style.background = '#CCFF00';
+        e.target.reset();
+        document.getElementById('contactService').style.color = '#aaa';
+      }, 3000);
+    }
+    const dot = document.getElementById('curDot');
+    const ring = document.getElementById('curRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+    (function loop(){
+      rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+      dot.style.left=mx+'px'; dot.style.top=my+'px';
+      ring.style.left=rx+'px'; ring.style.top=ry+'px';
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a,button').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';});
+      el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';});
+    });
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+    },{threshold:.07});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  </script>
+
+  <script src="https://bridgely-dashboard.vercel.app/widget.js" data-org-id="" async></script>
+</body>
+</html>
