@@ -315,15 +315,32 @@
     }
 
     /* ─────────────────────────────────────────────
-       GRID SHOWCASE — big staggered headline w/ grid lines + dots
+       GRID SHOWCASE — big staggered headline, pans diagonally on scroll
     ───────────────────────────────────────────── */
     .grid-showcase {
-      padding: 90px 0 100px;
+      position: relative;
+      height: 220vh;
       background: var(--bg);
+    }
+    .gs-sticky {
+      position: sticky;
+      top: 88px;
+      height: calc(100vh - 88px);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .gs-pan {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 175vw;
+      transform: translate(0, -50%);
+      will-change: transform;
     }
     .gs-labels {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(8, 1fr);
       padding: 0 48px;
       margin-bottom: 10px;
     }
@@ -342,17 +359,17 @@
     .gs-row {
       position: relative;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(8, 1fr);
       align-items: center;
       border-bottom: 1px solid var(--line);
       background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
-      background-size: 20% 100%;
+      background-size: 12.5% 100%;
       background-repeat: repeat-x;
-      min-height: clamp(64px, 9vw, 130px);
+      min-height: clamp(120px, 15vw, 260px);
     }
     .gs-word {
       grid-row: 1;
-      font-size: clamp(38px, 6vw, 92px);
+      font-size: clamp(64px, 11vw, 190px);
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1;
@@ -364,8 +381,8 @@
     .gs-dot {
       grid-row: 1;
       place-self: center;
-      width: clamp(26px, 3.4vw, 52px);
-      height: clamp(26px, 3.4vw, 52px);
+      width: clamp(40px, 5.5vw, 100px);
+      height: clamp(40px, 5.5vw, 100px);
       border-radius: 50%;
       z-index: 2;
     }
@@ -1059,9 +1076,12 @@
       .projects-desc { text-align: left; max-width: 100%; }
       .project-grid { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 20px; }
       .proj-card { min-height: 360px; padding: 28px; }
-      .grid-showcase { padding: 60px 0 70px; }
-      .gs-labels { padding: 0 24px; }
+      .grid-showcase { height: auto; padding: 60px 0 70px; }
+      .gs-sticky { position: static; height: auto; overflow: visible; display: block; top: auto; }
+      .gs-pan { position: static; width: 100%; top: auto; left: auto; transform: none !important; }
+      .gs-labels { grid-template-columns: repeat(5, 1fr); padding: 0 24px; }
       .gs-grid { margin: 0 24px; }
+      .gs-row { grid-template-columns: repeat(5, 1fr); background-size: 20% 100%; }
       .gs-word { padding-left: 14px; }
       #contact { padding: 80px 24px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
@@ -1570,27 +1590,31 @@
 
   <!-- ══════════════ GRID SHOWCASE ══════════════ -->
   <section class="grid-showcase">
-    <div class="gs-labels">
-      <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
-    </div>
-    <div class="gs-grid reveal">
-      <div class="gs-row">
-        <div class="gs-word" style="grid-column: 1;">Engineer</div>
-      </div>
-      <div class="gs-row">
-        <div class="gs-word" style="grid-column: 2;">the</div>
-        <div class="gs-dot" style="grid-column: 3; background:#E6322A;"></div>
-        <div class="gs-word" style="grid-column: 4;">Growth</div>
-      </div>
-      <div class="gs-row">
-        <div class="gs-dot" style="grid-column: 2; background:#CBFF00;"></div>
-        <div class="gs-word" style="grid-column: 3;">of</div>
-        <div class="gs-dot" style="grid-column: 4; background:#2663FF;"></div>
-        <div class="gs-word" style="grid-column: 5;">Digital</div>
-      </div>
-      <div class="gs-row">
-        <div class="gs-dot" style="grid-column: 4; background:#E6322A;"></div>
-        <div class="gs-word" style="grid-column: 5;">Marketing.</div>
+    <div class="gs-sticky">
+      <div class="gs-pan">
+        <div class="gs-labels">
+          <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span>
+        </div>
+        <div class="gs-grid">
+          <div class="gs-row">
+            <div class="gs-word" style="grid-column: 1;">Engineer</div>
+          </div>
+          <div class="gs-row">
+            <div class="gs-word" style="grid-column: 2;">the</div>
+            <div class="gs-dot" style="grid-column: 3; background:#E6322A;"></div>
+            <div class="gs-word" style="grid-column: 4;">Growth</div>
+          </div>
+          <div class="gs-row">
+            <div class="gs-dot" style="grid-column: 2; background:#CBFF00;"></div>
+            <div class="gs-word" style="grid-column: 3;">of</div>
+            <div class="gs-dot" style="grid-column: 4; background:#2663FF;"></div>
+            <div class="gs-word" style="grid-column: 5;">Digital</div>
+          </div>
+          <div class="gs-row">
+            <div class="gs-dot" style="grid-column: 4; background:#E6322A;"></div>
+            <div class="gs-word" style="grid-column: 5;">Marketing.</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1893,6 +1917,41 @@
       el.style.transitionDelay = (i%5)*70+'ms';
       io.observe(el);
     });
+
+    /* Grid showcase — diagonal scroll pan */
+    (function () {
+      const section = document.querySelector('.grid-showcase');
+      const pan = document.querySelector('.gs-pan');
+      if (!section || !pan) return;
+      const desktopQuery = window.matchMedia('(min-width: 901px)');
+      let raf = null;
+
+      function update() {
+        raf = null;
+        if (!desktopQuery.matches) {
+          pan.style.transform = '';
+          return;
+        }
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const scrollable = rect.height - vh;
+        let progress = scrollable > 0 ? -rect.top / scrollable : 0;
+        progress = Math.max(0, Math.min(1, progress));
+
+        const maxX = Math.max(0, pan.scrollWidth - section.clientWidth);
+        const maxY = Math.max(0, pan.scrollHeight - vh);
+        pan.style.transform =
+          'translate(' + (-progress * maxX) + 'px, calc(-50% - ' + (progress * maxY) + 'px))';
+      }
+
+      function onScroll() {
+        if (raf === null) raf = requestAnimationFrame(update);
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
+    })();
 
     /* Service chips toggle */
     document.querySelectorAll('.about-card-services-list li').forEach(li => {
