@@ -770,6 +770,82 @@
     }
 
     /* ─────────────────────────────────────────────
+       PROJECT GRID (card layout, ala Lumora)
+    ───────────────────────────────────────────── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      padding: 0 48px 100px;
+    }
+    .proj-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 32px;
+      background: #0d0d0d;
+      text-decoration: none;
+      transition: transform .45s cubic-bezier(.22,1,.36,1);
+    }
+    .proj-card:hover { transform: translateY(-8px); }
+    .proj-card-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      filter: brightness(.45);
+      transition: filter .5s, transform .6s;
+    }
+    .proj-card:hover .proj-card-bg { filter: brightness(.55); transform: scale(1.04); }
+    .proj-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.7), rgba(0,0,0,.15) 45%, transparent 75%);
+    }
+    .proj-card-watermark {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1; pointer-events: none;
+      font-size: 90px; font-weight: 800;
+      color: rgba(255,255,255,.06);
+      letter-spacing: -0.05em;
+    }
+    .proj-card-top {
+      position: relative; z-index: 2;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 12px;
+    }
+    .proj-card-meta {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .1em; color: rgba(255,255,255,.55);
+    }
+    .proj-card-badge {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+      color: #fff; font-size: 16px;
+      transition: all .25s;
+    }
+    .proj-card:hover .proj-card-badge {
+      background: #CCFF00; color: #0d0d0d; border-color: #CCFF00;
+      transform: rotate(45deg);
+    }
+    .proj-card-bottom { position: relative; z-index: 2; }
+    .proj-card-name {
+      font-size: 30px; font-weight: 800; letter-spacing: var(--ls-tight);
+      color: #fff; margin-bottom: 14px; line-height: 1.05;
+    }
+    .proj-card-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .proj-card-tag {
+      display: inline-flex; align-items: center;
+      border: 1px solid rgba(255,255,255,.25); color: #fff;
+      border-radius: 100px; padding: 6px 14px;
+      font-size: 12px; font-weight: 500; letter-spacing: var(--ls-normal);
+      background: rgba(255,255,255,.05);
+    }
+
+    /* ─────────────────────────────────────────────
        PROJECT CATEGORY LABELS
     ───────────────────────────────────────────── */
     .proj-category-label {
@@ -1001,6 +1077,8 @@
       .projects-head { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
       .projects-desc { text-align: left; max-width: 100%; }
       .proj-inner { padding: 28px 24px; }
+      .project-grid { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 20px; }
+      .proj-card { min-height: 360px; padding: 28px; }
       #contact { padding: 80px 24px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -1165,6 +1243,15 @@
       .proj-num { font-size: 10px; }
       .proj-year { font-size: 11px; }
       .proj-arrow { width: 36px; height: 36px; font-size: 14px; }
+
+      /* Project grid cards */
+      .project-grid { padding: 0 20px 40px; gap: 16px; }
+      .proj-card { min-height: 300px; padding: 22px; border-radius: 24px; }
+      .proj-card-name { font-size: 22px; margin-bottom: 10px; }
+      .proj-card-meta { font-size: 10px; }
+      .proj-card-badge { width: 36px; height: 36px; font-size: 13px; }
+      .proj-card-tag { font-size: 11px; padding: 5px 12px; }
+      .proj-card-watermark { font-size: 60px; }
       .proj-tagline { font-size: 12px; max-width: 90%; }
 
       /* Metrics chips */
@@ -1575,93 +1662,100 @@
       <span class="cat-desc">Brand Identity · Social Media Design · Visual Direction</span>
     </div>
 
-    <div class="project-list">
-      <a href="sepasi.html" class="proj-row with-img reveal" style="text-decoration:none;">
-        <div class="proj-bg" style="background-image:url('sepasi-cafe-bg.jpeg');"></div>
-        <div class="proj-inner">
-          <div class="proj-left">
-            <div class="proj-num">/001/</div>
-            <div class="proj-cat">{ Social Media Management }</div>
-            <div class="proj-name">Sepasi Cafe</div>
-          </div>
-          <div class="proj-right">
-            <div class="proj-year">/2022</div>
-            <div class="proj-arrow">↗</div>
+    <div class="project-grid">
+      <a href="sepasi.html" class="proj-card reveal">
+        <div class="proj-card-bg" style="background-image:url('sepasi-cafe-bg.jpeg');"></div>
+        <div class="proj-card-overlay"></div>
+        <div class="proj-card-watermark">hd.</div>
+        <div class="proj-card-top">
+          <span class="proj-card-meta">001 — 2022</span>
+          <span class="proj-card-badge">↗</span>
+        </div>
+        <div class="proj-card-bottom">
+          <h3 class="proj-card-name">Sepasi Cafe</h3>
+          <div class="proj-card-tags">
+            <span class="proj-card-tag">Social Media Management</span>
           </div>
         </div>
       </a>
 
-      <a href="voilene.html" class="proj-row with-img reveal" style="text-decoration:none;">
-        <div class="proj-bg" style="background-image:url('voilen-etoile-bg.jpeg');"></div>
-        <div class="proj-inner">
-          <div class="proj-left">
-            <div class="proj-num">/002/</div>
-            <div class="proj-cat">{ Social Media } { Photoshoot Direction }</div>
-            <div class="proj-name">Voilene Etoile</div>
-          </div>
-          <div class="proj-right">
-            <div class="proj-year">/2022</div>
-            <div class="proj-arrow">↗</div>
+      <a href="voilene.html" class="proj-card reveal">
+        <div class="proj-card-bg" style="background-image:url('voilen-etoile-bg.jpeg');"></div>
+        <div class="proj-card-overlay"></div>
+        <div class="proj-card-watermark">hd.</div>
+        <div class="proj-card-top">
+          <span class="proj-card-meta">002 — 2022</span>
+          <span class="proj-card-badge">↗</span>
+        </div>
+        <div class="proj-card-bottom">
+          <h3 class="proj-card-name">Voilene Etoile</h3>
+          <div class="proj-card-tags">
+            <span class="proj-card-tag">Social Media</span>
+            <span class="proj-card-tag">Photoshoot Direction</span>
           </div>
         </div>
       </a>
 
-      <a href="npure.html" class="proj-row with-img reveal" style="text-decoration:none;">
-        <div class="proj-bg" style="background-image:url('npure-bg.jpeg');"></div>
-        <div class="proj-inner">
-          <div class="proj-left">
-            <div class="proj-num">/003/</div>
-            <div class="proj-cat">{ Brand Identity }</div>
-            <div class="proj-name">NPure</div>
-          </div>
-          <div class="proj-right">
-            <div class="proj-year">/2023</div>
-            <div class="proj-arrow">↗</div>
+      <a href="npure.html" class="proj-card reveal">
+        <div class="proj-card-bg" style="background-image:url('npure-bg.jpeg');"></div>
+        <div class="proj-card-overlay"></div>
+        <div class="proj-card-watermark">hd.</div>
+        <div class="proj-card-top">
+          <span class="proj-card-meta">003 — 2023</span>
+          <span class="proj-card-badge">↗</span>
+        </div>
+        <div class="proj-card-bottom">
+          <h3 class="proj-card-name">NPure</h3>
+          <div class="proj-card-tags">
+            <span class="proj-card-tag">Brand Identity</span>
           </div>
         </div>
       </a>
 
-      <a href="granova.html" class="proj-row with-img reveal" style="text-decoration:none;">
-        <div class="proj-bg" style="background-image:url('granova-bg.jpeg');"></div>
-        <div class="proj-inner">
-          <div class="proj-left">
-            <div class="proj-num">/004/</div>
-            <div class="proj-cat">{ Graphic Design }</div>
-            <div class="proj-name">Granova</div>
-          </div>
-          <div class="proj-right">
-            <div class="proj-year">/2023</div>
-            <div class="proj-arrow">↗</div>
+      <a href="granova.html" class="proj-card reveal">
+        <div class="proj-card-bg" style="background-image:url('granova-bg.jpeg');"></div>
+        <div class="proj-card-overlay"></div>
+        <div class="proj-card-watermark">hd.</div>
+        <div class="proj-card-top">
+          <span class="proj-card-meta">004 — 2023</span>
+          <span class="proj-card-badge">↗</span>
+        </div>
+        <div class="proj-card-bottom">
+          <h3 class="proj-card-name">Granova</h3>
+          <div class="proj-card-tags">
+            <span class="proj-card-tag">Graphic Design</span>
           </div>
         </div>
       </a>
 
-      <a href="bakti.html" class="proj-row with-img reveal" style="text-decoration:none;">
-        <div class="proj-bg" style="background-image:url('bakti-milenial-bg.jpg');"></div>
-        <div class="proj-inner">
-          <div class="proj-left">
-            <div class="proj-num">/005/</div>
-            <div class="proj-cat">{ Brand Identity }</div>
-            <div class="proj-name">Bakti Millenial</div>
-          </div>
-          <div class="proj-right">
-            <div class="proj-year">/2022</div>
-            <div class="proj-arrow">↗</div>
+      <a href="bakti.html" class="proj-card reveal">
+        <div class="proj-card-bg" style="background-image:url('bakti-milenial-bg.jpg');"></div>
+        <div class="proj-card-overlay"></div>
+        <div class="proj-card-watermark">hd.</div>
+        <div class="proj-card-top">
+          <span class="proj-card-meta">005 — 2022</span>
+          <span class="proj-card-badge">↗</span>
+        </div>
+        <div class="proj-card-bottom">
+          <h3 class="proj-card-name">Bakti Millenial</h3>
+          <div class="proj-card-tags">
+            <span class="proj-card-tag">Brand Identity</span>
           </div>
         </div>
       </a>
 
-      <a href="pepsodent.html" class="proj-row with-img reveal" style="text-decoration:none;">
-        <div class="proj-bg" style="background-image:url('pepsodent-bg.jpeg');"></div>
-        <div class="proj-inner">
-          <div class="proj-left">
-            <div class="proj-num">/006/</div>
-            <div class="proj-cat">{ Creative Campaign }</div>
-            <div class="proj-name">Pepsodent</div>
-          </div>
-          <div class="proj-right">
-            <div class="proj-year">/2022</div>
-            <div class="proj-arrow">↗</div>
+      <a href="pepsodent.html" class="proj-card reveal">
+        <div class="proj-card-bg" style="background-image:url('pepsodent-bg.jpeg');"></div>
+        <div class="proj-card-overlay"></div>
+        <div class="proj-card-watermark">hd.</div>
+        <div class="proj-card-top">
+          <span class="proj-card-meta">006 — 2022</span>
+          <span class="proj-card-badge">↗</span>
+        </div>
+        <div class="proj-card-bottom">
+          <h3 class="proj-card-name">Pepsodent</h3>
+          <div class="proj-card-tags">
+            <span class="proj-card-tag">Creative Campaign</span>
           </div>
         </div>
       </a>
