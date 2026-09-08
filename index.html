@@ -746,6 +746,45 @@
     ───────────────────────────────────────────── */
     #projects { padding: 100px 0 0; }
 
+    .projects-statement {
+      padding: 0 48px;
+      margin-bottom: 90px;
+    }
+    .statement-headline {
+      font-size: clamp(30px, 4vw, 52px);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--black);
+      margin: 0 0 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .statement-row {
+      display: flex;
+      gap: 64px;
+    }
+    .statement-label {
+      flex: 0 0 auto;
+      width: 220px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: var(--ls-normal);
+      line-height: 1.5;
+      color: var(--black);
+    }
+    .statement-body {
+      flex: 1 1 auto;
+      max-width: 620px;
+    }
+    .statement-body p {
+      font-size: clamp(16px, 1.4vw, 19px);
+      line-height: 1.6;
+      color: var(--gray);
+      margin: 0 0 28px;
+    }
+    .statement-link.projects-all-link { color: var(--black); }
+
     .projects-head {
       padding: 0 48px;
       display: flex;
@@ -1131,6 +1170,9 @@
       .about-card-outer { max-width: 420px; position: static; margin-top: 0; }
       #logos { padding: 40px 0; }
       .logos-label { padding: 0 24px; }
+      .projects-statement { padding: 0 24px; margin-bottom: 60px; }
+      .statement-row { gap: 36px; }
+      .statement-label { width: 160px; }
       .projects-head { padding: 0 24px; gap: 16px; }
       .projects-filmstrip { padding-left: 24px; }
       .project-grid { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 20px; }
@@ -1282,6 +1324,10 @@
 
       /* ── PROJECTS ── */
       #projects { padding: 56px 0 0; }
+      .projects-statement { padding: 0 20px; margin-bottom: 48px; }
+      .statement-headline { margin-bottom: 28px; padding-bottom: 28px; }
+      .statement-row { flex-direction: column; gap: 20px; }
+      .statement-label { width: auto; }
       .projects-head {
         padding: 0 20px;
         gap: 16px;
@@ -1707,8 +1753,19 @@
 
   <!-- ══════════════ PROJECTS ══════════════ -->
   <section id="projects">
+    <div class="projects-statement reveal">
+      <h2 class="statement-headline">Clear Systems. Creative Execution.<br>Data-Backed. Always Building.</h2>
+      <div class="statement-row">
+        <div class="statement-label">Engineer. Strategize.<br>Create. Optimize.</div>
+        <div class="statement-body">
+          <p>I'm Davian — a full-stack digital marketer based in Malang, Indonesia, with a background in civil engineering. I build the systems, run the channels, and read the data behind every campaign. My process is structured, collaborative, and always curious about what actually moves the needle.</p>
+          <a href="#about" class="projects-all-link statement-link">More about me <span class="link-arrow-circle">→</span></a>
+        </div>
+      </div>
+    </div>
+
     <div class="projects-head reveal">
-      <div class="projects-title">projects<span class="proj-dot">.</span></div>
+      <div class="projects-title">A selection of my work</div>
       <div class="projects-meta-row">
         <a href="#projects" class="projects-all-link">All projects <span class="link-arrow-circle">→</span></a>
         <div class="projects-focus">
