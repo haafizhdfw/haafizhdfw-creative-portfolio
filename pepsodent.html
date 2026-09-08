@@ -184,7 +184,12 @@
 
     /* ── Stat list (accordion style) ── */
     .stat-list {
-      list-style: none; display: flex; flex-direction: column; gap: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
       margin-bottom: 48px;
     }
     .stat-list li {
@@ -196,7 +201,8 @@
       cursor: pointer;
       overflow: hidden;
     }
-    .stat-list li:first-child { border-top: 1px solid var(--line); }
+    .stat-list li:nth-child(1),
+    .stat-list li:nth-child(3) { border-top: 1px solid var(--line); }
     .stat-list li .stat-list-row {
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 0;
