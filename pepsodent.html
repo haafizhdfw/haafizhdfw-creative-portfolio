@@ -100,6 +100,7 @@
     }
     .hero-back:hover { color: var(--white); }
     .hero-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-chips-below { margin-bottom: 0; margin-top: 20px; }
     .hero-chip {
       padding: 5px 14px; border: 1px solid rgba(255,255,255,.2);
       background: rgba(255,255,255,.08); backdrop-filter: blur(8px);
@@ -107,7 +108,7 @@
       letter-spacing: .08em; color: rgba(255,255,255,.8); text-transform: uppercase;
     }
     .hero-title {
-      font-size: clamp(56px, 7vw, 96px); font-weight: 900;
+      font-size: clamp(56px, 7vw, 96px); font-weight: 600;
       letter-spacing: var(--ls-tight); line-height: 0.9; color: var(--white);
     }
     .hero-title span { color: #CCFF00; }
@@ -146,6 +147,15 @@
     }
     .section-title em { font-style: normal; color: var(--blue); }
     .section-title em.red { color: var(--red); }
+    .section-title-light { font-weight: 600; }
+
+    .section-head-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 48px; margin-bottom: 28px;
+    }
+    .section-head-row .section-title { margin-bottom: 0; flex: 1 1 auto; }
+    .section-lead-col { flex: 0 1 460px; padding-top: 6px; }
+    .section-lead-col .section-lead:last-child { margin-bottom: 0; }
 
     .section-lead {
       font-size: 17px; font-weight: 400; color: var(--gray);
@@ -301,6 +311,8 @@
       .hero-inner { padding: 40px 24px; }
       .hero-back { left: 24px; }
       .stat-row-4 { grid-template-columns: 1fr 1fr; }
+      .section-head-row { flex-direction: column; gap: 20px; }
+      .section-lead-col { flex: 1 1 auto; padding-top: 0; max-width: 100%; }
       .deck-pair { grid-template-columns: 1fr; }
       .cta-banner { padding: 36px 28px; grid-template-columns: 1fr; gap: 28px; }
       #contact { grid-template-columns: 1fr !important; padding: 56px 24px !important; gap: 48px !important; }
@@ -345,13 +357,13 @@
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"/></svg>
         All Projects
       </a>
-      <div class="hero-chips">
+      <h1 class="hero-title">Pepsodent<br><span>Campaign Decks</span></h1>
+      <div class="hero-chips hero-chips-below">
         <div class="hero-chip">Creative Campaign</div>
         <div class="hero-chip">Moodboard · Storyboard · Script</div>
         <div class="hero-chip">Overlay Studio 2024</div>
         <div class="hero-chip">Unilever · Pepsodent</div>
       </div>
-      <h1 class="hero-title">Pepsodent<br><span>Campaign Decks</span></h1>
     </div>
   </div>
 
@@ -382,10 +394,13 @@
       <span class="eyebrow-num">01</span>
       <span class="eyebrow-tag">The Project</span>
     </div>
-    <h2 class="section-title">Creative Campaign Decks<br>for <em class="red">Pepsodent</em></h2>
-    <p class="section-lead">
-      Pepsodent — a brand under <strong>Unilever</strong> — needed two creative decks for two different products: <strong>4D Expert Clean</strong> (toothbrush, 15 seconds) and <strong>Gum Expert</strong> (toothpaste, 30 seconds). At Overlay Studio Limited, I handled the full creative pre-production — from script writing and visual reference research to moodboard curation and PPT deck design, ready to present to the client and production crew.
-    </p>
+    <div class="section-head-row">
+      <h2 class="section-title section-title-light">Creative Campaign Decks<br>for <em class="red">Pepsodent</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">Pepsodent, a brand under <strong>Unilever</strong>. Needed two creative decks for two different products: <strong>4D Expert Clean</strong> (toothbrush, 15 seconds) and <strong>Gum Expert</strong> (toothpaste, 30 seconds).</p>
+        <p class="section-lead">At Overlay Studio Limited, I handled the full creative pre-production, from script writing and visual reference research to moodboard curation and PPT deck design, ready to present to the client and production crew.</p>
+      </div>
+    </div>
 
     <div class="stat-row stat-row-4" style="margin-bottom:0;">
       <div class="stat-cell">
