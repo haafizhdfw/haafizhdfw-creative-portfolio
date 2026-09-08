@@ -315,23 +315,19 @@
     }
 
     /* ─────────────────────────────────────────────
-       GRID SHOWCASE — big staggered headline, shifts from
-       "Engineer the Growth" to "of Digital Marketing." on scroll
+       GRID SHOWCASE — big staggered headline, fully visible, no clipping
     ───────────────────────────────────────────── */
     .grid-showcase {
       position: relative;
-      height: 170vh;
+      height: auto;
+      padding: 70px 0 80px;
       background: var(--bg);
     }
     .gs-sticky {
-      position: sticky;
-      top: 88px;
-      height: calc(100vh - 88px);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding-top: 40px;
+      position: static;
+      height: auto;
+      overflow: visible;
+      display: block;
     }
     .gs-labels {
       display: grid;
@@ -346,17 +342,14 @@
     .gs-labels span:first-child { visibility: hidden; }
 
     .gs-viewport {
-      position: relative;
-      overflow: hidden;
-      height: min(56vh, 540px);
+      position: static;
+      overflow: visible;
+      height: auto;
     }
     .gs-pan {
-      position: absolute;
-      top: 0;
-      left: 0;
+      position: static;
       width: 100%;
-      transform: translateY(0);
-      will-change: transform;
+      transform: none;
     }
     .gs-grid {
       margin: 0 48px;
@@ -1937,53 +1930,6 @@
       el.style.transitionDelay = (i%5)*70+'ms';
       io.observe(el);
     });
-
-    /* Grid showcase — smoothly slides from "Engineer the Growth" to "of Digital Marketing." as you scroll */
-    (function () {
-      const section = document.querySelector('.grid-showcase');
-      const pan = document.querySelector('.gs-pan');
-      const viewport = document.querySelector('.gs-viewport');
-      if (!section || !pan || !viewport) return;
-      const desktopQuery = window.matchMedia('(min-width: 901px)');
-      let raf = null;
-      let maxY = 0;
-
-      function measure() {
-        if (!desktopQuery.matches) return;
-        const contentHeight = pan.scrollHeight;
-        const viewportHeight = viewport.clientHeight;
-        maxY = Math.max(0, contentHeight - viewportHeight);
-      }
-
-      function update() {
-        raf = null;
-        if (!desktopQuery.matches) {
-          pan.style.transform = '';
-          return;
-        }
-        const rect = section.getBoundingClientRect();
-        const vh = window.innerHeight;
-        const scrollable = rect.height - vh;
-        let progress = scrollable > 0 ? -rect.top / scrollable : 0;
-        progress = Math.max(0, Math.min(1, progress));
-
-        pan.style.transform = 'translateY(' + (-progress * maxY) + 'px)';
-      }
-
-      function onScroll() {
-        if (raf === null) raf = requestAnimationFrame(update);
-      }
-
-      function onResize() {
-        measure();
-        onScroll();
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onResize);
-      measure();
-      update();
-    })();
 
     /* Service chips toggle */
     document.querySelectorAll('.about-card-services-list li').forEach(li => {
