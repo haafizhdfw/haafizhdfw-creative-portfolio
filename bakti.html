@@ -99,6 +99,7 @@
     }
     .hero-back:hover { color: var(--white); }
     .hero-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-chips-below { margin-bottom: 0; margin-top: 20px; }
     .hero-chip {
       padding: 5px 14px; border: 1px solid rgba(255,255,255,.2);
       background: rgba(255,255,255,.08); backdrop-filter: blur(8px);
@@ -125,7 +126,8 @@
     .stat-l { font-weight: 300; font-size: 26px; letter-spacing: var(--ls-tight); color: rgba(255,255,255,.45); }
 
     /* ── Sections ── */
-    .section { padding: 80px 52px; border-top: 1px solid var(--line); }
+    .section { padding: 48px 52px; }
+    .section:first-of-type { border-top: none; }
 
     .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
     .eyebrow-num { font-size: 11px; font-weight: 700; letter-spacing: .2em; color: var(--lgray); text-transform: uppercase; }
@@ -144,6 +146,15 @@
     }
     .section-title em { font-style: normal; color: var(--teal); }
 
+    .section-head-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 48px; margin-bottom: 28px;
+    }
+    .section-head-row .section-title { margin-bottom: 0; flex: 0 0 38%; }
+    .section-lead-col { flex: 1 1 auto; padding-top: 6px; }
+    .section-lead-col .section-lead:last-child { margin-bottom: 0; }
+    .section-lead-col .section-lead { font-size: 15px; max-width: none; }
+
     .section-lead {
       font-size: 17px; font-weight: 400; color: var(--gray);
       line-height: 1.7; letter-spacing: var(--ls-normal);
@@ -151,38 +162,95 @@
     }
     .section-lead strong { color: var(--black); font-weight: 600; }
 
-    /* ── Stat row ── */
-    .stat-row { display: grid; gap: 2px; margin-bottom: 48px; }
-    .stat-row-4 { grid-template-columns: repeat(4,1fr); }
-    .stat-cell {
-      background: var(--white); padding: 28px 24px; border: 1px solid var(--line);
+    /* ── Stat list (accordion style) ── */
+    .stat-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-top: 64px;
+      margin-bottom: 0;
     }
-    .stat-cell.dark      { background: #062e2b; }
-    .stat-cell.teal-cell { background: var(--teal); }
-    .stat-cell:first-child { border-radius: 14px 0 0 14px; }
-    .stat-cell:last-child  { border-radius: 0 14px 14px 0; }
-    .stat-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lgray); margin-bottom: 8px; }
-    .stat-cell.dark .stat-label      { color: rgba(255,255,255,.3); }
-    .stat-cell.teal-cell .stat-label { color: rgba(255,255,255,.65); }
-    .stat-value { font-size: clamp(20px,2.6vw,36px); font-weight: 900; letter-spacing: var(--ls-tight); color: var(--black); line-height: 1; margin-bottom: 4px; }
-    .stat-cell.dark .stat-value      { color: #4DD8CE; }
-    .stat-cell.teal-cell .stat-value { color: var(--white); }
-    .stat-note { font-size: 12px; color: var(--lgray); letter-spacing: var(--ls-normal); }
-    .stat-cell.dark .stat-note      { color: rgba(255,255,255,.25); }
-    .stat-cell.teal-cell .stat-note { color: rgba(255,255,255,.65); }
+    .stat-list li {
+      font-size: 22px; font-weight: 500; color: var(--black);
+      letter-spacing: -0.03em;
+      display: flex; flex-direction: column;
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .stat-list li:nth-child(1),
+    .stat-list li:nth-child(3) { border-top: 1px solid var(--line); }
+    .stat-list li .stat-list-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0;
+      transition: padding-left 0.2s;
+    }
+    .stat-list li:hover .stat-list-row { padding-left: 8px; }
+    .stat-list li .stat-list-row::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .stat-list li.open .stat-list-row::after {
+      transform: rotate(45deg);
+    }
+    .stat-list-drop {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0;
+    }
+    .stat-list li.open .stat-list-drop {
+      max-height: 200px;
+      padding-bottom: 18px;
+    }
+    .stat-list-drop span {
+      display: inline-block;
+      font-size: 19px; font-weight: 400; color: var(--gray);
+      letter-spacing: var(--ls-normal);
+    }
 
-    /* ── Role list ── */
-    .role-list { display: flex; flex-direction: column; margin-bottom: 48px; }
+    /* ── Role list (accordion style) ── */
+    .role-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-bottom: 0;
+    }
     .role-row {
-      display: flex; align-items: flex-start; gap: 20px;
-      padding: 22px 0; border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
     }
-    .role-row:first-child { border-top: 1px solid var(--line); }
-    .role-num {
-      font-size: 11px; font-weight: 800; letter-spacing: .14em;
-      color: var(--teal); flex-shrink: 0; padding-top: 3px; min-width: 28px;
+    .role-row:nth-child(1),
+    .role-row:nth-child(4) { border-top: none; }
+    .role-row-head {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 0;
+      transition: padding-left 0.2s;
     }
-    .role-title { font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); margin-bottom: 4px; }
+    .role-row:hover .role-row-head { padding-left: 8px; }
+    .role-row-head::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .role-row.open .role-row-head::after { transform: rotate(45deg); }
+    .role-num { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--teal); flex-shrink: 0; width: 28px; }
+    .role-title { font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); flex: 1 1 auto; margin-bottom: 0; }
+    .role-desc-wrap {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0; padding-left: 44px;
+    }
+    .role-row.open .role-desc-wrap { max-height: 300px; padding-bottom: 20px; }
     .role-desc { font-size: 14px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
     .role-desc strong { color: var(--black); font-weight: 600; }
     .role-tag {
@@ -197,7 +265,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      margin-bottom: 48px;
+      margin-bottom: 0;
     }
     .gallery-item {
       border-radius: 14px; overflow: hidden;
@@ -212,16 +280,22 @@
     .cta-banner {
       background: #062e2b; border-radius: 24px;
       padding: 56px; position: relative; overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
     }
     .cta-banner::before {
       content: 'KAMI'; position: absolute; right: -10px; bottom: -30px;
       font-size: 200px; font-weight: 900; letter-spacing: var(--ls-tight);
       color: rgba(255,255,255,.04); line-height: 1; pointer-events: none;
     }
+    .cta-left {}
+    .cta-right {}
     .cta-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; }
-    .cta-title { font-size: clamp(32px,4vw,56px); font-weight: 900; letter-spacing: var(--ls-tight); line-height: 0.93; color: var(--white); margin-bottom: 16px; }
+    .cta-title { font-size: clamp(32px,4vw,56px); font-weight: 900; letter-spacing: var(--ls-tight); line-height: 0.93; color: var(--white); margin-bottom: 0; }
     .cta-title span { color: #4DD8CE; }
-    .cta-desc { font-size: 16px; color: rgba(255,255,255,.5); line-height: 1.65; letter-spacing: var(--ls-normal); max-width: 520px; margin-bottom: 32px; }
+    .cta-desc { font-size: 16px; color: rgba(255,255,255,.5); line-height: 1.65; letter-spacing: var(--ls-normal); margin-bottom: 32px; }
     .cta-specs { display: flex; flex-wrap: wrap; gap: 8px; }
     .cta-spec {
       padding: 6px 16px; background: rgba(255,255,255,.07);
@@ -239,9 +313,15 @@
       .section { padding: 56px 24px; }
       .hero-inner, .hero-back { left: 24px; }
       .hero-inner { padding: 40px 24px; }
-      .stat-row-4 { grid-template-columns: 1fr 1fr; }
+      .section-head-row { flex-direction: column; gap: 20px; }
+      .section-head-row .section-title { flex: 0 0 auto; }
+      .section-lead-col { flex: 1 1 auto; padding-top: 0; max-width: 100%; }
+      .role-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; column-gap: 0; }
+      .role-row:nth-child(4) { border-top: 1px solid var(--line); }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
-      .cta-banner { padding: 36px 28px; }
+      .cta-banner { padding: 36px 28px; grid-template-columns: 1fr; gap: 28px; }
+      .cur-dot, .cur-ring { display: none; }
+      body { cursor: auto; }
     }
 
   </style>
@@ -281,12 +361,12 @@
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"/></svg>
         All Projects
       </a>
-      <div class="hero-chips">
+      <h1 class="hero-title">KAMI<br><span>Foundation.</span></h1>
+      <div class="hero-chips hero-chips-below">
         <div class="hero-chip">Social Media Design Post</div>
         <div class="hero-chip">Graphic Design</div>
         <div class="hero-chip">Non-Profit · 2022</div>
       </div>
-      <h1 class="hero-title">KAMI<br><span>Foundation.</span></h1>
     </div>
   </div>
 
@@ -317,33 +397,31 @@
       <span class="eyebrow-num">01</span>
       <span class="eyebrow-tag">The Project</span>
     </div>
-    <h2 class="section-title">Graphic Design for<br>a <em>Youth Non-Profit</em></h2>
-    <p class="section-lead">
-      KAMI Foundation (Millennial Karya Anak Foundation) is a <strong>Non-Profit Organization</strong> that serves as a forum for Indonesian youths to develop themselves and share their ideas, innovations, and works. I handled the full graphic design output for their <strong>Bakti Milenial</strong> program — including Instagram feeds, LinkedIn content, YouTube thumbnails, editorial design, and merchandise.
-    </p>
-
-    <div class="stat-row stat-row-4">
-      <div class="stat-cell">
-        <div class="stat-label">Client</div>
-        <div class="stat-value" style="font-size:18px;">KAMI Foundation</div>
-        <div class="stat-note">Non-Profit · Youth Org</div>
-      </div>
-      <div class="stat-cell dark">
-        <div class="stat-label">Program</div>
-        <div class="stat-value" style="font-size:18px;">Bakti Milenial</div>
-        <div class="stat-note">Milenial Mengabdi 2.0</div>
-      </div>
-      <div class="stat-cell teal-cell">
-        <div class="stat-label">Scope</div>
-        <div class="stat-value" style="font-size:18px;">6 Deliverables</div>
-        <div class="stat-note">Design outputs</div>
-      </div>
-      <div class="stat-cell dark">
-        <div class="stat-label">Year</div>
-        <div class="stat-value">2022</div>
-        <div class="stat-note">Personal Project</div>
+    <div class="section-head-row">
+      <h2 class="section-title">Graphic Design for<br>a <em>Youth Non-Profit</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">KAMI Foundation (Millennial Karya Anak Foundation) is a <strong>Non-Profit Organization</strong> that serves as a forum for Indonesian youths to develop themselves and share their ideas, innovations, and works. I handled the full graphic design output for their <strong>Bakti Milenial</strong> program — including Instagram feeds, LinkedIn content, YouTube thumbnails, editorial design, and merchandise.</p>
       </div>
     </div>
+
+    <ul class="stat-list">
+      <li>
+        <div class="stat-list-row">Client</div>
+        <div class="stat-list-drop"><span>KAMI Foundation, Non-Profit · Youth Org</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Program</div>
+        <div class="stat-list-drop"><span>Bakti Milenial, Milenial Mengabdi 2.0</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Scope</div>
+        <div class="stat-list-drop"><span>6 Deliverables, Design outputs</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Year</div>
+        <div class="stat-list-drop"><span>2022, Personal Project</span></div>
+      </li>
+    </ul>
   </section>
 
   <!-- ══ 02 WHAT I DID ══ -->
@@ -352,56 +430,70 @@
       <span class="eyebrow-num">02</span>
       <span class="eyebrow-tag teal">What I Did</span>
     </div>
-    <h2 class="section-title">My <em>Scope of Work</em></h2>
-    <p class="section-lead">
-      Enam lini desain yang aku kerjakan untuk mendukung program Bakti Milenial KAMI Foundation — dari konten harian Instagram hingga material cetak dan merchandise.
-    </p>
+    <div class="section-head-row">
+      <h2 class="section-title">My <em>Scope of Work</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">Enam lini desain yang aku kerjakan untuk mendukung program Bakti Milenial KAMI Foundation — dari konten harian Instagram hingga material cetak dan merchandise.</p>
+      </div>
+    </div>
 
     <div class="role-list">
       <div class="role-row">
-        <div class="role-num">01</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-num">01</div>
           <div class="role-title">Instagram Moodboard</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Membangun visual direction Instagram KAMI Foundation — palet warna teal yang bold, tipografi ekspresif, dan grid aesthetic yang energik sesuai karakter organisasi anak muda.</div>
           <span class="role-tag">Graphic Design</span>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-num">02</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-num">02</div>
           <div class="role-title">Feeds Instagram Design</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Mendesain konten Instagram untuk program Bakti Milenial — promo pendaftaran, infografis kuliner Raja Ampat, pengumuman peserta terpilih, konten edukatif, dan series <strong>Milenial Mengabdi 2.0</strong>.</div>
           <span class="role-tag">Graphic Design</span>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-num">03</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-num">03</div>
           <div class="role-title">Merchandise Design</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Mendesain merchandise program Bakti Milenial — kaos peserta, tote bag, dan atribut kegiatan yang mencerminkan identitas program Milenial Mengabdi 2.0.</div>
           <span class="role-tag">Graphic Design</span>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-num">04</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-num">04</div>
           <div class="role-title">Editorial &amp; Printing Design</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Desain material editorial dan cetak — booklet program, rundown acara, sertifikat peserta, dan materi publikasi Bakti Milenial untuk keperluan <strong>printing dan distribusi</strong>.</div>
           <span class="role-tag">Graphic Design</span>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-num">05</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-num">05</div>
           <div class="role-title">Feeds LinkedIn Design</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Mengadaptasi konten Instagram ke format profesional LinkedIn — menyesuaikan tone dan visual agar sesuai audiens platform profesional tanpa kehilangan identitas brand KAMI Foundation.</div>
           <span class="role-tag">Graphic Design</span>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-num">06</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-num">06</div>
           <div class="role-title">Thumbnail YouTube Design</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Mendesain thumbnail YouTube yang <strong>high-CTR</strong> — bold typography, wajah ekspresif, dan warna kontras tinggi untuk memaksimalkan click-through rate pada konten video KAMI Foundation.</div>
           <span class="role-tag">Graphic Design</span>
         </div>
@@ -415,10 +507,12 @@
       <span class="eyebrow-num">03</span>
       <span class="eyebrow-tag">Work Samples</span>
     </div>
-    <h2 class="section-title">Selected <em>Output</em></h2>
-    <p class="section-lead">
-      Beberapa hasil desain Instagram feeds yang diproduksi untuk program Bakti Milenial — Milenial Mengabdi 2.0.
-    </p>
+    <div class="section-head-row">
+      <h2 class="section-title">Selected <em>Output</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">Beberapa hasil desain Instagram feeds yang diproduksi untuk program Bakti Milenial — Milenial Mengabdi 2.0.</p>
+      </div>
+    </div>
 
     <div class="gallery-grid">
       <div class="gallery-item">
@@ -450,19 +544,23 @@
     </div>
 
     <div class="cta-banner">
-      <div class="cta-eyebrow">Final Output</div>
-      <div class="cta-title">Design System for<br><span>Youth Movement</span></div>
-      <div class="cta-desc">
-        Dari Instagram feeds hingga merchandise dan editorial — semua visual KAMI Foundation dirancang untuk mencerminkan energi anak muda Indonesia yang bergerak nyata. Bold, ekspresif, dan konsisten di setiap platform.
+      <div class="cta-left">
+        <div class="cta-eyebrow">Final Output</div>
+        <div class="cta-title">Design System for<br><span>Youth Movement</span></div>
       </div>
-      <div class="cta-specs">
-        <div class="cta-spec">Instagram Moodboard</div>
-        <div class="cta-spec">Feeds Instagram Design</div>
-        <div class="cta-spec">Merchandise Design</div>
-        <div class="cta-spec">Editorial &amp; Printing</div>
-        <div class="cta-spec">Feeds LinkedIn Design</div>
-        <div class="cta-spec">Thumbnail YouTube</div>
-        <div class="cta-spec">Non-Profit · 2022</div>
+      <div class="cta-right">
+        <div class="cta-desc">
+          Dari Instagram feeds hingga merchandise dan editorial — semua visual KAMI Foundation dirancang untuk mencerminkan energi anak muda Indonesia yang bergerak nyata. Bold, ekspresif, dan konsisten di setiap platform.
+        </div>
+        <div class="cta-specs">
+          <div class="cta-spec">Instagram Moodboard</div>
+          <div class="cta-spec">Feeds Instagram Design</div>
+          <div class="cta-spec">Merchandise Design</div>
+          <div class="cta-spec">Editorial &amp; Printing</div>
+          <div class="cta-spec">Feeds LinkedIn Design</div>
+          <div class="cta-spec">Thumbnail YouTube</div>
+          <div class="cta-spec">Non-Profit · 2022</div>
+        </div>
       </div>
     </div>
   </section>
@@ -486,6 +584,24 @@
       entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
     },{threshold:.07});
     document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    /* Stat list toggle */
+    document.querySelectorAll('.stat-list li').forEach(li => {
+      li.addEventListener('click', () => {
+        const isOpen = li.classList.contains('open');
+        document.querySelectorAll('.stat-list li').forEach(el => el.classList.remove('open'));
+        if (!isOpen) li.classList.add('open');
+      });
+    });
+
+    /* Role list toggle */
+    document.querySelectorAll('.role-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const isOpen = row.classList.contains('open');
+        document.querySelectorAll('.role-row').forEach(el => el.classList.remove('open'));
+        if (!isOpen) row.classList.add('open');
+      });
+    });
   </script>
 
   <script src="https://bridgely-dashboard.vercel.app/widget.js" data-org-id="" async></script>
