@@ -235,13 +235,21 @@
     }
 
     /* ── Role list (accordion style) ── */
-    .role-list { display: flex; flex-direction: column; margin-bottom: 0; }
+    .role-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-bottom: 0;
+    }
     .role-row {
       border-bottom: 1px solid var(--line);
       cursor: pointer;
       overflow: hidden;
     }
-    .role-row:first-child { border-top: none; }
+    .role-row:nth-child(1),
+    .role-row:nth-child(4) { border-top: none; }
     .role-row-head {
       display: flex; align-items: center; gap: 16px;
       padding: 20px 0;
@@ -387,6 +395,8 @@
       .section-head-row .section-title { flex: 0 0 auto; }
       .section-lead-col { flex: 1 1 auto; padding-top: 0; max-width: 100%; }
       .deck-pair { grid-template-columns: 1fr; }
+      .role-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; column-gap: 0; }
+      .role-row:nth-child(4) { border-top: 1px solid var(--line); }
       .cta-banner { padding: 36px 28px; grid-template-columns: 1fr; gap: 28px; }
       #contact { grid-template-columns: 1fr !important; padding: 56px 24px !important; gap: 48px !important; }
       .cur-dot, .cur-ring { display: none; }
