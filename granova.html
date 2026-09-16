@@ -100,6 +100,7 @@
     }
     .hero-back:hover { color: var(--white); }
     .hero-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-chips-below { margin-bottom: 0; margin-top: 20px; }
     .hero-chip {
       padding: 5px 14px; border: 1px solid rgba(255,255,255,.2);
       background: rgba(255,255,255,.08); backdrop-filter: blur(8px);
@@ -107,7 +108,7 @@
       letter-spacing: .08em; color: rgba(255,255,255,.8); text-transform: uppercase;
     }
     .hero-title {
-      font-size: clamp(56px, 7vw, 96px); font-weight: 900;
+      font-size: clamp(56px, 7vw, 96px); font-weight: 600;
       letter-spacing: var(--ls-tight); line-height: 0.9; color: var(--white);
     }
     .hero-title span { color: #CCFF00; }
@@ -145,6 +146,16 @@
     }
     .section-title em         { font-style: normal; color: var(--blue); }
     .section-title em.amber   { color: var(--amber); }
+    .section-title-light { font-weight: 600; font-size: clamp(32px, 3.8vw, 56px); }
+
+    .section-head-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 48px; margin-bottom: 28px;
+    }
+    .section-head-row .section-title { margin-bottom: 0; flex: 0 0 38%; }
+    .section-lead-col { flex: 1 1 auto; padding-top: 6px; }
+    .section-lead-col .section-lead:last-child { margin-bottom: 0; }
+    .section-lead-col .section-lead { font-size: 15px; max-width: none; }
 
     .section-lead {
       font-size: 17px; font-weight: 400; color: var(--gray);
@@ -153,34 +164,96 @@
     }
     .section-lead strong { color: var(--black); font-weight: 600; }
 
-    /* ── Stat row ── */
-    .stat-row { display: grid; gap: 2px; margin-bottom: 48px; }
-    .stat-row-4 { grid-template-columns: repeat(4,1fr); }
-    .stat-row-3 { grid-template-columns: repeat(3,1fr); }
-    .stat-cell {
-      background: var(--white); padding: 28px 24px;
-      border: 1px solid var(--line);
+    /* ── Stat list (accordion style) ── */
+    .stat-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-top: 64px;
+      margin-bottom: 0;
     }
-    .stat-cell.dark { background: var(--black); }
-    .stat-cell:first-child { border-radius: 14px 0 0 14px; }
-    .stat-cell:last-child  { border-radius: 0 14px 14px 0; }
-    .stat-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lgray); margin-bottom: 8px; }
-    .stat-cell.dark .stat-label { color: rgba(255,255,255,.3); }
-    .stat-value { font-size: clamp(24px,3vw,40px); font-weight: 900; letter-spacing: var(--ls-tight); color: var(--black); line-height: 1; margin-bottom: 4px; }
-    .stat-cell.dark .stat-value { color: var(--white); }
-    .stat-note { font-size: 12px; color: var(--lgray); letter-spacing: var(--ls-normal); }
-    .stat-cell.dark .stat-note { color: rgba(255,255,255,.3); }
+    .stat-list li {
+      font-size: 22px; font-weight: 500; color: var(--black);
+      letter-spacing: -0.03em;
+      display: flex; flex-direction: column;
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .stat-list li:nth-child(1),
+    .stat-list li:nth-child(3) { border-top: 1px solid var(--line); }
+    .stat-list li .stat-list-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0;
+      transition: padding-left 0.2s;
+    }
+    .stat-list li:hover .stat-list-row { padding-left: 8px; }
+    .stat-list li .stat-list-row::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .stat-list li.open .stat-list-row::after {
+      transform: rotate(45deg);
+    }
+    .stat-list-drop {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0;
+    }
+    .stat-list li.open .stat-list-drop {
+      max-height: 200px;
+      padding-bottom: 18px;
+    }
+    .stat-list-drop span {
+      display: inline-block;
+      font-size: 19px; font-weight: 400; color: var(--gray);
+      letter-spacing: var(--ls-normal);
+    }
 
-    /* ── Role list ── */
-    .role-list { display: flex; flex-direction: column; margin-bottom: 0; }
-    .role-row {
-      display: flex; align-items: flex-start; gap: 20px;
-      padding: 22px 0; border-bottom: 1px solid var(--line);
+    /* ── Role list (accordion style) ── */
+    .role-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-bottom: 0;
     }
-    .role-row:first-child { border-top: none; }
-    .role-icon { font-size: 20px; flex-shrink: 0; padding-top: 2px; width: 32px; }
-    .role-title { font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); margin-bottom: 4px; }
-    .role-desc { font-size: 14px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
+    .role-row {
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .role-row:nth-child(1),
+    .role-row:nth-child(4) { border-top: none; }
+    .role-row-head {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 0;
+      transition: padding-left 0.2s;
+    }
+    .role-row:hover .role-row-head { padding-left: 8px; }
+    .role-row-head::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .role-row.open .role-row-head::after { transform: rotate(45deg); }
+    .role-icon { font-size: 16px; font-weight: 600; letter-spacing: var(--ls-normal); color: var(--lgray); flex-shrink: 0; width: 32px; }
+    .role-title { font-size: 22px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); flex: 1 1 auto; margin-bottom: 0; }
+    .role-desc-wrap {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0; padding-left: 44px;
+    }
+    .role-row.open .role-desc-wrap { max-height: 300px; padding-bottom: 20px; }
+    .role-desc { font-size: 19px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
     .role-desc strong { color: var(--black); font-weight: 600; }
 
     /* ── Single deck preview ── */
@@ -249,7 +322,7 @@
       color: rgba(255,255,255,.04); line-height: 1; pointer-events: none;
     }
     .cta-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; }
-    .cta-title { font-size: clamp(32px,4vw,56px); font-weight: 900; letter-spacing: var(--ls-tight); line-height: 0.93; color: var(--white); margin-bottom: 0; }
+    .cta-title { font-size: clamp(32px,4vw,56px); font-weight: 600; letter-spacing: var(--ls-tight); line-height: 0.93; color: var(--white); margin-bottom: 0; }
     .cta-title span { color: #CCFF00; }
     .cta-desc { font-size: 16px; color: rgba(255,255,255,.5); line-height: 1.65; letter-spacing: var(--ls-normal); margin-bottom: 32px; }
     .cta-specs { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -270,7 +343,11 @@
       .section { padding: 56px 24px; }
       .hero-inner { padding: 40px 24px; }
       .hero-back { left: 24px; }
-      .stat-row-4 { grid-template-columns: 1fr 1fr; }
+      .section-head-row { flex-direction: column; gap: 20px; }
+      .section-head-row .section-title { flex: 0 0 auto; }
+      .section-lead-col { flex: 1 1 auto; padding-top: 0; max-width: 100%; }
+      .role-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; column-gap: 0; }
+      .role-row:nth-child(4) { border-top: 1px solid var(--line); }
       .cta-banner { padding: 36px 28px; grid-template-columns: 1fr; gap: 28px; }
       #contact { grid-template-columns: 1fr !important; padding: 56px 24px !important; gap: 48px !important; }
       .cur-dot, .cur-ring { display: none; }
@@ -314,13 +391,13 @@
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"/></svg>
         All Projects
       </a>
-      <div class="hero-chips">
+      <h1 class="hero-title">Granova ×<br><span>Kopi Kenangan</span></h1>
+      <div class="hero-chips hero-chips-below">
         <div class="hero-chip">Creative Campaign</div>
         <div class="hero-chip">Storyboard · Moodboard · Script</div>
         <div class="hero-chip">Overlay Studio 2024</div>
         <div class="hero-chip">Granova · Kopi Kenangan</div>
       </div>
-      <h1 class="hero-title">Granova ×<br><span>Kopi Kenangan</span></h1>
     </div>
   </div>
 
@@ -349,33 +426,33 @@
       <span class="eyebrow-num">01</span>
       <span class="eyebrow-tag">The Project</span>
     </div>
-    <h2 class="section-title">Creative Campaign Deck<br>for <em class="amber">Granova</em></h2>
-    <p class="section-lead">
-      Granova — a granola bar brand — collaborated with <strong>Kopi Kenangan</strong> to launch the <strong>Kenangan Mantan Coffee Bar</strong>, a coffee-flavored granola bar made with real Gula Aren. At Overlay Studio Limited, I handled the full creative pre-production: from writing the campaign script and curating visual references to building the storyboard and designing the final PPT deck — ready for client presentation and production.
-    </p>
-
-    <div class="stat-row stat-row-4" style="margin-bottom:0;">
-      <div class="stat-cell">
-        <div class="stat-label">Client</div>
-        <div class="stat-value" style="font-size:18px;">Granova ×<br>Kopi Kenangan</div>
-        <div class="stat-note">Collab campaign</div>
-      </div>
-      <div class="stat-cell dark">
-        <div class="stat-label">Output</div>
-        <div class="stat-value">1</div>
-        <div class="stat-note">Campaign deck</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-label">Product</div>
-        <div class="stat-value" style="font-size:16px;">Kenangan Mantan<br>Coffee Bar</div>
-        <div class="stat-note">Coffee · Almond · Gula Aren</div>
-      </div>
-      <div class="stat-cell dark">
-        <div class="stat-label">Year</div>
-        <div class="stat-value">2024</div>
-        <div class="stat-note">Overlay Studio Ltd.</div>
+    <div class="section-head-row">
+      <h2 class="section-title section-title-light">Creative Campaign Deck<br>for <em class="amber">Granova</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">
+          Granova, a granola bar brand, collaborated with <strong>Kopi Kenangan</strong> to launch the <strong>Kenangan Mantan Coffee Bar</strong>, a coffee-flavored granola bar made with real Gula Aren. At Overlay Studio Limited, I handled the full creative pre-production: from writing the campaign script and curating visual references to building the storyboard and designing the final PPT deck, ready for client presentation and production.
+        </p>
       </div>
     </div>
+
+    <ul class="stat-list">
+      <li>
+        <div class="stat-list-row">Client</div>
+        <div class="stat-list-drop"><span>Granova × Kopi Kenangan, Collab campaign</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Output</div>
+        <div class="stat-list-drop"><span>1 Campaign Deck</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Product</div>
+        <div class="stat-list-drop"><span>Kenangan Mantan Coffee Bar, Coffee · Almond · Gula Aren</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Year</div>
+        <div class="stat-list-drop"><span>2024, Overlay Studio Ltd.</span></div>
+      </li>
+    </ul>
   </section>
 
   <!-- ══ 02 WHAT I DID ══ -->
@@ -384,45 +461,57 @@
       <span class="eyebrow-num">02</span>
       <span class="eyebrow-tag blue">What I Did</span>
     </div>
-    <h2 class="section-title">My <em>Contribution</em></h2>
-    <p class="section-lead">
-      End-to-end creative pre-production for a collab launch campaign — from the first script draft to a polished deck the client could take straight to the shoot.
-    </p>
+    <div class="section-head-row">
+      <h2 class="section-title section-title-light">My <em>Contribution</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">End-to-end creative pre-production for a collab launch campaign, from the first script draft to a polished deck the client could take straight to the shoot.</p>
+      </div>
+    </div>
 
     <div class="role-list">
       <div class="role-row">
-        <div class="role-icon">✍️</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">01.</div>
           <div class="role-title">Script Writing</div>
-          <div class="role-desc">Wrote the creative campaign script for the <strong>Kenangan Mantan Coffee Bar</strong> launch video — covering scene flow, voice over, and key messaging that highlighted the product's identity as a coffee-meets-granola collab snack.</div>
+        </div>
+        <div class="role-desc-wrap">
+          <div class="role-desc">Wrote the creative campaign script for the <strong>Kenangan Mantan Coffee Bar</strong> launch video, covering scene flow, voice over, and key messaging that highlighted the product's identity as a coffee-meets-granola collab snack.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🔍</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">02.</div>
           <div class="role-title">Reference Research</div>
-          <div class="role-desc">Sourced visual references from <strong>YouTube, TikTok, Instagram, and Pinterest</strong> — focusing on food product cinematography, lifestyle snack campaigns, café aesthetic, and collab brand tone that matched both Granova and Kopi Kenangan's identity.</div>
+        </div>
+        <div class="role-desc-wrap">
+          <div class="role-desc">Sourced visual references from <strong>YouTube, TikTok, Instagram, and Pinterest</strong>, focusing on food product cinematography, lifestyle snack campaigns, café aesthetic, and collab brand tone that matched both Granova and Kopi Kenangan's identity.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🗂️</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">03.</div>
           <div class="role-title">Curation in Eagle</div>
-          <div class="role-desc">Organized all visual references in <strong>Eagle</strong> by scene, shot type, and mood — creating a structured library the production team and director could navigate quickly on production day.</div>
+        </div>
+        <div class="role-desc-wrap">
+          <div class="role-desc">Organized all visual references in <strong>Eagle</strong> by scene, shot type, and mood, creating a structured library the production team and director could navigate quickly on production day.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🎬</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">04.</div>
           <div class="role-title">Storyboard & Moodboard</div>
-          <div class="role-desc">Built a full storyboard scene-by-scene — shot type, camera movement, focal length, talent direction, and props — plus a visual moodboard aligned to the warm, coffee-inspired campaign aesthetic.</div>
+        </div>
+        <div class="role-desc-wrap">
+          <div class="role-desc">Built a full storyboard scene-by-scene, shot type, camera movement, focal length, talent direction, and props, plus a visual moodboard aligned to the warm, coffee-inspired campaign aesthetic.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🎨</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">05.</div>
           <div class="role-title">PPT Deck Design</div>
-          <div class="role-desc">Designed the final Creative Deck in PowerPoint — <strong>visual, on-brand</strong>, and presentation-ready, covering the creative brief, script, storyboard, moodboard, and talent direction all in one polished document.</div>
+        </div>
+        <div class="role-desc-wrap">
+          <div class="role-desc">Designed the final Creative Deck in PowerPoint, <strong>visual, on-brand</strong>, and presentation-ready, covering the creative brief, script, storyboard, moodboard, and talent direction all in one polished document.</div>
         </div>
       </div>
     </div>
@@ -434,8 +523,12 @@
       <span class="eyebrow-num">03</span>
       <span class="eyebrow-tag">Result</span>
     </div>
-    <h2 class="section-title" style="margin-bottom:12px;">One Deck,<br><em class="amber">Client Approved</em></h2>
-    <p class="section-lead">A full creative deck delivered for Granova's collab launch — covering everything from script to storyboard in a single polished presentation.</p>
+    <div class="section-head-row">
+      <h2 class="section-title section-title-light" style="font-size: clamp(24px, 2.6vw, 38px);">One Deck,<br><em class="amber">Client Approved</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">A full creative deck delivered for Granova's collab launch, covering everything from script to storyboard in a single polished presentation.</p>
+      </div>
+    </div>
 
     <!-- Single deck preview -->
     <a href="https://canva.link/n9wke4d8b727tfj" target="_blank" rel="noopener" class="deck-preview">
@@ -449,7 +542,7 @@
         </div>
       </div>
       <div class="deck-preview-footer">
-        <div class="deck-preview-label">Kenangan Mantan Coffee Bar — Creative Deck & Moodboard</div>
+        <div class="deck-preview-label">Kenangan Mantan Coffee Bar, Creative Deck & Moodboard</div>
         <div class="deck-preview-sub">Granova × Kopi Kenangan · Overlay Studio 2024 · Canva →</div>
       </div>
     </a>
@@ -461,7 +554,7 @@
       </div>
       <div class="cta-right">
         <div class="cta-desc">
-          The deck was approved and used directly on the campaign's production day. Every shot angle, product styling, and talent direction was mapped in the storyboard — so the director and brand team from both Granova and Kopi Kenangan walked in fully aligned.
+          The deck was approved and used directly on the campaign's production day. Every shot angle, product styling, and talent direction was mapped in the storyboard, so the director and brand team from both Granova and Kopi Kenangan walked in fully aligned.
         </div>
         <div class="cta-specs">
           <div class="cta-spec">Script Writing</div>
@@ -523,7 +616,7 @@
   <!-- ══ FOOTER ══ -->
   <footer style="background:#0d0d0d;padding:24px 52px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;">
     <a href="index.html"><img src="logo-portfolio.svg" alt="hd." style="height:32px;opacity:.3;filter:invert(1);" /></a>
-    <p style="font-size:12px;color:#444;">© 2026 Davian Harris — Digital Marketing Systems Builder</p>
+    <p style="font-size:12px;color:#444;">© 2026 Davian Harris · Digital Marketing Systems Builder</p>
     <p style="font-size:12px;color:#444;">Indonesia</p>
   </footer>
 
@@ -558,6 +651,24 @@
       entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
     },{threshold:.07});
     document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    /* Stat list toggle */
+    document.querySelectorAll('.stat-list li').forEach(li => {
+      li.addEventListener('click', () => {
+        const isOpen = li.classList.contains('open');
+        document.querySelectorAll('.stat-list li').forEach(el => el.classList.remove('open'));
+        if (!isOpen) li.classList.add('open');
+      });
+    });
+
+    /* Role list toggle */
+    document.querySelectorAll('.role-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const isOpen = row.classList.contains('open');
+        document.querySelectorAll('.role-row').forEach(el => el.classList.remove('open'));
+        if (!isOpen) row.classList.add('open');
+      });
+    });
   </script>
 
   <script src="https://bridgely-dashboard.vercel.app/widget.js" data-org-id="" async></script>
