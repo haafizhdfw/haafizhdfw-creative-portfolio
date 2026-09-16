@@ -224,6 +224,7 @@
       column-gap: 48px;
       margin-bottom: 0;
     }
+    .role-list-right { grid-template-columns: 1fr; margin-left: calc(38% + 48px); }
     .role-row {
       border-bottom: 1px solid var(--line);
       cursor: pointer;
@@ -318,6 +319,7 @@
       .section-head-row .section-title { flex: 0 0 auto; }
       .section-lead-col { flex: 1 1 auto; padding-top: 0; max-width: 100%; }
       .role-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; column-gap: 0; }
+      .role-list-right { margin-left: 0; }
       .role-row:nth-child(4) { border-top: 1px solid var(--line); }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .cta-banner { padding: 36px 28px; grid-template-columns: 1fr; gap: 28px; }
@@ -438,7 +440,7 @@
       </div>
     </div>
 
-    <div class="role-list">
+    <div class="role-list role-list-right">
       <div class="role-row">
         <div class="role-row-head">
           <div class="role-icon">01.</div>
