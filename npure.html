@@ -99,6 +99,7 @@
     }
     .hero-back:hover { color: var(--white); }
     .hero-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-chips-below { margin-bottom: 0; margin-top: 20px; }
     .hero-chip {
       padding: 5px 14px; border: 1px solid rgba(255,255,255,.2);
       background: rgba(255,255,255,.08); backdrop-filter: blur(8px);
@@ -106,7 +107,7 @@
       letter-spacing: .08em; color: rgba(255,255,255,.8); text-transform: uppercase;
     }
     .hero-title {
-      font-size: clamp(56px, 7vw, 96px); font-weight: 900;
+      font-size: clamp(56px, 7vw, 96px); font-weight: 600;
       letter-spacing: var(--ls-tight); line-height: 0.9; color: var(--white);
     }
     .hero-title span { color: #CCFF00; }
@@ -142,6 +143,16 @@
       color: var(--black); margin-bottom: 20px;
     }
     .section-title em { font-style: normal; color: var(--blue); }
+    .section-title-light { font-weight: 600; font-size: clamp(32px, 3.8vw, 56px); }
+
+    .section-head-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 48px; margin-bottom: 28px;
+    }
+    .section-head-row .section-title { margin-bottom: 0; flex: 0 0 38%; }
+    .section-lead-col { flex: 1 1 auto; padding-top: 6px; }
+    .section-lead-col .section-lead:last-child { margin-bottom: 0; }
+    .section-lead-col .section-lead { font-size: 15px; max-width: none; }
 
     .section-lead {
       font-size: 17px; font-weight: 400; color: var(--gray);
@@ -150,58 +161,97 @@
     }
     .section-lead strong { color: var(--black); font-weight: 600; }
 
-    /* ── Stat row ── */
-    .stat-row {
-      display: grid; gap: 2px; margin-bottom: 0;
+    /* ── Stat list (accordion style) ── */
+    .stat-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-top: 64px;
+      margin-bottom: 0;
     }
-    .stat-row-4 { grid-template-columns: repeat(4,1fr); }
-    .stat-row-3 { grid-template-columns: repeat(3,1fr); }
-    .stat-cell {
-      background: var(--white); padding: 28px 24px;
-      border: 1px solid var(--line);
+    .stat-list li {
+      font-size: 22px; font-weight: 500; color: var(--black);
+      letter-spacing: -0.03em;
+      display: flex; flex-direction: column;
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
     }
-    .stat-cell.dark { background: var(--black); }
-    .stat-cell:first-child { border-radius: 14px 0 0 14px; }
-    .stat-cell:last-child  { border-radius: 0 14px 14px 0; }
-    .stat-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lgray); margin-bottom: 8px; }
-    .stat-cell.dark .stat-label { color: rgba(255,255,255,.3); }
-    .stat-value { font-size: clamp(24px,3vw,40px); font-weight: 900; letter-spacing: var(--ls-tight); color: var(--black); line-height: 1; margin-bottom: 4px; }
-    .stat-cell.dark .stat-value { color: var(--white); }
-    .stat-note { font-size: 12px; color: var(--lgray); letter-spacing: var(--ls-normal); }
-    .stat-cell.dark .stat-note { color: rgba(255,255,255,.3); }
-
-    /* ── Role list ── */
-    .role-list { display: flex; flex-direction: column; margin-bottom: 0; }
-    .role-row {
-      display: flex; align-items: flex-start; gap: 20px;
-      padding: 22px 0; border-bottom: 1px solid var(--line);
-    }
-    .role-row:first-child { border-top: none; }
-    .role-icon { font-size: 20px; flex-shrink: 0; padding-top: 2px; width: 32px; }
-    .role-title { font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); margin-bottom: 4px; }
-    .role-desc { font-size: 14px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
-    .role-desc strong { color: var(--black); font-weight: 600; }
-
-    /* ── Scene rows ── */
-    .scene-list { display: flex; flex-direction: column; margin-bottom: 48px; }
-    .scene-row {
+    .stat-list li:nth-child(1),
+    .stat-list li:nth-child(3) { border-top: 1px solid var(--line); }
+    .stat-list li .stat-list-row {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 28px; background: var(--white);
-      border-top: 1px solid var(--line);
-      transition: background .2s, padding-left .2s;
+      padding: 18px 0;
+      transition: padding-left 0.2s;
     }
-    .scene-row:last-child { border-bottom: 1px solid var(--line); }
-    .scene-row:hover { background: #e8e7e1; padding-left: 40px; }
-    .scene-left { display: flex; align-items: flex-start; gap: 20px; }
-    .scene-num { font-size: 11px; font-weight: 700; letter-spacing: .2em; color: var(--lgray); padding-top: 3px; flex-shrink: 0; min-width: 32px; }
-    .scene-title { font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); margin-bottom: 3px; }
-    .scene-desc { font-size: 13px; color: var(--gray); letter-spacing: var(--ls-normal); line-height: 1.5; max-width: 480px; }
-    .scene-shots { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; flex-shrink: 0; margin-left: 16px; }
-    .shot-pill {
-      padding: 4px 12px; background: var(--bg); border: 1px solid var(--line);
-      border-radius: 100px; font-size: 11px; font-weight: 600;
-      letter-spacing: .06em; color: var(--gray); text-transform: uppercase; white-space: nowrap;
+    .stat-list li:hover .stat-list-row { padding-left: 8px; }
+    .stat-list li .stat-list-row::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
     }
+    .stat-list li.open .stat-list-row::after {
+      transform: rotate(45deg);
+    }
+    .stat-list-drop {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0;
+    }
+    .stat-list li.open .stat-list-drop {
+      max-height: 200px;
+      padding-bottom: 18px;
+    }
+    .stat-list-drop span {
+      display: inline-block;
+      font-size: 19px; font-weight: 400; color: var(--gray);
+      letter-spacing: var(--ls-normal);
+    }
+
+    /* ── Role list (accordion style) ── */
+    .role-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-bottom: 0;
+    }
+    .role-row {
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .role-row:nth-child(1),
+    .role-row:nth-child(4) { border-top: none; }
+    .role-row-head {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 0;
+      transition: padding-left 0.2s;
+    }
+    .role-row:hover .role-row-head { padding-left: 8px; }
+    .role-row-head::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .role-row.open .role-row-head::after { transform: rotate(45deg); }
+    .role-icon { font-size: 16px; font-weight: 600; letter-spacing: var(--ls-normal); color: var(--lgray); flex-shrink: 0; width: 32px; }
+    .role-title { font-size: 22px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); flex: 1 1 auto; margin-bottom: 0; }
+    .role-desc-wrap {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0; padding-left: 44px;
+    }
+    .role-row.open .role-desc-wrap { max-height: 300px; padding-bottom: 20px; }
+    .role-desc { font-size: 19px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
+    .role-desc strong { color: var(--black); font-weight: 600; }
 
     /* ── Deck preview thumbnail ── */
     .deck-preview {
@@ -266,7 +316,7 @@
       color: rgba(255,255,255,.04); line-height: 1; pointer-events: none;
     }
     .cta-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; }
-    .cta-title { font-size: clamp(32px,4vw,56px); font-weight: 900; letter-spacing: var(--ls-tight); line-height: 0.93; color: var(--white); margin-bottom: 0; }
+    .cta-title { font-size: clamp(32px,4vw,56px); font-weight: 600; letter-spacing: var(--ls-tight); line-height: 0.93; color: var(--white); margin-bottom: 0; }
     .cta-title span { color: #CCFF00; }
     .cta-desc { font-size: 16px; color: rgba(255,255,255,.5); line-height: 1.65; letter-spacing: var(--ls-normal); margin-bottom: 32px; }
     .cta-specs { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -286,9 +336,15 @@
       .section { padding: 56px 24px; }
       .hero-inner, .hero-back { left: 24px; }
       .hero-inner { padding: 40px 24px; }
-      .stat-row-4 { grid-template-columns: 1fr 1fr; }
-      .scene-shots { display: none; }
-      .cta-banner { padding: 36px 28px; }
+      .section-head-row { flex-direction: column; gap: 20px; }
+      .section-head-row .section-title { flex: 0 0 auto; }
+      .section-lead-col { flex: 1 1 auto; padding-top: 0; max-width: 100%; }
+      .role-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; column-gap: 0; }
+      .role-row:nth-child(4) { border-top: 1px solid var(--line); }
+      .cta-banner { padding: 36px 28px; grid-template-columns: 1fr; gap: 28px; }
+      #contact { grid-template-columns: 1fr !important; padding: 56px 24px !important; gap: 48px !important; }
+      .cur-dot, .cur-ring { display: none; }
+      body { cursor: auto; }
     }
 
   </style>
@@ -328,12 +384,12 @@
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"/></svg>
         All Projects
       </a>
-      <div class="hero-chips">
+      <h1 class="hero-title">N'Pure<br><span>CICA Series</span></h1>
+      <div class="hero-chips hero-chips-below">
         <div class="hero-chip">Creative Content</div>
         <div class="hero-chip">Moodboard · Deck</div>
         <div class="hero-chip">Overlay Studio 2024</div>
       </div>
-      <h1 class="hero-title">N'Pure<br><span>CICA Series</span></h1>
     </div>
   </div>
 
@@ -362,33 +418,33 @@
       <span class="eyebrow-num">01</span>
       <span class="eyebrow-tag">The Project</span>
     </div>
-    <h2 class="section-title">Creative Moodboard<br>for a <em>Product Video</em></h2>
-    <p class="section-lead">
-      N'Pure needed a <strong>30-second vertical video</strong> for their CICA Series launch. At Overlay Studio Limited, I handled full creative pre-production — from writing the script to designing the brand deck used to align the client and crew before shoot day.
-    </p>
-
-    <div class="stat-row stat-row-4">
-      <div class="stat-cell">
-        <div class="stat-label">Client</div>
-        <div class="stat-value" style="font-size:22px;">N'Pure</div>
-        <div class="stat-note">CICA Series</div>
-      </div>
-      <div class="stat-cell dark">
-        <div class="stat-label">Output</div>
-        <div class="stat-value">30s</div>
-        <div class="stat-note">Vertical video</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-label">Products</div>
-        <div class="stat-value">5</div>
-        <div class="stat-note">SKUs in CICA Series</div>
-      </div>
-      <div class="stat-cell dark">
-        <div class="stat-label">Year</div>
-        <div class="stat-value">2024</div>
-        <div class="stat-note">Overlay Studio Ltd.</div>
+    <div class="section-head-row">
+      <h2 class="section-title section-title-light">Creative Moodboard<br>for a <em>Product Video</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">
+          N'Pure needed a <strong>30-second vertical video</strong> for their CICA Series launch. At Overlay Studio Limited, I handled full creative pre-production, from writing the script to designing the brand deck used to align the client and crew before shoot day.
+        </p>
       </div>
     </div>
+
+    <ul class="stat-list">
+      <li>
+        <div class="stat-list-row">Client</div>
+        <div class="stat-list-drop"><span>N'Pure, CICA Series</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Output</div>
+        <div class="stat-list-drop"><span>30s, Vertical video</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Products</div>
+        <div class="stat-list-drop"><span>5, SKUs in CICA Series</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Year</div>
+        <div class="stat-list-drop"><span>2024, Overlay Studio Ltd.</span></div>
+      </li>
+    </ul>
   </section>
 
   <!-- ══ 02 WHAT I DID ══ -->
@@ -397,44 +453,56 @@
       <span class="eyebrow-num">02</span>
       <span class="eyebrow-tag blue">What I Did</span>
     </div>
-    <h2 class="section-title">My <em>Contribution</em></h2>
-    <p class="section-lead">
-      Full creative pre-production — from writing the script to delivering a deck ready to present to the brand.
-    </p>
+    <div class="section-head-row">
+      <h2 class="section-title section-title-light">My <em>Contribution</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">Full creative pre-production, from writing the script to delivering a deck ready to present to the brand.</p>
+      </div>
+    </div>
 
     <div class="role-list">
       <div class="role-row">
-        <div class="role-icon">✍️</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">01.</div>
           <div class="role-title">Script Writing</div>
-          <div class="role-desc">Wrote the creative script for the 30-second video — scene-by-scene, aligned to the key messages and brand voice of N'Pure.</div>
+        </div>
+        <div class="role-desc-wrap">
+          <div class="role-desc">Wrote the creative script for the 30-second video, scene-by-scene, aligned to the key messages and brand voice of N'Pure.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🔍</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">02.</div>
           <div class="role-title">Reference Research</div>
-          <div class="role-desc">Sourced visual references from <strong>YouTube, TikTok, Instagram, and Pinterest</strong> — focused on product cinematography that feels organic and clean.</div>
+        </div>
+        <div class="role-desc-wrap">
+          <div class="role-desc">Sourced visual references from <strong>YouTube, TikTok, Instagram, and Pinterest</strong>, focused on product cinematography that feels organic and clean.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🗂️</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">03.</div>
           <div class="role-title">Eagle Curation</div>
-          <div class="role-desc">Collected and tagged all references in <strong>Eagle</strong> by scene, product, and shot type — creating a visual library the production team could access at any time.</div>
+        </div>
+        <div class="role-desc-wrap">
+          <div class="role-desc">Collected and tagged all references in <strong>Eagle</strong> by scene, product, and shot type, creating a visual library the production team could access at any time.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🎬</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">04.</div>
           <div class="role-title">Timeline Moodboard</div>
-          <div class="role-desc">Arranged references into a <strong>scene-by-scene moodboard</strong> — wide shot, close-up, flying motion, overhead — following the script sequence.</div>
+        </div>
+        <div class="role-desc-wrap">
+          <div class="role-desc">Arranged references into a <strong>scene-by-scene moodboard</strong>, wide shot, close-up, flying motion, overhead, following the script sequence.</div>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-icon">🎨</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">05.</div>
           <div class="role-title">PPT Deck Design</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Designed the Creative Deck in PowerPoint to be <strong>visual, brand-aligned</strong>, and polished enough to present directly to N'Pure on the day.</div>
         </div>
       </div>
@@ -470,7 +538,7 @@
         <div class="cta-title">Creative Deck<br><span>& Moodboard</span></div>
       </div>
       <div class="cta-right">
-        <div class="cta-desc">The deck was approved and used directly on production day. Every shot was executed according to the moodboard — the director and brand team were fully aligned before the camera rolled.</div>
+        <div class="cta-desc">The deck was approved and used directly on production day. Every shot was executed according to the moodboard, so the director and brand team were fully aligned before the camera rolled.</div>
         <div class="cta-specs">
           <div class="cta-spec">30s Vertical Video</div>
           <div class="cta-spec">7 Scenes</div>
@@ -482,7 +550,70 @@
     </div>
   </section>
 
+  <!-- ══ CONTACT ══ -->
+  <section id="contact" style="padding:100px 52px;border-top:1px solid var(--line);background:#0d0d0d;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+
+    <div style="display:flex;flex-direction:column;align-items:flex-start;text-align:left;">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#555;margin-bottom:32px;">Let's Work Together</div>
+      <h2 style="font-family:'Inter',sans-serif;font-size:60px;font-weight:500;letter-spacing:-0.09em;line-height:1.1;color:#fff;margin-bottom:48px;">
+        Ready to build your<br>one marketing system<br>with AI automation?<br><span style="color:#CCFF00;">Let's talk!</span>
+      </h2>
+      <a href="mailto:haafizhdfw13@gmail.com" style="display:inline-block;font-size:18px;font-weight:500;letter-spacing:-0.03em;color:#fff;text-decoration:none;border-bottom:1px solid #333;padding-bottom:4px;margin-bottom:40px;transition:border-color .2s;">haafizhdfw13@gmail.com</a>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;">
+        <a href="https://www.instagram.com/haafizhdfw/" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">Instagram</a>
+        <a href="#" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">Behance</a>
+        <a href="https://www.linkedin.com/in/haafizhdfw/" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">LinkedIn</a>
+        <a href="https://www.tiktok.com/@haafizhdfw" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">TikTok</a>
+      </div>
+    </div>
+
+    <div>
+      <form style="display:flex;flex-direction:column;gap:14px;" onsubmit="handleFormSubmit(event)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <input type="text" placeholder="Full Name" required style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;" />
+          <input type="email" placeholder="Email Address" required style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;" />
+        </div>
+        <input type="text" placeholder="Business / Brand Name" style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;" />
+        <select id="contactService" onchange="this.style.color='#0d0d0d'" style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#aaa;outline:none;-webkit-appearance:none;">
+          <option value="" disabled selected>What do you need?</option>
+          <option>Social Media Management</option>
+          <option>Paid Ads (Meta / Google)</option>
+          <option>SEO & Landing Page Optimization</option>
+          <option>CRM & AI Automation</option>
+          <option>Full-Stack Marketing System</option>
+          <option>Other</option>
+        </select>
+        <textarea placeholder="Tell me about your project..." style="width:100%;background:#fff;border:none;border-radius:20px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;resize:none;height:110px;line-height:1.6;"></textarea>
+        <button type="submit" id="npureContactBtn" style="display:inline-flex;align-items:center;gap:0;padding:14px 14px 14px 28px;background:#CCFF00;color:#0d0d0d;font-family:'Inter',sans-serif;font-size:18px;font-weight:700;letter-spacing:-0.01em;border:none;border-radius:100px;cursor:pointer;width:fit-content;transition:background .2s,transform .15s;">
+          Let's Build
+          <span style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:#0d0d0d;border-radius:50%;margin-left:16px;flex-shrink:0;transition:transform .2s;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer style="background:#0d0d0d;padding:24px 52px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;">
+    <a href="index.html"><img src="logo-portfolio.svg" alt="hd." style="height:32px;opacity:.3;filter:invert(1);" /></a>
+    <p style="font-size:12px;color:#444;">© 2026 Davian Harris · Digital Marketing Systems Builder</p>
+    <p style="font-size:12px;color:#444;">Indonesia</p>
+  </footer>
+
   <script>
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('npureContactBtn');
+      btn.textContent = 'Sent! ✓';
+      btn.style.background = '#00ff88';
+      setTimeout(() => {
+        btn.innerHTML = 'Let\'s Build <span style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:#0d0d0d;border-radius:50%;margin-left:16px;"><svg viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>';
+        btn.style.background = '#CCFF00';
+        e.target.reset();
+        document.getElementById('contactService').style.color = '#aaa';
+      }, 3000);
+    }
     const dot = document.getElementById('curDot');
     const ring = document.getElementById('curRing');
     let mx=0,my=0,rx=0,ry=0;
@@ -501,59 +632,25 @@
       entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
     },{threshold:.07});
     document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-    function handleNpureForm(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type=submit]');
-      const orig = btn.innerHTML;
-      btn.textContent = 'Sent! ✓'; btn.style.background = '#00ff88';
-      setTimeout(() => { btn.innerHTML = orig; btn.style.background = '#CCFF00'; e.target.reset(); }, 3000);
-    }
-  </script>
-  <!-- CONTACT -->
-  <section id="contact" style="padding:100px 52px;background:#0d0d0d;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
-    <div style="display:flex;flex-direction:column;align-items:flex-start;text-align:left;">
-      <div style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#555;margin-bottom:32px;">Let's Work Together</div>
-      <h2 style="font-family:'Inter',sans-serif;font-size:60px;font-weight:500;letter-spacing:-0.09em;line-height:1.1;color:#fff;margin-bottom:48px;">Ready to build your<br>one marketing system<br>with AI automation?<br><span style="color:#CCFF00;">Let's talk!</span></h2>
-      <a href="mailto:haafizhdfw13@gmail.com" style="display:inline-block;font-size:18px;font-weight:500;letter-spacing:-0.03em;color:#fff;text-decoration:none;border-bottom:1px solid #333;padding-bottom:4px;margin-bottom:40px;">haafizhdfw13@gmail.com</a>
-      <div style="display:flex;gap:24px;flex-wrap:wrap;">
-        <a href="https://www.instagram.com/haafizhdfw/" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">Instagram</a>
-        <a href="#" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">Behance</a>
-        <a href="https://www.linkedin.com/in/haafizhdfw/" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">LinkedIn</a>
-        <a href="https://www.tiktok.com/@haafizhdfw" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#444;text-decoration:none;">TikTok</a>
-      </div>
-    </div>
-    <div>
-      <form style="display:flex;flex-direction:column;gap:14px;" onsubmit="handleNpureForm(event)">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-          <input type="text" placeholder="Full Name" required style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;" />
-          <input type="email" placeholder="Email Address" required style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;" />
-        </div>
-        <input type="text" placeholder="Business / Brand Name" style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;" />
-        <select onchange="this.style.color='#0d0d0d'" style="width:100%;background:#fff;border:none;border-radius:100px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#aaa;outline:none;cursor:pointer;-webkit-appearance:none;">
-          <option value="" disabled selected>What do you need?</option>
-          <option>Social Media Management</option>
-          <option>Paid Ads (Meta / Google)</option>
-          <option>SEO &amp; Landing Page Optimization</option>
-          <option>CRM &amp; AI Automation</option>
-          <option>Full-Stack Marketing System</option>
-          <option>Other</option>
-        </select>
-        <textarea placeholder="Tell me about your project..." style="width:100%;background:#fff;border:none;border-radius:20px;padding:16px 24px;font-family:'Inter',sans-serif;font-size:16px;color:#0d0d0d;outline:none;resize:none;height:120px;line-height:1.6;"></textarea>
-        <button type="submit" style="display:inline-flex;align-items:center;padding:14px 14px 14px 28px;background:#CCFF00;color:#0d0d0d;font-family:'Inter',sans-serif;font-size:18px;font-weight:700;border:none;border-radius:100px;cursor:pointer;width:100%;justify-content:space-between;margin-top:4px;">
-          Let's Build
-          <span style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:#0d0d0d;border-radius:50%;flex-shrink:0;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#CCFF00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-          </span>
-        </button>
-      </form>
-    </div>
-  </section>
 
-  <footer style="background:#0d0d0d;padding:24px 52px;border-top:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;">
-    <a href="index.html"><img src="logo-portfolio.svg" alt="hd." style="height:28px;opacity:.3;filter:invert(1);" /></a>
-    <p style="font-size:13px;color:#444;">© 2026 Davian Harris — Digital Marketing Systems Builder</p>
-    <p style="font-size:13px;color:#444;">Indonesia</p>
-  </footer>
+    /* Stat list toggle */
+    document.querySelectorAll('.stat-list li').forEach(li => {
+      li.addEventListener('click', () => {
+        const isOpen = li.classList.contains('open');
+        document.querySelectorAll('.stat-list li').forEach(el => el.classList.remove('open'));
+        if (!isOpen) li.classList.add('open');
+      });
+    });
+
+    /* Role list toggle */
+    document.querySelectorAll('.role-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const isOpen = row.classList.contains('open');
+        document.querySelectorAll('.role-row').forEach(el => el.classList.remove('open'));
+        if (!isOpen) row.classList.add('open');
+      });
+    });
+  </script>
 
   <script src="https://bridgely-dashboard.vercel.app/widget.js" data-org-id="" async></script>
 </body>
