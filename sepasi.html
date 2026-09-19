@@ -12,14 +12,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:      #f3f4f3;
-      --black:   #0d0d0d;
-      --gray:    #6b6b6b;
-      --lgray:   #b8b8b2;
-      --blue:    #2563ff;
-      --orange:  #E8621A;
-      --white:   #ffffff;
-      --line:    #ddddd5;
+      --bg:     #f3f4f3;
+      --black:  #0d0d0d;
+      --gray:   #6b6b6b;
+      --lgray:  #b8b8b2;
+      --blue:   #2563ff;
+      --orange: #E8621A;
+      --white:  #ffffff;
+      --line:   #ddddd5;
       --ls-tight:  -0.08em;
       --ls-normal: -0.03em;
       --nav-h:     88px;
@@ -99,6 +99,7 @@
     }
     .hero-back:hover { color: var(--white); }
     .hero-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-chips-below { margin-bottom: 0; margin-top: 20px; }
     .hero-chip {
       padding: 5px 14px; border: 1px solid rgba(255,255,255,.2);
       background: rgba(255,255,255,.08); backdrop-filter: blur(8px);
@@ -106,7 +107,7 @@
       letter-spacing: .08em; color: rgba(255,255,255,.8); text-transform: uppercase;
     }
     .hero-title {
-      font-size: clamp(56px, 7vw, 96px); font-weight: 900;
+      font-size: clamp(56px, 7vw, 96px); font-weight: 600;
       letter-spacing: var(--ls-tight); line-height: 0.9; color: var(--white);
     }
     .hero-title span { color: #E8621A; }
@@ -125,7 +126,8 @@
     .stat-l { font-weight: 300; font-size: 30px; letter-spacing: var(--ls-tight); color: #fff; }
 
     /* ── Sections ── */
-    .section { padding: 80px 52px; border-top: 1px solid var(--line); }
+    .section { padding: 48px 52px; }
+    .section:first-of-type { border-top: none; }
 
     .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
     .eyebrow-num { font-size: 11px; font-weight: 700; letter-spacing: .2em; color: var(--lgray); text-transform: uppercase; }
@@ -143,6 +145,16 @@
       color: var(--black); margin-bottom: 20px;
     }
     .section-title em { font-style: normal; color: var(--orange); }
+    .section-title-light { font-weight: 600; font-size: clamp(32px, 3.8vw, 56px); }
+
+    .section-head-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 48px; margin-bottom: 28px;
+    }
+    .section-head-row .section-title { margin-bottom: 0; flex: 0 0 38%; }
+    .section-lead-col { flex: 1 1 auto; padding-top: 6px; }
+    .section-lead-col .section-lead:last-child { margin-bottom: 0; }
+    .section-lead-col .section-lead { font-size: 15px; max-width: none; }
 
     .section-lead {
       font-size: 17px; font-weight: 400; color: var(--gray);
@@ -151,41 +163,96 @@
     }
     .section-lead strong { color: var(--black); font-weight: 600; }
 
-    /* ── Stat row ── */
-    .stat-row { display: grid; gap: 2px; margin-bottom: 48px; }
-    .stat-row-4 { grid-template-columns: repeat(4,1fr); }
-    .stat-row-3 { grid-template-columns: repeat(3,1fr); }
-    .stat-cell {
-      background: var(--white); padding: 28px 24px;
-      border: 1px solid var(--line);
+    /* ── Stat list (accordion style) ── */
+    .stat-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-top: 64px;
+      margin-bottom: 0;
     }
-    .stat-cell.dark { background: var(--black); }
-    .stat-cell.orange-cell { background: var(--orange); }
-    .stat-cell:first-child { border-radius: 14px 0 0 14px; }
-    .stat-cell:last-child  { border-radius: 0 14px 14px 0; }
-    .stat-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lgray); margin-bottom: 8px; }
-    .stat-cell.dark .stat-label   { color: rgba(255,255,255,.3); }
-    .stat-cell.orange-cell .stat-label { color: rgba(255,255,255,.6); }
-    .stat-value { font-size: clamp(22px,2.8vw,38px); font-weight: 900; letter-spacing: var(--ls-tight); color: var(--black); line-height: 1; margin-bottom: 4px; }
-    .stat-cell.dark .stat-value   { color: var(--white); }
-    .stat-cell.orange-cell .stat-value { color: var(--white); }
-    .stat-note { font-size: 12px; color: var(--lgray); letter-spacing: var(--ls-normal); }
-    .stat-cell.dark .stat-note   { color: rgba(255,255,255,.3); }
-    .stat-cell.orange-cell .stat-note { color: rgba(255,255,255,.6); }
+    .stat-list li {
+      font-size: 22px; font-weight: 500; color: var(--black);
+      letter-spacing: -0.03em;
+      display: flex; flex-direction: column;
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .stat-list li:nth-child(1),
+    .stat-list li:nth-child(3) { border-top: 1px solid var(--line); }
+    .stat-list li .stat-list-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0;
+      transition: padding-left 0.2s;
+    }
+    .stat-list li:hover .stat-list-row { padding-left: 8px; }
+    .stat-list li .stat-list-row::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .stat-list li.open .stat-list-row::after {
+      transform: rotate(45deg);
+    }
+    .stat-list-drop {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0;
+    }
+    .stat-list li.open .stat-list-drop {
+      max-height: 200px;
+      padding-bottom: 18px;
+    }
+    .stat-list-drop span {
+      display: inline-block;
+      font-size: 19px; font-weight: 400; color: var(--gray);
+      letter-spacing: var(--ls-normal);
+    }
 
-    /* ── Role list ── */
-    .role-list { display: flex; flex-direction: column; margin-bottom: 48px; }
+    /* ── Role list (accordion style) ── */
+    .role-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-bottom: 0;
+    }
     .role-row {
-      display: flex; align-items: flex-start; gap: 20px;
-      padding: 22px 0; border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
     }
-    .role-row:first-child { border-top: 1px solid var(--line); }
-    .role-num {
-      font-size: 11px; font-weight: 800; letter-spacing: .14em;
-      color: var(--orange); flex-shrink: 0; padding-top: 3px; min-width: 28px;
+    .role-row:nth-child(1),
+    .role-row:nth-child(4) { border-top: none; }
+    .role-row-head {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 0;
+      transition: padding-left 0.2s;
     }
-    .role-title { font-size: 18px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); margin-bottom: 4px; }
-    .role-desc { font-size: 14px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
+    .role-row:hover .role-row-head { padding-left: 8px; }
+    .role-row-head::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .role-row.open .role-row-head::after { transform: rotate(45deg); }
+    .role-icon { font-size: 16px; font-weight: 600; letter-spacing: var(--ls-normal); color: var(--lgray); flex-shrink: 0; width: 32px; }
+    .role-title { font-size: 22px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); flex: 1 1 auto; margin-bottom: 0; }
+    .role-desc-wrap {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0; padding-left: 44px;
+    }
+    .role-row.open .role-desc-wrap { max-height: 300px; padding-bottom: 20px; }
+    .role-desc { font-size: 19px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
     .role-desc strong { color: var(--black); font-weight: 600; }
     .role-tag {
       display: inline-block; margin-top: 8px; padding: 3px 10px;
@@ -198,39 +265,43 @@
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 48px;
+      gap: 12px;
+      margin-bottom: 0;
     }
     .gallery-item {
-      border-radius: 16px; overflow: hidden;
-      background: #e8e6e0;
+      border-radius: 14px; overflow: hidden;
+      background: #e8e6e0; aspect-ratio: 1/1;
     }
     .gallery-item img {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
     }
-    .gallery-item.tall { grid-row: span 2; }
-    .gallery-item.wide { grid-column: span 2; }
 
     /* ── Dark CTA ── */
     .cta-banner {
       background: var(--black); border-radius: 24px;
       padding: 56px; position: relative; overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
     }
     .cta-banner::before {
       content: 'SEPASI'; position: absolute; right: -10px; bottom: -30px;
       font-size: 160px; font-weight: 900; letter-spacing: var(--ls-tight);
       color: rgba(255,255,255,.04); line-height: 1; pointer-events: none;
     }
+    .cta-left {}
+    .cta-right {}
     .cta-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; }
-    .cta-title { font-size: clamp(32px,4vw,56px); font-weight: 900; letter-spacing: var(--ls-tight); line-height: 0.93; color: var(--white); margin-bottom: 16px; }
+    .cta-title { font-size: clamp(32px,4vw,56px); font-weight: 600; letter-spacing: var(--ls-tight); line-height: 0.93; color: var(--white); margin-bottom: 0; }
     .cta-title span { color: #E8621A; }
-    .cta-desc { font-size: 16px; color: rgba(255,255,255,.5); line-height: 1.65; letter-spacing: var(--ls-normal); max-width: 520px; margin-bottom: 32px; }
+    .cta-desc { font-size: 16px; color: rgba(255,255,255,.5); line-height: 1.65; letter-spacing: var(--ls-normal); margin-bottom: 32px; }
     .cta-specs { display: flex; flex-wrap: wrap; gap: 8px; }
     .cta-spec {
-      padding: 6px 16px; background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.15); border-radius: 100px;
-      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: rgba(255,255,255,.75);
+      padding: 6px 16px; background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12); border-radius: 100px;
+      font-size: 12px; font-weight: 600; letter-spacing: .04em; color: rgba(255,255,255,.65);
     }
 
     /* ── Reveal ── */
@@ -243,10 +314,15 @@
       .section { padding: 56px 24px; }
       .hero-inner, .hero-back { left: 24px; }
       .hero-inner { padding: 40px 24px; }
-      .stat-row-4 { grid-template-columns: 1fr 1fr; }
+      .section-head-row { flex-direction: column; gap: 20px; }
+      .section-head-row .section-title { flex: 0 0 auto; }
+      .section-lead-col { flex: 1 1 auto; padding-top: 0; max-width: 100%; }
+      .role-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; column-gap: 0; }
+      .role-row:nth-child(4) { border-top: 1px solid var(--line); }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-item.wide { grid-column: span 1; }
-      .cta-banner { padding: 36px 28px; }
+      .cta-banner { padding: 36px 28px; grid-template-columns: 1fr; gap: 28px; }
+      .cur-dot, .cur-ring { display: none; }
+      body { cursor: auto; }
     }
 
   </style>
@@ -286,12 +362,12 @@
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"/></svg>
         All Projects
       </a>
-      <div class="hero-chips">
+      <h1 class="hero-title">Sepasi<br><span>Cafe.</span></h1>
+      <div class="hero-chips hero-chips-below">
         <div class="hero-chip">Social Media Design Post</div>
         <div class="hero-chip">Social Media Admin</div>
         <div class="hero-chip">Surabaya &amp; Malang · 2022</div>
       </div>
-      <h1 class="hero-title">Sepasi<br><span>Cafe.</span></h1>
     </div>
   </div>
 
@@ -320,33 +396,31 @@
       <span class="eyebrow-num">01</span>
       <span class="eyebrow-tag">The Project</span>
     </div>
-    <h2 class="section-title">Social Media <em>Design</em><br>for a Cafe Brand</h2>
-    <p class="section-lead">
-      Sepasi Cafe is an <strong>industrial-concept cafe</strong> based in Surabaya and Malang — instagrammable, with affordable and unique menus. I handled their social media presence end-to-end: from content planning and copywriting to designing the feeds and stories that built their visual identity on Instagram.
-    </p>
-
-    <div class="stat-row stat-row-4">
-      <div class="stat-cell">
-        <div class="stat-label">Client</div>
-        <div class="stat-value" style="font-size:22px;">Sepasi</div>
-        <div class="stat-note">Cafe · Surabaya &amp; Malang</div>
-      </div>
-      <div class="stat-cell dark">
-        <div class="stat-label">Platform</div>
-        <div class="stat-value" style="font-size:22px;">Instagram</div>
-        <div class="stat-note">Feeds &amp; Stories</div>
-      </div>
-      <div class="stat-cell orange-cell">
-        <div class="stat-label">Scope</div>
-        <div class="stat-value" style="font-size:18px;">Admin + Design</div>
-        <div class="stat-note">Social Media</div>
-      </div>
-      <div class="stat-cell dark">
-        <div class="stat-label">Year</div>
-        <div class="stat-value">2022</div>
-        <div class="stat-note">Personal Project</div>
+    <div class="section-head-row">
+      <h2 class="section-title section-title-light">Social Media <em>Design</em><br>for a Cafe Brand</h2>
+      <div class="section-lead-col">
+        <p class="section-lead">Sepasi Cafe is an <strong>industrial-concept cafe</strong> based in Surabaya and Malang — instagrammable, with affordable and unique menus. I handled their social media presence end-to-end: from content planning and copywriting to designing the feeds and stories that built their visual identity on Instagram.</p>
       </div>
     </div>
+
+    <ul class="stat-list">
+      <li>
+        <div class="stat-list-row">Client</div>
+        <div class="stat-list-drop"><span>Sepasi, Cafe · Surabaya &amp; Malang</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Platform</div>
+        <div class="stat-list-drop"><span>Instagram, Feeds &amp; Stories</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Scope</div>
+        <div class="stat-list-drop"><span>Admin + Design, Social Media</span></div>
+      </li>
+      <li>
+        <div class="stat-list-row">Year</div>
+        <div class="stat-list-drop"><span>2022, Personal Project</span></div>
+      </li>
+    </ul>
   </section>
 
   <!-- ══ 02 WHAT I DID ══ -->
@@ -355,48 +429,60 @@
       <span class="eyebrow-num">02</span>
       <span class="eyebrow-tag orange">What I Did</span>
     </div>
-    <h2 class="section-title">My <em>Scope of Work</em></h2>
-    <p class="section-lead">
-      Dua lini pekerjaan — Social Media Admin dan Graphic Design — yang aku kerjakan bersamaan untuk membangun presence Instagram Sepasi Cafe dari awal.
-    </p>
+    <div class="section-head-row">
+      <h2 class="section-title section-title-light">My <em>Scope of Work</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">Dua lini pekerjaan — Social Media Admin dan Graphic Design — yang aku kerjakan bersamaan untuk membangun presence Instagram Sepasi Cafe dari awal.</p>
+      </div>
+    </div>
 
     <div class="role-list">
       <div class="role-row">
-        <div class="role-num">01</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">01.</div>
           <div class="role-title">Content Planning</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Menyusun kalender konten bulanan — dari event cafe, promo, hingga konten sehari-hari. Setiap post punya tujuan: engagement, awareness, atau konversi.</div>
           <span class="role-tag">Social Media Admin</span>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-num">02</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">02.</div>
           <div class="role-title">Schedule Post</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Menjadwalkan dan mempublikasikan konten di waktu yang optimal berdasarkan <strong>insight audiens Instagram</strong> Sepasi Cafe.</div>
           <span class="role-tag">Social Media Admin</span>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-num">03</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">03.</div>
           <div class="role-title">Copywriting, Caption &amp; Hashtag Research</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Menulis caption yang sesuai dengan tone of voice Sepasi — friendly, casual, dan on-brand. Riset hashtag yang relevan untuk memperluas organic reach di Instagram.</div>
           <span class="role-tag">Social Media Admin</span>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-num">04</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">04.</div>
           <div class="role-title">Instagram Moodboard</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Membangun <strong>visual identity</strong> Sepasi di Instagram — palet warna, tipografi, dan grid aesthetic yang konsisten dengan industrial concept cafe mereka.</div>
           <span class="role-tag">Graphic Design</span>
         </div>
       </div>
       <div class="role-row">
-        <div class="role-num">05</div>
-        <div>
+        <div class="role-row-head">
+          <div class="role-icon">05.</div>
           <div class="role-title">Feeds &amp; Story Instagram Design</div>
+        </div>
+        <div class="role-desc-wrap">
           <div class="role-desc">Mendesain seluruh aset visual Instagram — feed post (square dan portrait), story template, event announcement, merchandise promo, dan konten seasonal. Semua konsisten dengan brand guideline Sepasi.</div>
           <span class="role-tag">Graphic Design</span>
         </div>
@@ -404,34 +490,33 @@
     </div>
   </section>
 
-  <!-- ══ 03 WORK ══ -->
+  <!-- ══ 03 GALLERY ══ -->
   <section class="section reveal">
     <div class="eyebrow">
       <span class="eyebrow-num">03</span>
       <span class="eyebrow-tag">Work Samples</span>
     </div>
-    <h2 class="section-title">Selected <em>Output</em></h2>
-    <p class="section-lead">
-      Beberapa hasil desain yang diproduksi untuk Instagram Sepasi Cafe — mulai dari Grand Opening announcement, merchandise promo, hingga konten event.
-    </p>
+    <div class="section-head-row">
+      <h2 class="section-title section-title-light" style="font-size: clamp(24px, 2.6vw, 38px);">Selected <em>Output</em></h2>
+      <div class="section-lead-col">
+        <p class="section-lead">Beberapa hasil desain yang diproduksi untuk Instagram Sepasi Cafe — mulai dari Grand Opening announcement, merchandise promo, hingga konten event.</p>
+      </div>
+    </div>
 
     <div class="gallery-grid">
-      <!-- Row 1: wide + tall portrait -->
-      <div class="gallery-item wide" style="aspect-ratio:16/9;">
+      <div class="gallery-item">
         <img src="sepasi-1.jpeg" alt="Sepasi Cafe — Grand Opening" />
       </div>
-      <div class="gallery-item tall" style="aspect-ratio:4/5;">
+      <div class="gallery-item">
         <img src="sepasi-2.jpeg" alt="Sepasi Merchandise" />
       </div>
-      <!-- Row 2: two squares + (tall continues) -->
-      <div class="gallery-item" style="aspect-ratio:1/1;">
+      <div class="gallery-item">
         <img src="sepasi-4.jpeg" alt="Sepasi Merchandise Square" />
       </div>
-      <div class="gallery-item" style="aspect-ratio:1/1;">
+      <div class="gallery-item">
         <img src="sepasi-5.jpeg" alt="Sepasi Grand Opening Dark" />
       </div>
-      <!-- Row 3: tall portrait -->
-      <div class="gallery-item" style="aspect-ratio:4/5; grid-column: span 1;">
+      <div class="gallery-item">
         <img src="sepasi-3.jpeg" alt="Selamat Hari Gizi" />
       </div>
     </div>
@@ -445,19 +530,23 @@
     </div>
 
     <div class="cta-banner">
-      <div class="cta-eyebrow">Final Output</div>
-      <div class="cta-title">Instagram Presence<br><span>Built from Zero</span></div>
-      <div class="cta-desc">
-        Dari konten planning sampai desain visual — semua dikerjakan untuk membangun identitas Instagram Sepasi Cafe yang konsisten, industrial, dan instagrammable. Setiap post dirancang untuk memperkuat brand awareness sekaligus mendorong engagement organik.
+      <div class="cta-left">
+        <div class="cta-eyebrow">Final Output</div>
+        <div class="cta-title">Instagram Presence<br><span>Built from Zero</span></div>
       </div>
-      <div class="cta-specs">
-        <div class="cta-spec">Social Media Admin</div>
-        <div class="cta-spec">Instagram Feeds &amp; Stories</div>
-        <div class="cta-spec">Content Planning</div>
-        <div class="cta-spec">Copywriting</div>
-        <div class="cta-spec">Caption &amp; Hashtag Research</div>
-        <div class="cta-spec">Instagram Moodboard</div>
-        <div class="cta-spec">2022</div>
+      <div class="cta-right">
+        <div class="cta-desc">
+          Dari konten planning sampai desain visual — semua dikerjakan untuk membangun identitas Instagram Sepasi Cafe yang konsisten, industrial, dan instagrammable. Setiap post dirancang untuk memperkuat brand awareness sekaligus mendorong engagement organik.
+        </div>
+        <div class="cta-specs">
+          <div class="cta-spec">Social Media Admin</div>
+          <div class="cta-spec">Instagram Feeds &amp; Stories</div>
+          <div class="cta-spec">Content Planning</div>
+          <div class="cta-spec">Copywriting</div>
+          <div class="cta-spec">Caption &amp; Hashtag Research</div>
+          <div class="cta-spec">Instagram Moodboard</div>
+          <div class="cta-spec">2022</div>
+        </div>
       </div>
     </div>
   </section>
@@ -481,6 +570,24 @@
       entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
     },{threshold:.07});
     document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    /* Stat list toggle */
+    document.querySelectorAll('.stat-list li').forEach(li => {
+      li.addEventListener('click', () => {
+        const isOpen = li.classList.contains('open');
+        document.querySelectorAll('.stat-list li').forEach(el => el.classList.remove('open'));
+        if (!isOpen) li.classList.add('open');
+      });
+    });
+
+    /* Role list toggle */
+    document.querySelectorAll('.role-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const isOpen = row.classList.contains('open');
+        document.querySelectorAll('.role-row').forEach(el => el.classList.remove('open'));
+        if (!isOpen) row.classList.add('open');
+      });
+    });
   </script>
 
   <script src="https://bridgely-dashboard.vercel.app/widget.js" data-org-id="" async></script>
