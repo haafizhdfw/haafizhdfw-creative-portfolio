@@ -431,6 +431,22 @@
       background: var(--line);
       flex-shrink: 0;
     }
+    .channel-stat-pills {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .channel-stat-pill {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 16px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 13px; color: var(--gray);
+      letter-spacing: var(--ls-normal);
+    }
+    .channel-stat-pill strong {
+      font-size: 15px; font-weight: 800; color: var(--black);
+      letter-spacing: -0.02em;
+    }
     .channel-name {
       font-size: 16px; font-weight: 700;
       letter-spacing: var(--ls-normal);
@@ -1205,14 +1221,11 @@
                   <div class="channel-sub">@supersub_nz</div>
                 </div>
               </div>
-              <div class="channel-stats-inline">
-                <span><strong>292K</strong> Total Views</span>
-                <span class="ch-stats-sep"></span>
-                <span><strong>28.6%</strong> From Search</span>
-                <span class="ch-stats-sep"></span>
-                <span><strong>53K</strong> Best Video</span>
-                <span class="ch-stats-sep"></span>
-                <span><strong>10+</strong> Videos &gt;10K</span>
+              <div class="channel-stat-pills">
+                <span class="channel-stat-pill"><strong>292K</strong> Total Views</span>
+                <span class="channel-stat-pill"><strong>28.6%</strong> From Search</span>
+                <span class="channel-stat-pill"><strong>53K</strong> Best Video</span>
+                <span class="channel-stat-pill"><strong>10+</strong> Videos &gt;10K</span>
               </div>
             </div>
             <a class="channel-screenshot" href="analytics-tiktok.png" target="_blank" rel="noopener">
