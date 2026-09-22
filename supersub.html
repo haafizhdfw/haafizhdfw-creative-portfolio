@@ -499,6 +499,45 @@
       width: 100%;
       display: block;
     }
+    .tiktok-showcase {
+      margin-top: 32px;
+    }
+    .tiktok-showcase-label {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lgray);
+      margin-bottom: 14px;
+    }
+    .tiktok-video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .tiktok-video-card {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #1a1a1a, #000);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      transition: opacity .2s, transform .2s;
+    }
+    .tiktok-video-card:hover { opacity: .88; transform: translateY(-2px); }
+    .tiktok-video-card .tv-play {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      border: 1.5px solid rgba(255,255,255,.35);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tiktok-video-card .tv-play svg { width: 20px; height: 20px; }
+    .tiktok-video-card .tv-label {
+      position: absolute; left: 14px; right: 14px; bottom: 14px;
+      color: #fff; font-size: 12px; font-weight: 600;
+      letter-spacing: var(--ls-normal);
+      display: flex; align-items: center; gap: 6px;
+    }
     .channel-screenshot-hint {
       font-size: 11px;
       color: var(--lgray);
@@ -1349,6 +1388,39 @@
             </div>
           </div>
 
+        </div>
+
+        <div class="tiktok-showcase">
+          <div class="tiktok-showcase-label">Watch on TikTok</div>
+          <div class="tiktok-video-grid">
+            <a class="tiktok-video-card" href="https://www.tiktok.com/@supersub_nz/video/7532771421311847686" target="_blank" rel="noopener">
+              <div class="tv-play">
+                <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+              <div class="tv-label">
+                <img src="tiktok.png" alt="TikTok" style="width:16px; height:16px; border-radius:4px;" />
+                Watch on TikTok ↗
+              </div>
+            </a>
+            <a class="tiktok-video-card" href="https://www.tiktok.com/@supersub_nz/video/7529793710641433861" target="_blank" rel="noopener">
+              <div class="tv-play">
+                <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+              <div class="tv-label">
+                <img src="tiktok.png" alt="TikTok" style="width:16px; height:16px; border-radius:4px;" />
+                Watch on TikTok ↗
+              </div>
+            </a>
+            <a class="tiktok-video-card" href="https://www.tiktok.com/@supersub_nz/video/7487819085359648005" target="_blank" rel="noopener">
+              <div class="tv-play">
+                <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+              <div class="tv-label">
+                <img src="tiktok.png" alt="TikTok" style="width:16px; height:16px; border-radius:4px;" />
+                Watch on TikTok ↗
+              </div>
+            </a>
+          </div>
         </div>
 
         <div class="insight dark">
