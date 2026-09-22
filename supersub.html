@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Supersub — Digital Marketing Case Study · Davian Harris</title>
+  <title>Supersub, Digital Marketing Case Study · Davian Harris</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -59,7 +59,7 @@
     }
 
     /* ─────────────────────────────────────────────
-       TOP NAV — matches index.html
+       TOP NAV - matches index.html
     ───────────────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -105,7 +105,7 @@
     .nav-btn-icon svg { width: 18px; height: 18px; color: var(--black); }
 
     /* ─────────────────────────────────────────────
-       LAYOUT — sidebar + content
+       LAYOUT - sidebar + content
     ───────────────────────────────────────────── */
     .layout {
       display: flex;
@@ -501,7 +501,15 @@
       grid-template-columns: 1fr 1fr;
       gap: 24px;
     }
+    .ca-row.stacked {
+      display: flex; flex-direction: column; gap: 16px;
+    }
     .ca-block {}
+    .ca-block.dark {
+      background: #222222;
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
     .ca-label {
       font-size: 10px; font-weight: 700;
       letter-spacing: 0.1em; text-transform: uppercase;
@@ -510,11 +518,15 @@
     }
     .ca-label.green { color: #16a34a; }
     .ca-label.blue  { color: var(--blue); }
+    .ca-block.dark .ca-label.green { color: #4ade80; }
+    .ca-block.dark .ca-label.blue  { color: #60a5fa; }
     .ca-text {
       font-size: 12px; color: var(--gray);
       line-height: 1.6; letter-spacing: var(--ls-normal);
     }
     .ca-text strong { color: var(--black); font-weight: 600; }
+    .ca-block.dark .ca-text { color: rgba(255,255,255,.8); }
+    .ca-block.dark .ca-text strong { color: #fff; }
 
     /* ─────────────────────────────────────────────
        INSIGHT CALLOUT
@@ -878,7 +890,7 @@
     }
 
     /* ─────────────────────────────────────────────
-       HERO — pepsodent-style
+       HERO - pepsodent-style
     ───────────────────────────────────────────── */
     #overview {
       padding: 0; border-bottom: none;
@@ -1080,7 +1092,7 @@
     <main class="main">
 
       <!-- ══════════════════════════════════════
-           01 — OVERVIEW
+           01 - OVERVIEW
       ══════════════════════════════════════ -->
       <section id="overview">
 
@@ -1143,7 +1155,7 @@
       </section>
 
       <!-- ══════════════════════════════════════
-           02 — STRATEGY
+           02 - STRATEGY
       ══════════════════════════════════════ -->
       <section id="strategy" class="chapter reveal" style="border-bottom:none; padding-bottom:48px;">
         <div class="ch-eyebrow">
@@ -1164,7 +1176,7 @@
       </section>
 
       <!-- ══════════════════════════════════════
-           03 — SOCIAL MEDIA
+           03 - SOCIAL MEDIA
       ══════════════════════════════════════ -->
       <section id="social" class="chapter reveal" style="padding-top:48px; border-bottom:none; padding-bottom:48px;">
         <div class="ch-eyebrow">
@@ -1198,22 +1210,19 @@
                 <span><strong>10+</strong> Videos &gt;10K</span>
               </div>
             </div>
-            <div class="channel-highlight">
-              <strong>28.6% search traffic</strong> — industry typical is under 10%. Viewers actively searching for the product, not passively scrolling. Best video: 53,000 views, 1K likes, 72 comments.
-            </div>
             <a class="channel-screenshot" href="analytics-tiktok.png" target="_blank" rel="noopener">
               <img src="analytics-tiktok.png" alt="TikTok Analytics" />
             </a>
             <div class="channel-screenshot-hint">Click to view full size ↗</div>
             <div class="channel-analysis">
-              <div class="ca-row">
-                <div class="ca-block">
+              <div class="ca-row stacked">
+                <div class="ca-block dark">
                   <div class="ca-label green">What the data says</div>
-                  <div class="ca-text">292K views with <strong>28.6% coming from search</strong> — 3× the industry average. People aren't stumbling on this content. They're searching for what Supersub sells and finding it. 5.3K likes and 836 shares confirm the content resonates beyond passive views.</div>
+                  <div class="ca-text">292K views with <strong>28.6% coming from search</strong>: 3× the industry average. People aren't stumbling on this content. They're searching for what Supersub sells and finding it. 5.3K likes and 836 shares confirm the content resonates beyond passive views.</div>
                 </div>
-                <div class="ca-block">
+                <div class="ca-block dark">
                   <div class="ca-label blue">My approach</div>
-                  <div class="ca-text">I script every video around a specific search term: "SIP panel NZ", "snaplock wall system", "modular home build". Short educational format (60–90s), product-anchored hook in the first 3 seconds. TikTok is my top-of-funnel engine — it generates the awareness that paid campaigns then convert.</div>
+                  <div class="ca-text">I script every video around a specific search term: "SIP panel NZ", "snaplock wall system", "modular home build". Short educational format (60–90s), product-anchored hook in the first 3 seconds. TikTok is my top-of-funnel engine: it generates the awareness that paid campaigns then convert.</div>
                 </div>
               </div>
             </div>
@@ -1257,11 +1266,11 @@
               <div class="ca-row">
                 <div class="ca-block">
                   <div class="ca-label green">What the data says</div>
-                  <div class="ca-text"><strong>49.7% of views from non-followers</strong> — the account is actively reaching new audiences, not just preaching to existing ones. Reels account for 96.2% of all views. 1,567 accounts reached in 90 days with no paid promotion.</div>
+                  <div class="ca-text"><strong>49.7% of views from non-followers</strong>: the account is actively reaching new audiences, not just preaching to existing ones. Reels account for 96.2% of all views. 1,567 accounts reached in 90 days with no paid promotion.</div>
                 </div>
                 <div class="ca-block">
                   <div class="ca-label blue">My approach</div>
-                  <div class="ca-text">Reels for reach, carousels for trust. Every Reel has a product-specific hook to attract new viewers. Carousels go deep on specs, comparisons, and build process — the content that moves someone from curious to enquiring. Instagram is the credibility layer in the funnel.</div>
+                  <div class="ca-text">Reels for reach, carousels for trust. Every Reel has a product-specific hook to attract new viewers. Carousels go deep on specs, comparisons, and build process, the content that moves someone from curious to enquiring. Instagram is the credibility layer in the funnel.</div>
                 </div>
               </div>
             </div>
@@ -1301,11 +1310,11 @@
               <div class="ca-row">
                 <div class="ca-block">
                   <div class="ca-label green">What the data says</div>
-                  <div class="ca-text"><strong>476,264 total views</strong> over the past year. 1-minute view rate up <strong>3,210% year-on-year</strong> — the audience isn't just scrolling past, they're watching. 94.6% of views from non-followers means organic reach extends well beyond the existing base.</div>
+                  <div class="ca-text"><strong>476,264 total views</strong> over the past year. 1-minute view rate up <strong>3,210% year-on-year</strong>: the audience isn't just scrolling past, they're watching. 94.6% of views from non-followers means organic reach extends well beyond the existing base.</div>
                 </div>
                 <div class="ca-block">
                   <div class="ca-label blue">My approach</div>
-                  <div class="ca-text">Facebook handles two jobs simultaneously: organic brand presence and warm audience retargeting for paid campaigns. People who watch organic content here get added to custom retargeting audiences — closing the loop between content and lead capture without extra ad spend.</div>
+                  <div class="ca-text">Facebook handles two jobs simultaneously: organic brand presence and warm audience retargeting for paid campaigns. People who watch organic content here get added to custom retargeting audiences, closing the loop between content and lead capture without extra ad spend.</div>
                 </div>
               </div>
             </div>
@@ -1335,7 +1344,7 @@
               </div>
             </div>
             <div class="channel-highlight">
-              Shorts repurposed from TikTok content for cross-platform reach. Long-form videos support SEO strategy — embedded in landing pages and articles as supporting content and trust signals.
+              Shorts repurposed from TikTok content for cross-platform reach. Long-form videos support SEO strategy, embedded in landing pages and articles as supporting content and trust signals.
             </div>
             <a class="channel-screenshot" href="analytics-youtube.png" target="_blank" rel="noopener">
               <img src="analytics-youtube.png" alt="YouTube Analytics" />
@@ -1345,11 +1354,11 @@
               <div class="ca-row">
                 <div class="ca-block">
                   <div class="ca-label green">What the data says</div>
-                  <div class="ca-text"><strong>119,855 views</strong> in the last 365 days with 458 watch hours. Subscribers up <strong>+253 in one year (+216% YoY)</strong> — organic growth with no paid promotion. Watch time confirms people aren't dropping off. They're staying.</div>
+                  <div class="ca-text"><strong>119,855 views</strong> in the last 365 days with 458 watch hours. Subscribers up <strong>+253 in one year (+216% YoY)</strong>: organic growth with no paid promotion. Watch time confirms people aren't dropping off. They're staying.</div>
                 </div>
                 <div class="ca-block">
                   <div class="ca-label blue">My approach</div>
-                  <div class="ca-text">Long-form videos target SEO keywords and get embedded directly into landing pages and blog articles — increasing time-on-site and building purchase trust for high-ticket buyers. Shorts are repurposed from TikTok at zero extra production cost, extending reach without additional workload.</div>
+                  <div class="ca-text">Long-form videos target SEO keywords and get embedded directly into landing pages and blog articles, increasing time-on-site and building purchase trust for high-ticket buyers. Shorts are repurposed from TikTok at zero extra production cost, extending reach without additional workload.</div>
                 </div>
               </div>
             </div>
@@ -1367,7 +1376,7 @@
       </section>
 
       <!-- ══════════════════════════════════════
-           04 — PAID CAMPAIGNS
+           04 - PAID CAMPAIGNS
       ══════════════════════════════════════ -->
       <section id="paid" class="chapter reveal" style="padding-top:48px; border-bottom:none; padding-bottom:48px;">
         <div class="ch-eyebrow">
@@ -1376,7 +1385,7 @@
         </div>
         <h2 class="ch-title"><em>$3.87</em> per lead.<br>Industry pays $50–$200+.</h2>
         <p class="ch-lead" style="max-width:none;">
-          I ran Facebook Ads for a high-ticket B2B construction product — a segment where most advertisers struggle to break even. <strong>I captured 1,478 leads at an average CPL that benchmarks in the top tier of B2B lead generation globally.</strong>
+          I ran Facebook Ads for a high-ticket B2B construction product, a segment where most advertisers struggle to break even. <strong>I captured 1,478 leads at an average CPL that benchmarks in the top tier of B2B lead generation globally.</strong>
         </p>
 
         <div class="stat-grid stat-grid-4 reveal">
@@ -1431,7 +1440,7 @@
       </section>
 
       <!-- ══════════════════════════════════════
-           05 — SEO & LANDING PAGES
+           05 - SEO & LANDING PAGES
       ══════════════════════════════════════ -->
       <section id="seo" class="chapter reveal" style="padding-top:48px; border-bottom:none; padding-bottom:48px;">
         <div class="ch-eyebrow">
@@ -1469,7 +1478,7 @@
         <!-- GSC SCREENSHOT -->
         <div class="reveal" style="margin-bottom:32px;">
           <a class="channel-screenshot" href="analytics-gsc.png" target="_blank" rel="noopener" style="cursor:zoom-in;">
-            <img src="analytics-gsc.png" alt="Google Search Console Performance — supersub.co.nz" style="width:100%;display:block;border-radius:10px;" />
+            <img src="analytics-gsc.png" alt="Google Search Console Performance: supersub.co.nz" style="width:100%;display:block;border-radius:10px;" />
           </a>
           <div class="channel-screenshot-hint">Google Search Console · 12 months · Click to view full size ↗</div>
         </div>
@@ -1500,7 +1509,7 @@
       </section>
 
       <!-- ══════════════════════════════════════
-           06 — CRM & DASHBOARDS
+           06 - CRM & DASHBOARDS
       ══════════════════════════════════════ -->
       <section id="dashboards" class="chapter reveal" style="padding-top:48px; border-bottom:none; padding-bottom:48px;">
         <div class="ch-eyebrow">
@@ -1537,24 +1546,24 @@
           <div class="feature-2col-item">
             <div class="feature-2col-num">03</div>
             <div class="feature-2col-title">Quote Builder &amp; Automated Email Delivery</div>
-            <div class="feature-2col-desc">Templates built per product line (SS-PB, etc). Generate a branded quote with product details, pricing, validity date and delivery location — sent directly to the customer's inbox with one click. Quote numbering auto-increments (SS-PB-2026-003).</div>
+            <div class="feature-2col-desc">Templates built per product line (SS-PB, etc). Generate a branded quote with product details, pricing, validity date and delivery location, sent directly to the customer's inbox with one click. Quote numbering auto-increments (SS-PB-2026-003).</div>
           </div>
           <div class="feature-2col-item">
             <div class="feature-2col-num">04</div>
             <div class="feature-2col-title">Invite-Only Authentication</div>
-            <div class="feature-2col-desc">Role-based access control — only team members invited by email can sign up and log in. Lead and pipeline data is protected from public access.</div>
+            <div class="feature-2col-desc">Role-based access control: only team members invited by email can sign up and log in. Lead and pipeline data is protected from public access.</div>
           </div>
           <div class="feature-2col-item">
             <div class="feature-2col-num">05</div>
             <div class="feature-2col-title">Built in Under 1 Month</div>
-            <div class="feature-2col-desc">Designed, developed and deployed while managing all other Supersub marketing deliverables simultaneously. Replaced HubSpot — saving <strong>$800+/month</strong> in SaaS costs.</div>
+            <div class="feature-2col-desc">Designed, developed and deployed while managing all other Supersub marketing deliverables simultaneously. Replaced HubSpot, saving <strong>$800+/month</strong> in SaaS costs.</div>
           </div>
         </div>
 
         <!-- CONTENT DASHBOARD -->
         <div class="block-title no-line" style="margin-bottom:16px; margin-top:56px; font-size:clamp(20px,2.2vw,28px); font-weight:800;">Content Dashboard</div>
         <p class="ch-lead" style="max-width:none; margin-bottom:24px;">
-          A centralised hub for every piece of content I produce for Supersub — carousels, videos, captions, scheduling, content frameworks, and ad strategy. No Google Drive folders, no scattered documents.
+          A centralised hub for every piece of content I produce for Supersub: carousels, videos, captions, scheduling, content frameworks, and ad strategy. No Google Drive folders, no scattered documents.
         </p>
 
         <!-- Content Dashboard Screenshot placeholder -->
@@ -1569,17 +1578,17 @@
           <div class="feature-2col-item">
             <div class="feature-2col-num">01</div>
             <div class="feature-2col-title">Content Library</div>
-            <div class="feature-2col-desc">10 carousels, 60+ slides, 8 videos — all stored with thumbnails, captions, hashtags, and production dates. Reviewable in a single view.</div>
+            <div class="feature-2col-desc">10 carousels, 60+ slides, 8 videos, all stored with thumbnails, captions, hashtags, and production dates. Reviewable in a single view.</div>
           </div>
           <div class="feature-2col-item">
             <div class="feature-2col-num">02</div>
             <div class="feature-2col-title">Manager Feedback System</div>
-            <div class="feature-2col-desc">Managers can open any carousel or video and leave structured feedback — comments are attached to the specific piece of content, not buried in Slack threads.</div>
+            <div class="feature-2col-desc">Managers can open any carousel or video and leave structured feedback: comments are attached to the specific piece of content, not buried in Slack threads.</div>
           </div>
           <div class="feature-2col-item">
             <div class="feature-2col-num">03</div>
             <div class="feature-2col-title">Schedule to Buffer</div>
-            <div class="feature-2col-desc">Direct integration with Buffer for post scheduling. Select platforms (Instagram, Facebook, TikTok, LinkedIn, YouTube), pick NZ date and time — scheduled in one step.</div>
+            <div class="feature-2col-desc">Direct integration with Buffer for post scheduling. Select platforms (Instagram, Facebook, TikTok, LinkedIn, YouTube), pick NZ date and time, scheduled in one step.</div>
           </div>
           <div class="feature-2col-item">
             <div class="feature-2col-num">04</div>
@@ -1589,21 +1598,21 @@
           <div class="feature-2col-item">
             <div class="feature-2col-num">05</div>
             <div class="feature-2col-title">Roadmap: Unified Analytics</div>
-            <div class="feature-2col-desc">Next phase: all platform analytics (TikTok, IG, Facebook, YouTube) pulled into one dashboard. Campaign performance, SEO data, and creative asset results — all in a single source of truth.</div>
+            <div class="feature-2col-desc">Next phase: all platform analytics (TikTok, IG, Facebook, YouTube) pulled into one dashboard. Campaign performance, SEO data, and creative asset results, all in a single source of truth.</div>
           </div>
         </div>
 
         <div class="insight dark" style="margin-top:40px;">
           <div class="insight-label">Why This Exists</div>
           <div class="insight-text">
-            Most marketing teams run on Notion docs, Google Drive folders, and WhatsApp threads. These tools were built specifically for how Supersub works — with the workflows, terminology, and data structure that actually fits the business. That's the difference between using software and building it.
+            Most marketing teams run on Notion docs, Google Drive folders, and WhatsApp threads. These tools were built specifically for how Supersub works: with the workflows, terminology, and data structure that actually fits the business. That's the difference between using software and building it.
           </div>
         </div>
 
       </section>
 
       <!-- ══════════════════════════════════════
-           07 — IMPACT SUMMARY
+           07 - IMPACT SUMMARY
       ══════════════════════════════════════ -->
       <section id="impact" class="chapter reveal" style="padding-top:48px;">
 
@@ -1614,7 +1623,7 @@
         <div class="ch-header-2col">
           <h2 class="ch-title">The full <em>picture.</em></h2>
           <p class="ch-lead" style="max-width:none;">
-            Three years of building, testing, iterating, and shipping. Not just running campaigns — I engineered a complete digital growth system from the ground up.
+            Three years of building, testing, iterating, and shipping. Not just running campaigns: I engineered a complete digital growth system from the ground up.
           </p>
         </div>
 
@@ -1624,7 +1633,7 @@
             <span>The output of a full team.</span>
           </div>
           <div class="impact-body">
-            A typical company would need a social media manager, a paid ads specialist, an SEO consultant, a developer, and a data analyst to cover what I've built here. <strong>I think in systems, execute across channels, and build the infrastructure that connects them — all at once.</strong>
+            A typical company would need a social media manager, a paid ads specialist, an SEO consultant, a developer, and a data analyst to cover what I've built here. <strong>I think in systems, execute across channels, and build the infrastructure that connects them, all at once.</strong>
           </div>
         </div>
 
@@ -1632,7 +1641,7 @@
           <div class="pillar-card">
             <div class="pillar-num">01</div>
             <div class="pillar-name">5 Channels Managed</div>
-            <div class="pillar-desc">TikTok, Instagram, Facebook, YouTube, LinkedIn — all coordinated, all with defined roles in the funnel.</div>
+            <div class="pillar-desc">TikTok, Instagram, Facebook, YouTube, LinkedIn, all coordinated, all with defined roles in the funnel.</div>
           </div>
           <div class="pillar-card">
             <div class="pillar-num">02</div>
@@ -1647,7 +1656,7 @@
           <div class="pillar-card">
             <div class="pillar-num">04</div>
             <div class="pillar-name">Custom CRM Built</div>
-            <div class="pillar-desc">Replaced HubSpot ($800+/month). Lead scoring, pipeline tracking, and automated quote delivery — deployed in under 1 month.</div>
+            <div class="pillar-desc">Replaced HubSpot ($800+/month). Lead scoring, pipeline tracking, and automated quote delivery, deployed in under 1 month.</div>
           </div>
           <div class="pillar-card">
             <div class="pillar-num">05</div>
@@ -1657,7 +1666,7 @@
           <div class="pillar-card">
             <div class="pillar-num">06</div>
             <div class="pillar-name">AI Automation (Next)</div>
-            <div class="pillar-desc">n8n-based research automation and Remotion for programmatic video — infrastructure being built to scale content and ops without scaling headcount.</div>
+            <div class="pillar-desc">n8n-based research automation and Remotion for programmatic video, infrastructure being built to scale content and ops without scaling headcount.</div>
           </div>
         </div>
 
