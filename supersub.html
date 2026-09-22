@@ -406,6 +406,25 @@
       font-size: 20px;
       flex-shrink: 0;
     }
+    .channel-icon-img {
+      width: 48px; height: 48px; border-radius: 12px;
+      object-fit: contain; flex-shrink: 0;
+      background: var(--white); border: 1.5px solid var(--line);
+      padding: 6px;
+    }
+    .channel-stats-inline {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+      border: 1.5px solid var(--line); border-radius: 100px;
+      padding: 14px 26px; font-size: 16px; color: var(--gray);
+      letter-spacing: var(--ls-normal);
+    }
+    .channel-stats-inline strong {
+      font-size: 24px; font-weight: 800; color: var(--black);
+      letter-spacing: -0.04em; margin-right: 2px;
+    }
+    .channel-stats-inline .ch-stats-sep {
+      color: var(--lgray); font-weight: 300;
+    }
     .channel-name {
       font-size: 16px; font-weight: 700;
       letter-spacing: var(--ls-normal);
@@ -1155,29 +1174,22 @@
 
           <!-- TIKTOK -->
           <div class="channel-card">
-            <div class="channel-top">
-              <div class="channel-icon" style="background:#f0f0f0;">🎵</div>
-              <div>
-                <div class="channel-name">TikTok</div>
-                <div class="channel-sub">@supersub_nz · Primary Growth Channel</div>
+            <div class="channel-top" style="justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <img src="tiktok.png" alt="TikTok" class="channel-icon-img" />
+                <div>
+                  <div class="channel-name">TikTok</div>
+                  <div class="channel-sub">@supersub_nz</div>
+                </div>
               </div>
-            </div>
-            <div class="channel-metrics">
-              <div class="ch-metric">
-                <div class="ch-metric-val">292K</div>
-                <div class="ch-metric-lbl">Total Views</div>
-              </div>
-              <div class="ch-metric">
-                <div class="ch-metric-val">28.6%</div>
-                <div class="ch-metric-lbl">From Search</div>
-              </div>
-              <div class="ch-metric">
-                <div class="ch-metric-val">34K</div>
-                <div class="ch-metric-lbl">Best Video</div>
-              </div>
-              <div class="ch-metric">
-                <div class="ch-metric-val">8+</div>
-                <div class="ch-metric-lbl">Videos &gt;10K</div>
+              <div class="channel-stats-inline">
+                <span><strong>292K</strong> Total Views</span>
+                <span class="ch-stats-sep">|</span>
+                <span><strong>28.6%</strong> From Search</span>
+                <span class="ch-stats-sep">|</span>
+                <span><strong>34K</strong> Best Video</span>
+                <span class="ch-stats-sep">|</span>
+                <span><strong>8+</strong> Videos &gt;10K</span>
               </div>
             </div>
             <div class="channel-highlight">
