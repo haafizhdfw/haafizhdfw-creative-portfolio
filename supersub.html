@@ -548,6 +548,20 @@
       letter-spacing: var(--ls-normal);
       display: flex; align-items: center; gap: 6px;
     }
+    .pc-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .pc-gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      display: block;
+    }
     .channel-screenshot-hint {
       font-size: 11px;
       color: var(--lgray);
@@ -1462,22 +1476,22 @@
         </p>
 
         <div class="stat-grid stat-grid-4 reveal">
-          <div class="stat-cell dark">
+          <div class="stat-cell">
             <div class="stat-label">Total Leads</div>
             <div class="stat-value">1,478</div>
             <div class="stat-note">All paid channels combined</div>
           </div>
-          <div class="stat-cell dark">
+          <div class="stat-cell">
             <div class="stat-label">Avg. CPL</div>
             <div class="stat-value">$3.87</div>
             <div class="stat-note">NZD · All campaigns</div>
           </div>
-          <div class="stat-cell dark">
+          <div class="stat-cell">
             <div class="stat-label">Best Campaign CPL</div>
             <div class="stat-value">$3.66</div>
             <div class="stat-note">Portable Bathroom · 3M active</div>
           </div>
-          <div class="stat-cell dark">
+          <div class="stat-cell">
             <div class="stat-label">Product Price</div>
             <div class="stat-value">$7.9K+</div>
             <div class="stat-note">NZD · per unit</div>
@@ -1486,9 +1500,18 @@
 
         <div class="insight dark">
           <div class="insight-label">Why This Number Matters</div>
-          <div class="insight-text">
+          <div class="insight-text" style="font-size:18px;">
             Industry benchmark for B2B construction leads: $50–$200+ per lead. At $3.87 average CPL for a $7,900–$8,940 NZD product, my cost-to-revenue ratio puts the campaign in an exceptionally efficient position. For every dollar spent, the potential return is measurably outsized.
           </div>
+        </div>
+
+        <div class="pc-gallery reveal">
+          <img src="paid-1.png" alt="Paid campaign ad 1" />
+          <img src="paid-2.png" alt="Paid campaign ad 2" />
+          <img src="paid-3.png" alt="Paid campaign ad 3" />
+          <img src="paid-4.png" alt="Paid campaign ad 4" />
+          <img src="paid-5.png" alt="Paid campaign ad 5" />
+          <img src="paid-6.png" alt="Paid campaign ad 6" />
         </div>
 
         <div class="content-cols reveal">
