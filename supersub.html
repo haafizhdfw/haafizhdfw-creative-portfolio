@@ -378,6 +378,51 @@
     .feature-2col-desc { font-size:15px; color:rgba(255,255,255,.7); line-height:1.65; }
     .feature-2col-desc strong { color:#ffffff; }
 
+    /* ── Role list (accordion style, matches pepsodent.html "My Contribution") ── */
+    .role-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-top: 24px;
+      margin-bottom: 0;
+    }
+    .role-row {
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .role-row:nth-child(1),
+    .role-row:nth-child(4) { border-top: none; }
+    .role-row-head {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 0;
+      transition: padding-left 0.2s;
+    }
+    .role-row:hover .role-row-head { padding-left: 8px; }
+    .role-row-head::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .role-row.open .role-row-head::after { transform: rotate(45deg); }
+    .role-icon { font-size: 16px; font-weight: 600; letter-spacing: var(--ls-normal); color: var(--lgray); flex-shrink: 0; width: 32px; }
+    .role-title { font-size: 22px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); flex: 1 1 auto; margin-bottom: 0; }
+    .role-desc-wrap {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0; padding-left: 44px;
+    }
+    .role-row.open .role-desc-wrap { max-height: 300px; padding-bottom: 20px; }
+    .role-desc { font-size: 19px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
+    .role-desc strong { color: var(--black); font-weight: 600; }
+    @media (max-width: 720px) {
+      .role-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; column-gap: 0; }
+      .role-row:nth-child(4) { border-top: 1px solid var(--line); }
+    }
+
     /* ─────────────────────────────────────────────
        CHANNEL CARDS
     ───────────────────────────────────────────── */
@@ -1603,31 +1648,51 @@
           <div class="channel-screenshot-hint">Supersub CRM · quotation-and-sales-dashboard.vercel.app · Click to view full size ↗</div>
         </div>
 
-        <div class="feature-2col reveal">
-          <div class="feature-2col-item">
-            <div class="feature-2col-num">01</div>
-            <div class="feature-2col-title">Multi-Channel Lead Capture</div>
-            <div class="feature-2col-desc">Automatically captures leads from website forms and Meta/Facebook Ads. Each lead is tagged by source, scored, and enters the pipeline in real-time.</div>
+        <div class="role-list reveal">
+          <div class="role-row">
+            <div class="role-row-head">
+              <div class="role-icon">01.</div>
+              <div class="role-title">Multi-Channel Lead Capture</div>
+            </div>
+            <div class="role-desc-wrap">
+              <div class="role-desc">Automatically captures leads from website forms and Meta/Facebook Ads. Each lead is tagged by source, scored, and enters the pipeline in real-time.</div>
+            </div>
           </div>
-          <div class="feature-2col-item">
-            <div class="feature-2col-num">02</div>
-            <div class="feature-2col-title">Lead Scoring System</div>
-            <div class="feature-2col-desc">Leads are automatically scored based on intent signals. General enquiries score 15; specific product enquiries (e.g. "2.4m Portable Bathroom") score 35. Sales team prioritises accordingly.</div>
+          <div class="role-row">
+            <div class="role-row-head">
+              <div class="role-icon">02.</div>
+              <div class="role-title">Lead Scoring System</div>
+            </div>
+            <div class="role-desc-wrap">
+              <div class="role-desc">Leads are automatically scored based on intent signals. General enquiries score 15; specific product enquiries (e.g. "2.4m Portable Bathroom") score 35. Sales team prioritises accordingly.</div>
+            </div>
           </div>
-          <div class="feature-2col-item">
-            <div class="feature-2col-num">03</div>
-            <div class="feature-2col-title">Quote Builder &amp; Automated Email Delivery</div>
-            <div class="feature-2col-desc">Templates built per product line (SS-PB, etc). Generate a branded quote with product details, pricing, validity date and delivery location, sent directly to the customer's inbox with one click. Quote numbering auto-increments (SS-PB-2026-003).</div>
+          <div class="role-row">
+            <div class="role-row-head">
+              <div class="role-icon">03.</div>
+              <div class="role-title">Quote Builder &amp; Automated Email Delivery</div>
+            </div>
+            <div class="role-desc-wrap">
+              <div class="role-desc">Templates built per product line (SS-PB, etc). Generate a branded quote with product details, pricing, validity date and delivery location, sent directly to the customer's inbox with one click. Quote numbering auto-increments (SS-PB-2026-003).</div>
+            </div>
           </div>
-          <div class="feature-2col-item">
-            <div class="feature-2col-num">04</div>
-            <div class="feature-2col-title">Invite-Only Authentication</div>
-            <div class="feature-2col-desc">Role-based access control: only team members invited by email can sign up and log in. Lead and pipeline data is protected from public access.</div>
+          <div class="role-row">
+            <div class="role-row-head">
+              <div class="role-icon">04.</div>
+              <div class="role-title">Invite-Only Authentication</div>
+            </div>
+            <div class="role-desc-wrap">
+              <div class="role-desc">Role-based access control: only team members invited by email can sign up and log in. Lead and pipeline data is protected from public access.</div>
+            </div>
           </div>
-          <div class="feature-2col-item">
-            <div class="feature-2col-num">05</div>
-            <div class="feature-2col-title">Built in Under 1 Month</div>
-            <div class="feature-2col-desc">Designed, developed and deployed while managing all other Supersub marketing deliverables simultaneously. Replaced HubSpot, saving <strong>$800+/month</strong> in SaaS costs.</div>
+          <div class="role-row">
+            <div class="role-row-head">
+              <div class="role-icon">05.</div>
+              <div class="role-title">Built in Under 1 Month</div>
+            </div>
+            <div class="role-desc-wrap">
+              <div class="role-desc">Designed, developed and deployed while managing all other Supersub marketing deliverables simultaneously. Replaced HubSpot, saving <strong>$800+/month</strong> in SaaS costs.</div>
+            </div>
           </div>
         </div>
 
@@ -1645,31 +1710,51 @@
           <div class="channel-screenshot-hint">Content Dashboard · Click to view full size ↗</div>
         </div>
 
-        <div class="feature-2col reveal">
-          <div class="feature-2col-item">
-            <div class="feature-2col-num">01</div>
-            <div class="feature-2col-title">Content Library</div>
-            <div class="feature-2col-desc">10 carousels, 60+ slides, 8 videos, all stored with thumbnails, captions, hashtags, and production dates. Reviewable in a single view.</div>
+        <div class="role-list reveal">
+          <div class="role-row">
+            <div class="role-row-head">
+              <div class="role-icon">01.</div>
+              <div class="role-title">Content Library</div>
+            </div>
+            <div class="role-desc-wrap">
+              <div class="role-desc">10 carousels, 60+ slides, 8 videos, all stored with thumbnails, captions, hashtags, and production dates. Reviewable in a single view.</div>
+            </div>
           </div>
-          <div class="feature-2col-item">
-            <div class="feature-2col-num">02</div>
-            <div class="feature-2col-title">Manager Feedback System</div>
-            <div class="feature-2col-desc">Managers can open any carousel or video and leave structured feedback: comments are attached to the specific piece of content, not buried in Slack threads.</div>
+          <div class="role-row">
+            <div class="role-row-head">
+              <div class="role-icon">02.</div>
+              <div class="role-title">Manager Feedback System</div>
+            </div>
+            <div class="role-desc-wrap">
+              <div class="role-desc">Managers can open any carousel or video and leave structured feedback: comments are attached to the specific piece of content, not buried in Slack threads.</div>
+            </div>
           </div>
-          <div class="feature-2col-item">
-            <div class="feature-2col-num">03</div>
-            <div class="feature-2col-title">Schedule to Buffer</div>
-            <div class="feature-2col-desc">Direct integration with Buffer for post scheduling. Select platforms (Instagram, Facebook, TikTok, LinkedIn, YouTube), pick NZ date and time, scheduled in one step.</div>
+          <div class="role-row">
+            <div class="role-row-head">
+              <div class="role-icon">03.</div>
+              <div class="role-title">Schedule to Buffer</div>
+            </div>
+            <div class="role-desc-wrap">
+              <div class="role-desc">Direct integration with Buffer for post scheduling. Select platforms (Instagram, Facebook, TikTok, LinkedIn, YouTube), pick NZ date and time, scheduled in one step.</div>
+            </div>
           </div>
-          <div class="feature-2col-item">
-            <div class="feature-2col-num">04</div>
-            <div class="feature-2col-title">Content Framework Documentation</div>
-            <div class="feature-2col-desc"><strong>12 content categories, 5 pillars, 120+ topic ideas</strong> mapped per product line (Snaplock Wall, SIP Panel). Recommended monthly content mix: 25% Educate, 15% Problem, 25% Solution, 20% Trust, 15% Convert.</div>
+          <div class="role-row">
+            <div class="role-row-head">
+              <div class="role-icon">04.</div>
+              <div class="role-title">Content Framework Documentation</div>
+            </div>
+            <div class="role-desc-wrap">
+              <div class="role-desc"><strong>12 content categories, 5 pillars, 120+ topic ideas</strong> mapped per product line (Snaplock Wall, SIP Panel). Recommended monthly content mix: 25% Educate, 15% Problem, 25% Solution, 20% Trust, 15% Convert.</div>
+            </div>
           </div>
-          <div class="feature-2col-item">
-            <div class="feature-2col-num">05</div>
-            <div class="feature-2col-title">Roadmap: Unified Analytics</div>
-            <div class="feature-2col-desc">Next phase: all platform analytics (TikTok, IG, Facebook, YouTube) pulled into one dashboard. Campaign performance, SEO data, and creative asset results, all in a single source of truth.</div>
+          <div class="role-row">
+            <div class="role-row-head">
+              <div class="role-icon">05.</div>
+              <div class="role-title">Roadmap: Unified Analytics</div>
+            </div>
+            <div class="role-desc-wrap">
+              <div class="role-desc">Next phase: all platform analytics (TikTok, IG, Facebook, YouTube) pulled into one dashboard. Campaign performance, SEO data, and creative asset results, all in a single source of truth.</div>
+            </div>
           </div>
         </div>
 
@@ -1826,6 +1911,18 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.08 });
     revealEls.forEach(el => observer.observe(el));
+
+    /* ── Role list toggle (accordion) ── */
+    document.querySelectorAll('.role-list').forEach(list => {
+      const rows = list.querySelectorAll('.role-row');
+      rows.forEach(row => {
+        row.querySelector('.role-row-head').addEventListener('click', () => {
+          const isOpen = row.classList.contains('open');
+          rows.forEach(el => el.classList.remove('open'));
+          if (!isOpen) row.classList.add('open');
+        });
+      });
+    });
   </script>
 
   <script src="https://bridgely-dashboard.vercel.app/widget.js" data-org-id="" async></script>
