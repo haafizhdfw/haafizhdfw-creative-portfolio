@@ -421,6 +421,9 @@
     @media (max-width: 720px) {
       .role-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; column-gap: 0; }
       .role-row:nth-child(4) { border-top: 1px solid var(--line); }
+      .role-icon { font-size: 13px; width: 24px; }
+      .role-title { font-size: 16px; font-weight: 500; }
+      .role-desc { font-size: 14px; }
     }
 
     /* ─────────────────────────────────────────────
@@ -1118,6 +1121,10 @@
       opacity: 1;
       transform: none;
     }
+    .hide-mobile { display: inline; }
+    .show-mobile-inline { display: none; }
+    .show-mobile-block { display: none; }
+    .show-mobile-flex { display: none; }
 
     /* ─────────────────────────────────────────────
        RESPONSIVE
@@ -1139,6 +1146,65 @@
       .stat-grid-3 { grid-template-columns: 1fr; }
       .pillars-grid { grid-template-columns: 1fr; }
       .overview-stats-bar { grid-template-columns: repeat(2, 1fr); }
+
+      /* ── NAV — match index.html mobile nav ── */
+      nav { padding: 0 20px; height: 64px; }
+      .nav-center { display: none; }
+      .nav-logo img { height: 44px; }
+      .nav-btn { font-size: 14px; padding: 7px 7px 7px 18px; }
+      .nav-btn-icon { width: 32px; height: 32px; margin-left: 10px; }
+      .nav-btn-icon svg { width: 14px; height: 14px; }
+
+      /* ── HERO — left padding matches .chapter's mobile padding ── */
+      .hero-ss-inner { padding: 40px 28px; }
+      .hero-ss-back { left: 28px; top: 24px; }
+
+      /* ── STATS MARQUEE — sized like index.html mobile ── */
+      .stats-inner-ss { gap: 28px; }
+      .ss-item { gap: 5px; }
+      .ss-n { font-size: 19px; }
+      .ss-l { font-size: 19px; }
+      .ss-bullet { width: 10px; height: 10px; }
+
+      /* ── OVERVIEW BODY — stack, subtitle then tags, same padding as .chapter ── */
+      .overview-body {
+        grid-template-columns: 1fr;
+        padding: 40px 28px 48px;
+        gap: 24px;
+      }
+      .overview-tag { font-size: 12px; padding: 5px 12px; }
+
+      /* ── CHANNEL STAT PILLS (292K Total Views, 97 Posts, etc.) ── */
+      .channel-stat-pills { gap: 6px; }
+      .channel-stat-pill { font-size: 11px; padding: 6px 12px; gap: 5px; }
+      .channel-stat-pill strong { font-size: 14px; }
+
+      /* ── TIKTOK VIDEO CARDS ── */
+      .hide-mobile { display: none; }
+      .show-mobile-inline { display: inline; }
+      .tiktok-video-card .tv-play { width: 36px; height: 36px; }
+      .tiktok-video-card .tv-play svg { width: 14px; height: 14px; }
+
+      /* ── CHAPTER TITLES — shrink so headings wrap to fewer lines ── */
+      .ch-title { font-size: clamp(28px, 8vw, 40px); }
+
+      /* ── DARK INSIGHT LABEL (Cross-Channel Architecture, Why This Number Matters) ── */
+      .insight.dark .insight-label { font-size: 11px; letter-spacing: 0.06em; }
+
+      /* ── IMPACT SECTION HEADER — stack, same size as other chapter titles ── */
+      .ch-header-2col { grid-template-columns: 1fr; gap: 16px; align-items: start; }
+      .ch-header-2col .ch-title { font-size: clamp(38px, 5.3vw, 78px); }
+
+      /* ── IMPACT HERO — padding matches pillar-card, title less bold ── */
+      .impact-hero { padding: 36px 24px; }
+      .impact-title { font-weight: 600; }
+
+      /* ── FOOTER / CONTACT CTA — matches lidya-veronika.html mobile ── */
+      .hide-mobile-block { display: none !important; }
+      .show-mobile-block { display: block !important; }
+      .show-mobile-flex { display: flex !important; }
+      .cta-box { padding: 40px 24px !important; grid-template-columns: 1fr !important; gap: 32px !important; }
+      .cta-form-row { grid-template-columns: 1fr !important; }
     }
 
   </style>
@@ -1470,7 +1536,7 @@
               </div>
               <div class="tv-label">
                 <img src="tiktok.png" alt="TikTok" style="width:16px; height:16px; border-radius:4px;" />
-                Watch on TikTok ↗
+                <span class="hide-mobile">Watch on TikTok</span> ↗
               </div>
             </a>
             <a class="tiktok-video-card" href="https://www.tiktok.com/@supersub_nz/video/7529793710641433861" target="_blank" rel="noopener">
@@ -1481,7 +1547,7 @@
               </div>
               <div class="tv-label">
                 <img src="tiktok.png" alt="TikTok" style="width:16px; height:16px; border-radius:4px;" />
-                Watch on TikTok ↗
+                <span class="hide-mobile">Watch on TikTok</span> ↗
               </div>
             </a>
             <a class="tiktok-video-card" href="https://www.tiktok.com/@supersub_nz/video/7487819085359648005" target="_blank" rel="noopener">
@@ -1492,7 +1558,7 @@
               </div>
               <div class="tv-label">
                 <img src="tiktok.png" alt="TikTok" style="width:16px; height:16px; border-radius:4px;" />
-                Watch on TikTok ↗
+                <span class="hide-mobile">Watch on TikTok</span> ↗
               </div>
             </a>
           </div>
@@ -1524,7 +1590,7 @@
           <div class="stat-cell">
             <div class="stat-label">Total Leads</div>
             <div class="stat-value" style="font-weight:600;">1,478</div>
-            <div class="stat-note">All paid channels combined</div>
+            <div class="stat-note">All<span class="hide-mobile"> paid channels combined</span><span class="show-mobile-inline"> channels</span></div>
           </div>
           <div class="stat-cell">
             <div class="stat-label">Avg. CPL</div>
@@ -1532,9 +1598,9 @@
             <div class="stat-note">NZD · All campaigns</div>
           </div>
           <div class="stat-cell">
-            <div class="stat-label">Best Campaign CPL</div>
+            <div class="stat-label">Best Campaign<span class="hide-mobile"> CPL</span></div>
             <div class="stat-value" style="font-weight:600;">$3.66</div>
-            <div class="stat-note">Portable Bathroom · 3M active</div>
+            <div class="stat-note">Portable Bathroom<span class="hide-mobile"> · 3M active</span></div>
           </div>
           <div class="stat-cell">
             <div class="stat-label">Product Price</div>
@@ -1581,19 +1647,19 @@
             <div class="stat-note">224K impressions</div>
           </div>
           <div class="stat-cell">
-            <div class="stat-label">Homepage Clicks (12 Month)</div>
+            <div class="stat-label">Homepage<span class="hide-mobile"> Clicks (12 Month)</span></div>
             <div class="stat-value" style="font-weight:600;">2,502</div>
             <div class="stat-note">32,635 impressions</div>
           </div>
           <div class="stat-cell">
-            <div class="stat-label">Total Article Clicks</div>
+            <div class="stat-label">Total Article<span class="hide-mobile"> Clicks</span></div>
             <div class="stat-value" style="font-weight:600;">887</div>
             <div class="stat-note">55,572 impressions</div>
           </div>
           <div class="stat-cell">
             <div class="stat-label">Avg. Position</div>
             <div class="stat-value" style="font-weight:600;">14</div>
-            <div class="stat-note">Was 37.23 six months prior</div>
+            <div class="stat-note">Was 37.23<span class="hide-mobile"> six months prior</span></div>
           </div>
         </div>
 
@@ -1827,19 +1893,22 @@
         </div>
 
         <!-- CONTACT FORM -->
-        <div class="reveal" style="margin-top:48px; background:#0d0d0d; border-radius:24px; padding:64px 64px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;">
+        <div class="reveal cta-box" style="margin-top:48px; background:#0d0d0d; border-radius:24px; padding:64px 64px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;">
 
           <!-- Left: headline -->
           <div>
             <div style="font-size:11px; font-weight:800; letter-spacing:0.18em; text-transform:uppercase; color:#555; margin-bottom:28px;">Let's Work Together</div>
-            <div style="font-size:clamp(32px,3.6vw,52px); font-weight:900; color:#ffffff; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:16px;">
+            <div class="hide-mobile-block" style="font-size:clamp(32px,3.6vw,52px); font-weight:900; color:#ffffff; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:16px;">
               Ready to build your one marketing system with AI automation?
             </div>
-            <div style="font-size:clamp(28px,3vw,44px); font-weight:900; color:#CCFF00; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:40px;">
+            <div class="hide-mobile-block" style="font-size:clamp(28px,3vw,44px); font-weight:900; color:#CCFF00; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:40px;">
               Let's talk!
             </div>
+            <div class="show-mobile-block" style="font-size:clamp(20px,6.5vw,28px); font-weight:700; color:#ffffff; letter-spacing:var(--ls-tight); line-height:1.25; margin-bottom:28px;">
+              Ready to build your one marketing system with AI automation? <span style="color:#CCFF00;">Let's talk!</span>
+            </div>
             <a href="mailto:haafizhdfw13@gmail.com" style="display:inline-block; font-size:16px; font-weight:500; color:#ffffff; text-decoration:none; border-bottom:1px solid #333; padding-bottom:4px; letter-spacing:var(--ls-normal); margin-bottom:36px; transition:border-color .2s;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='#333'">haafizhdfw13@gmail.com</a>
-            <div style="display:flex; gap:28px;">
+            <div class="hide-mobile-block" style="display:flex; gap:28px;">
               <a href="https://www.instagram.com/haafizhdfw/" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#444'">Instagram</a>
               <a href="#" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#444'">Behance</a>
               <a href="https://www.linkedin.com/in/haafizhdfw/" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#444'">LinkedIn</a>
@@ -1849,7 +1918,7 @@
 
           <!-- Right: form -->
           <form action="https://formspree.io/f/xpwrlknq" method="POST" style="display:flex; flex-direction:column; gap:14px;">
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div class="cta-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
               <input type="text" name="name" placeholder="Full Name" required style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
               <input type="email" name="email" placeholder="Email Address" required style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
             </div>
@@ -1866,6 +1935,13 @@
               <a href="index.html" style="font-size:13px; color:rgba(255,255,255,.35); text-decoration:none; letter-spacing:var(--ls-normal); transition:color .2s;" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.35)'">← Back to Portfolio</a>
             </div>
           </form>
+
+          <div class="show-mobile-flex" style="gap:24px; flex-wrap:wrap;">
+            <a href="https://www.instagram.com/haafizhdfw/" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none;">Instagram</a>
+            <a href="#" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none;">Behance</a>
+            <a href="https://www.linkedin.com/in/haafizhdfw/" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none;">LinkedIn</a>
+            <a href="https://www.tiktok.com/@haafizhdfw" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none;">TikTok</a>
+          </div>
 
         </div>
 
