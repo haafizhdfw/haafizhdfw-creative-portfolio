@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lidya Veronika, Digital Marketing Case Study · Davian Harris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ─────────────────────────────────────────────
+       RESET
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #f3f4f3;
+      --black: #0d0d0d;
+      --gray:  #6b6b6b;
+      --lgray: #b8b8b2;
+      --red:   #e63329;
+      --blue:  #2563ff;
+      --white: #ffffff;
+      --line:  #ddddd5;
+
+      --ls-tight:  -0.08em;
+      --ls-normal: -0.03em;
+
+      --nav-h:     88px;
+      --sidebar-w: 240px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    /* ─────────────────────────────────────────────
+       CUSTOM CURSOR
+    ───────────────────────────────────────────── */
+    .cur-dot {
+      position: fixed; pointer-events: none; z-index: 9999;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--black);
+      transform: translate(-50%, -50%);
+    }
+    .cur-ring {
+      position: fixed; pointer-events: none; z-index: 9998;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,.25);
+      transform: translate(-50%, -50%);
+      transition: transform .5s ease, width .25s, height .25s;
+    }
+
+    /* ─────────────────────────────────────────────
+       TOP NAV - matches index.html
+    ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--nav-h);
+      display: flex; align-items: center;
+      padding: 0 52px;
+      background: var(--bg);
+      box-shadow: 0 1px 0 var(--line), 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .nav-logo {
+      display: flex; align-items: center;
+      margin-right: auto; text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo img { height: 60px; width: auto; display: block; }
+
+    .nav-center {
+      flex: 1; display: flex; justify-content: center;
+      gap: 56px; list-style: none;
+    }
+    .nav-center a {
+      font-size: 18px; font-weight: 500; letter-spacing: var(--ls-normal);
+      color: var(--black); text-decoration: none; transition: opacity .2s;
+    }
+    .nav-center a:hover { opacity: .45; }
+
+    .nav-right { display: flex; align-items: center; gap: 32px; flex-shrink: 0; }
+    .nav-btn {
+      display: inline-flex; align-items: center;
+      gap: 0; padding: 8px 8px 8px 28px;
+      background: var(--blue); color: var(--white);
+      font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
+      text-decoration: none; border-radius: 100px;
+      transition: background .2s, transform .15s; white-space: nowrap;
+    }
+    .nav-btn:hover { background: #1a4de0; transform: scale(1.03); }
+    .nav-btn-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; background: var(--white);
+      border-radius: 50%; margin-left: 16px; flex-shrink: 0;
+      transition: transform .2s;
+    }
+    .nav-btn:hover .nav-btn-icon { transform: rotate(45deg); }
+    .nav-btn-icon svg { width: 18px; height: 18px; color: var(--black); }
+
+    /* ─────────────────────────────────────────────
+       LAYOUT - sidebar + content
+    ───────────────────────────────────────────── */
+    .layout {
+      display: flex;
+      padding-top: var(--nav-h);
+      min-height: 100vh;
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      width: var(--sidebar-w);
+      height: calc(100vh - var(--nav-h));
+      overflow-y: auto;
+      border-right: 1px solid var(--line);
+      padding: 48px 0 48px 0;
+      display: flex; flex-direction: column;
+      background: var(--bg);
+      z-index: 100;
+    }
+    .sidebar-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--lgray);
+      text-transform: uppercase;
+      padding: 0 28px;
+      margin-bottom: 16px;
+    }
+    .sidebar-nav { list-style: none; }
+    .sidebar-nav li { display: block; }
+    .sidebar-nav a {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 28px;
+      font-size: 13px; font-weight: 500;
+      color: var(--gray);
+      text-decoration: none;
+      letter-spacing: var(--ls-normal);
+      border-left: 2px solid transparent;
+      transition: color .2s, border-color .2s, background .2s;
+      line-height: 1.4;
+    }
+    .sidebar-nav a:hover {
+      color: var(--black);
+      background: rgba(0,0,0,.035);
+    }
+    .sidebar-nav a.active {
+      color: var(--black);
+      border-left-color: var(--black);
+      background: rgba(0,0,0,.04);
+      font-weight: 600;
+    }
+    .sidebar-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--lgray);
+      margin-top: 1px;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.04em;
+    }
+    .sidebar-nav a.active .sidebar-num { color: var(--black); }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 20px 28px;
+    }
+    .sidebar-meta {
+      padding: 0 20px;
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .sidebar-meta-box {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #222222;
+    }
+    .sidebar-meta-box strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: var(--ls-normal);
+      margin-bottom: 4px;
+      color: #CCFF00;
+    }
+    .sidebar-meta-box p {
+      font-size: 13px;
+      line-height: 1.5;
+      letter-spacing: var(--ls-normal);
+      color: rgba(255,255,255,.75);
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION BASE STYLES
+    ───────────────────────────────────────────── */
+    .chapter {
+      padding: 96px 72px 96px 72px;
+      border-bottom: 1px solid var(--line);
+    }
+    .chapter:last-child { border-bottom: none; }
+
+    .ch-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 28px;
+    }
+    .ch-num {
+      font-size: 11px; font-weight: 700;
+      color: var(--lgray); letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .ch-tag {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      color: var(--gray);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .ch-tag.red { background: var(--red); color: var(--white); border-color: var(--red); }
+    .ch-tag.blue { background: var(--blue); color: var(--white); border-color: var(--blue); }
+    .ch-tag.green { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    .ch-title {
+      font-size: clamp(38px, 5.3vw, 78px);
+      font-weight: 400;
+      letter-spacing: -0.06em;
+      line-height: 0.95;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+    .ch-title em {
+      font-style: normal;
+      color: var(--red);
+    }
+
+    .ch-lead {
+      font-size: clamp(16px, 1.5vw, 20px);
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.65;
+      letter-spacing: var(--ls-normal);
+      max-width: 640px;
+      margin-bottom: 56px;
+    }
+    .ch-lead strong {
+      color: var(--black);
+      font-weight: 600;
+    }
+
+    /* ─────────────────────────────────────────────
+       STAT GRIDS
+    ───────────────────────────────────────────── */
+    .stat-grid {
+      display: grid;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 56px;
+    }
+    .stat-grid-2 { grid-template-columns: 1fr 1fr; }
+    .stat-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .stat-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .stat-cell {
+      background: var(--white);
+      padding: 32px 28px;
+    }
+    .stat-cell.dark {
+      background: #222222;
+      color: var(--white);
+    }
+    .stat-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--lgray);
+      margin-bottom: 10px;
+    }
+    .stat-cell.dark .stat-label { color: rgba(255,255,255,.45); }
+    .stat-value {
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 900;
+      letter-spacing: var(--ls-tight);
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-cell.dark .stat-value { color: #CCFF00; }
+    .stat-value .stat-red { color: var(--red); }
+    .stat-value .stat-blue { color: var(--blue); }
+    .stat-note {
+      font-size: 12px;
+      color: var(--lgray);
+      font-weight: 400;
+      letter-spacing: var(--ls-normal);
+    }
+    .stat-cell.dark .stat-note { color: rgba(255,255,255,.35); }
+
+    /* ─────────────────────────────────────────────
+       CONTENT BLOCKS
+    ───────────────────────────────────────────── */
+    .content-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+    .content-cols.thirds {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+    }
+
+    .block-title {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .block-title::before {
+      content: '';
+      display: block; width: 20px; height: 2px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    .block-body {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.7;
+      letter-spacing: var(--ls-normal);
+    }
+    .block-body strong { color: var(--black); font-weight: 600; }
+    .block-body em { font-style: italic; color: var(--gray); }
+
+    /* dark content box */
+    .dark-box {
+      background: #222222;
+      border-radius: 16px;
+      padding: 32px 36px;
+    }
+    .dark-box .block-title { color: #CCFF00; }
+    .dark-box .block-title::before { display: none; }
+    .block-title.no-line::before { display: none; }
+    .dark-box .block-body { color: rgba(255,255,255,.7); font-size: 21px; line-height: 1.6; }
+    .dark-box .block-body strong { color: #ffffff; }
+    .dark-box .block-body em { color: rgba(255,255,255,.6); }
+
+    /* ─────────────────────────────────────────────
+       FEATURE 2-COL GRID (CRM & Content Dashboard)
+    ───────────────────────────────────────────── */
+    .feature-2col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:24px; }
+    .feature-2col-item { background:#222222; border-radius:16px; padding:28px 32px; }
+    .feature-2col-num { font-size:11px; font-weight:800; letter-spacing:0.14em; color:#CCFF00; margin-bottom:10px; }
+    .feature-2col-title { font-size:18px; font-weight:700; letter-spacing:var(--ls-tight); color:#CCFF00; margin-bottom:12px; line-height:1.3; }
+    .feature-2col-desc { font-size:15px; color:rgba(255,255,255,.7); line-height:1.65; }
+    .feature-2col-desc strong { color:#ffffff; }
+
+    /* ── Role list (accordion style, matches pepsodent.html "My Contribution") ── */
+    .role-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, auto);
+      grid-auto-flow: column;
+      column-gap: 48px;
+      margin-top: 24px;
+      margin-bottom: 0;
+    }
+    .role-row {
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .role-row:nth-child(1),
+    .role-row:nth-child(4) { border-top: none; }
+    .role-row-head {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 0;
+      transition: padding-left 0.2s;
+    }
+    .role-row:hover .role-row-head { padding-left: 8px; }
+    .role-row-head::after {
+      content: '+'; color: var(--lgray);
+      font-size: 20px; font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .role-row.open .role-row-head::after { transform: rotate(45deg); }
+    .role-icon { font-size: 16px; font-weight: 600; letter-spacing: var(--ls-normal); color: var(--lgray); flex-shrink: 0; width: 32px; }
+    .role-title { font-size: 22px; font-weight: 700; letter-spacing: var(--ls-tight); color: var(--black); flex: 1 1 auto; margin-bottom: 0; }
+    .role-desc-wrap {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding-bottom 0.35s ease;
+      padding-bottom: 0; padding-left: 44px;
+    }
+    .role-row.open .role-desc-wrap { max-height: 300px; padding-bottom: 20px; }
+    .role-desc { font-size: 19px; color: var(--gray); line-height: 1.6; letter-spacing: var(--ls-normal); }
+    .role-desc strong { color: var(--black); font-weight: 600; }
+    @media (max-width: 720px) {
+      .role-list { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; column-gap: 0; }
+      .role-row:nth-child(4) { border-top: 1px solid var(--line); }
+    }
+
+    /* ─────────────────────────────────────────────
+       CHANNEL CARDS
+    ───────────────────────────────────────────── */
+    .channel-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+    .channel-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      transition: box-shadow .2s;
+    }
+    .channel-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.06); }
+
+    .channel-top {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .channel-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .channel-icon-img {
+      width: 48px; height: 48px; border-radius: 12px;
+      object-fit: contain; flex-shrink: 0;
+      background: var(--white); border: 1.5px solid var(--line);
+      padding: 6px;
+    }
+    .channel-stats-inline {
+      display: flex; align-items: stretch; flex-wrap: wrap; gap: 12px;
+      border: 1.5px solid var(--line); border-radius: 100px;
+      padding: 0 26px; font-size: 16px; color: var(--gray);
+      letter-spacing: var(--ls-normal);
+    }
+    .channel-stats-inline > span:not(.ch-stats-sep) {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 0;
+    }
+    .channel-stats-inline strong {
+      font-size: 24px; font-weight: 800; color: var(--black);
+      letter-spacing: -0.04em;
+    }
+    .channel-stats-inline .ch-stats-sep {
+      width: 1.5px; align-self: stretch;
+      background: var(--line);
+      flex-shrink: 0;
+    }
+    .channel-stat-pills {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .channel-stat-pill {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 20px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 16px; color: var(--gray);
+      letter-spacing: var(--ls-normal);
+    }
+    .channel-stat-pill strong {
+      font-size: 21px; font-weight: 800; color: var(--black);
+      letter-spacing: -0.02em;
+    }
+    .channel-name {
+      font-size: 16px; font-weight: 700;
+      letter-spacing: var(--ls-normal);
+      color: var(--black);
+    }
+    .channel-sub {
+      font-size: 12px; color: var(--lgray);
+      font-weight: 400;
+    }
+
+    .channel-metrics {
+      display: flex; flex-wrap: wrap; gap: 16px;
+    }
+    .ch-metric {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .ch-metric-val {
+      font-size: 22px; font-weight: 800;
+      letter-spacing: -0.05em;
+      color: var(--black);
+    }
+    .ch-metric-lbl {
+      font-size: 11px; color: var(--lgray);
+      font-weight: 500; letter-spacing: 0.03em;
+    }
+
+    .channel-highlight {
+      margin-top: 18px;
+      padding: 12px 16px;
+      background: var(--bg);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.5;
+      letter-spacing: var(--ls-normal);
+    }
+    .channel-highlight strong { color: var(--black); }
+
+    .channel-screenshot {
+      margin-top: 16px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      display: block;
+      cursor: zoom-in;
+      transition: opacity .2s;
+    }
+    .channel-screenshot:hover { opacity: .88; }
+    .channel-screenshot img {
+      width: 100%;
+      display: block;
+    }
+    .tiktok-showcase {
+      margin-top: 32px;
+    }
+    .tiktok-showcase-label {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lgray);
+      margin-bottom: 14px;
+    }
+    .tiktok-video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .tiktok-video-card {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #1a1a1a, #000);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      transition: opacity .2s, transform .2s;
+    }
+    .tiktok-video-card:hover { opacity: .88; transform: translateY(-2px); }
+    .tiktok-video-card .tv-cover {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .tiktok-video-card .tv-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.1) 40%, rgba(0,0,0,.7) 100%);
+    }
+    .tiktok-video-card .tv-play {
+      position: relative; z-index: 1;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      border: 1.5px solid rgba(255,255,255,.35);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tiktok-video-card .tv-play svg { width: 20px; height: 20px; }
+    .tiktok-video-card .tv-label {
+      position: absolute; z-index: 1; left: 14px; right: 14px; bottom: 14px;
+      color: #fff; font-size: 12px; font-weight: 600;
+      letter-spacing: var(--ls-normal);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .pc-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .pc-gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      display: block;
+    }
+    .channel-screenshot-hint {
+      font-size: 11px;
+      color: var(--lgray);
+      text-align: right;
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .channel-analysis {
+      margin-top: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+    .channel-analysis.no-divider {
+      border-top: none;
+      padding-top: 0;
+    }
+    .ca-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .ca-row.stacked {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .ca-block {}
+    .ca-block.dark {
+      background: #222222;
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .ca-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lgray);
+      margin-bottom: 4px;
+    }
+    .ca-label.green { color: #16a34a; }
+    .ca-label.blue  { color: var(--blue); }
+    .ca-block.dark .ca-label.green { color: #4ade80; }
+    .ca-block.dark .ca-label.blue  { color: #60a5fa; }
+    .ca-block.dark .ca-label { font-size: 12px; }
+    .ca-text {
+      font-size: 12px; color: var(--gray);
+      line-height: 1.6; letter-spacing: var(--ls-normal);
+    }
+    .ca-text strong { color: var(--black); font-weight: 600; }
+    .ca-block.dark .ca-text { color: rgba(255,255,255,.8); font-size: 15px; line-height: 1.65; }
+    .ca-block.dark .ca-text strong { color: #fff; }
+
+    /* ─────────────────────────────────────────────
+       INSIGHT CALLOUT
+    ───────────────────────────────────────────── */
+    .insight {
+      border-left: 3px solid var(--red);
+      padding: 20px 24px;
+      background: rgba(230,51,41,.04);
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 40px;
+    }
+    .insight-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 8px;
+    }
+    .insight-text {
+      font-size: 15px;
+      color: var(--black);
+      font-weight: 500;
+      line-height: 1.6;
+      letter-spacing: var(--ls-normal);
+    }
+
+    .insight.blue-accent {
+      border-left-color: var(--blue);
+      background: rgba(37,99,255,.04);
+    }
+    .insight.blue-accent .insight-label { color: var(--blue); }
+
+    .insight.dark {
+      background: #222222;
+      border-left: none;
+      border-radius: 16px;
+      padding: 32px 36px;
+    }
+    .insight.dark .insight-label { color: #CCFF00; font-size: 16px; }
+    .insight.dark .insight-text {
+      font-size: 31px;
+      color: rgba(255,255,255,.85);
+      line-height: 1.4;
+      letter-spacing: -0.03em;
+    }
+
+    /* ─── 2-col chapter header ─── */
+    .ch-header-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .ch-header-2col .ch-title { margin-bottom: 0; font-size: clamp(32px, 4.7vw, 72px); }
+    .ch-header-2col .ch-lead {
+      font-size: 15px;
+      margin-bottom: 0;
+      padding-top: 8px;
+    }
+
+    /* ─────────────────────────────────────────────
+       CAMPAIGN TABLE
+    ───────────────────────────────────────────── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      font-size: 13px;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 10px 16px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lgray);
+      border-bottom: 1px solid var(--line);
+    }
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--black);
+      font-weight: 400;
+      letter-spacing: var(--ls-normal);
+      line-height: 1.4;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(0,0,0,.018); }
+    .data-table .td-lead {
+      font-weight: 700;
+      color: var(--black);
+    }
+    .data-table .td-badge {
+      display: inline-flex; align-items: center;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px; font-weight: 600;
+    }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-yellow { background: #fef9c3; color: #a16207; }
+    .badge-gray { background: #f3f4f6; color: #6b7280; }
+
+    /* ─────────────────────────────────────────────
+       SEO BAR CHART
+    ───────────────────────────────────────────── */
+    .seo-bars { margin-bottom: 48px; }
+    .seo-bar-row {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 14px;
+    }
+    .seo-bar-label {
+      font-size: 12px; font-weight: 500;
+      color: var(--black);
+      min-width: 220px;
+      white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+      letter-spacing: var(--ls-normal);
+    }
+    .seo-bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--line);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .seo-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: var(--black);
+      transition: width 1s ease;
+    }
+    .seo-bar-fill.blue { background: var(--blue); }
+    .seo-bar-fill.red { background: var(--red); }
+    .seo-bar-val {
+      font-size: 12px; font-weight: 700;
+      color: var(--black);
+      min-width: 56px;
+      text-align: right;
+      letter-spacing: -0.03em;
+    }
+
+    /* ─────────────────────────────────────────────
+       DASHBOARD SHOWCASE
+    ───────────────────────────────────────────── */
+    .dash-showcase {
+      background: var(--black);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .dash-header {
+      padding: 24px 32px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .dash-header-title {
+      font-size: 16px; font-weight: 700;
+      color: var(--white);
+      letter-spacing: var(--ls-normal);
+    }
+    .dash-header-sub {
+      font-size: 12px; color: rgba(255,255,255,.4);
+      margin-top: 2px;
+      letter-spacing: var(--ls-normal);
+    }
+    .dash-tag {
+      font-size: 11px; font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: rgba(34,197,94,.15);
+      color: #4ade80;
+      letter-spacing: 0.04em;
+    }
+    .dash-body { padding: 32px; }
+
+    .dash-kpi-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; margin-bottom: 28px;
+    }
+    .dash-kpi {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: 20px 20px 16px;
+    }
+    .dash-kpi-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 8px;
+    }
+    .dash-kpi-value {
+      font-size: 28px; font-weight: 900;
+      color: var(--white);
+      letter-spacing: var(--ls-tight);
+      line-height: 1;
+    }
+    .dash-kpi-value.accent { color: #CCFF00; }
+    .dash-kpi-note {
+      font-size: 11px; color: rgba(255,255,255,.3);
+      margin-top: 4px;
+      letter-spacing: var(--ls-normal);
+    }
+
+    .dash-funnel {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .funnel-row {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .funnel-label {
+      font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,.5);
+      min-width: 100px;
+    }
+    .funnel-bar-track {
+      flex: 1; height: 28px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.06);
+      overflow: hidden;
+    }
+    .funnel-bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      display: flex; align-items: center; padding-left: 12px;
+      font-size: 12px; font-weight: 700;
+      color: var(--white);
+    }
+    .funnel-num {
+      font-size: 12px; font-weight: 700;
+      color: rgba(255,255,255,.6);
+      min-width: 48px; text-align: right;
+    }
+
+    /* ─────────────────────────────────────────────
+       FEATURE LIST
+    ───────────────────────────────────────────── */
+    .feature-list {
+      display: flex; flex-direction: column; gap: 12px;
+      margin-bottom: 40px;
+    }
+    .feature-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 20px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      transition: box-shadow .2s;
+    }
+    .feature-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,.05); }
+    .feature-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .feature-text { }
+    .feature-name {
+      font-size: 14px; font-weight: 700;
+      color: var(--black);
+      margin-bottom: 3px;
+      letter-spacing: var(--ls-normal);
+    }
+    .feature-desc {
+      font-size: 13px; color: var(--gray);
+      line-height: 1.5;
+      letter-spacing: var(--ls-normal);
+    }
+
+    /* ─────────────────────────────────────────────
+       TIMELINE / PROCESS
+    ───────────────────────────────────────────── */
+    .timeline { margin-bottom: 48px; }
+    .tl-item {
+      display: flex; gap: 24px;
+      padding-bottom: 32px;
+      position: relative;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: 15px; top: 32px;
+      width: 1px;
+      bottom: 0;
+      background: var(--line);
+    }
+    .tl-item:last-child::before { display: none; }
+    .tl-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--black);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+    .tl-dot.red { background: var(--red); }
+    .tl-dot.blue { background: var(--blue); }
+    .tl-content { padding-top: 4px; }
+    .tl-title {
+      font-size: 20px; font-weight: 700;
+      color: var(--black); margin-bottom: 6px;
+      letter-spacing: var(--ls-normal);
+    }
+    .tl-body {
+      font-size: 17px; color: var(--gray);
+      line-height: 1.6; letter-spacing: var(--ls-normal);
+    }
+    .tl-body strong { color: var(--black); }
+
+    /* ─────────────────────────────────────────────
+       IMPACT SUMMARY
+    ───────────────────────────────────────────── */
+    .impact-hero {
+      background: #222222;
+      border-radius: 24px;
+      padding: 56px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .impact-hero::before, .impact-hero::after { display: none; content: none; }
+    .impact-title {
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: var(--ls-tight);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .impact-title span { color: #CCFF00; }
+    .impact-body {
+      font-size: 16px; color: rgba(255,255,255,.6);
+      line-height: 1.7; max-width: 600px;
+      letter-spacing: var(--ls-normal);
+      position: relative;
+    }
+    .impact-body strong { color: rgba(255,255,255,.9); }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .pillar-card {
+      background: #222222;
+      border: none;
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+    .pillar-num { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; color: #CCFF00; margin-bottom: 10px; }
+    .pillar-name {
+      font-size: 15px; font-weight: 800;
+      color: #CCFF00;
+      letter-spacing: var(--ls-normal);
+      margin-bottom: 8px;
+    }
+    .pillar-desc {
+      font-size: 13px; color: rgba(255,255,255,.7);
+      line-height: 1.55; letter-spacing: var(--ls-normal);
+    }
+
+    /* ─────────────────────────────────────────────
+       HERO - pepsodent-style
+    ───────────────────────────────────────────── */
+    #overview {
+      padding: 0; border-bottom: none;
+      background: #111;
+    }
+    .hero-ss {
+      position: relative; height: 520px; overflow: hidden;
+      background: #111;
+    }
+    .hero-ss-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; filter: brightness(.3) saturate(.6);
+    }
+    .hero-ss-inner {
+      position: relative; z-index: 2; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 56px 72px;
+    }
+    .hero-ss-back {
+      position: absolute; top: 36px; left: 72px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; letter-spacing: var(--ls-normal);
+      color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s;
+      white-space: nowrap;
+    }
+    .hero-ss-back:hover { color: var(--white); }
+    .hero-ss-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-ss-chips-below { margin-bottom: 0; margin-top: 20px; }
+    .hero-ss-chip {
+      padding: 5px 14px; border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.08); backdrop-filter: blur(8px);
+      border-radius: 100px; font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; color: rgba(255,255,255,.8); text-transform: uppercase;
+    }
+    .hero-ss-title {
+      font-size: clamp(38px, 5.3vw, 78px); font-weight: 400;
+      letter-spacing: -0.06em; line-height: 0.95; color: var(--white);
+    }
+    .hero-ss-title .lime {
+      color: #CCFF00;
+      font-size: clamp(33px, 4.8vw, 73px);
+    }
+    .hero-ss-title .red  { color: var(--red); }
+
+    /* ─────────────────────────────────────────────
+       STATS MARQUEE
+    ───────────────────────────────────────────── */
+    .stats-bar-ss { background: #222; overflow: hidden; padding: 36px 0; }
+    .stats-inner-ss {
+      display: flex; align-items: center; gap: 48px;
+      width: max-content; animation: marquee-ss 30s linear infinite;
+    }
+    .stats-inner-ss:hover { animation-play-state: paused; }
+    @keyframes marquee-ss { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .ss-bullet { width: 16px; height: 16px; border-radius: 50%; background: #CCFF00; flex-shrink: 0; }
+    .ss-item { display: flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+    .ss-n { font-weight: 700; font-size: 30px; letter-spacing: var(--ls-tight); color: #CCFF00; }
+    .ss-l { font-weight: 300; font-size: 30px; letter-spacing: var(--ls-tight); color: #fff; }
+
+    /* ─────────────────────────────────────────────
+       OVERVIEW BODY (subtitle + tags)
+    ───────────────────────────────────────────── */
+    .overview-body {
+      background: var(--white); padding: 48px 72px 56px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: start;
+      border-bottom: 1px solid var(--line);
+    }
+    .overview-subtitle {
+      font-size: clamp(16px, 1.6vw, 20px); font-weight: 400;
+      color: var(--gray); line-height: 1.65;
+      letter-spacing: var(--ls-normal);
+      margin-bottom: 0;
+    }
+    .overview-subtitle strong { color: var(--black); font-weight: 600; }
+    .overview-tags { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+    .overview-tag {
+      padding: 6px 16px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 15px; font-weight: 500;
+      color: var(--gray);
+      letter-spacing: var(--ls-normal);
+    }
+
+    /* ─────────────────────────────────────────────
+       SCROLL REVEAL
+    ───────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      :root { --sidebar-w: 200px; }
+      .chapter { padding: 72px 48px; }
+      .stat-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .dash-kpi-row { grid-template-columns: repeat(2, 1fr); }
+      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 800px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .chapter { padding: 56px 28px; }
+      .content-cols { grid-template-columns: 1fr; }
+      .content-cols.thirds { grid-template-columns: 1fr; }
+      .channel-grid { grid-template-columns: 1fr; }
+      .stat-grid-3 { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .overview-stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cur-dot" id="curDot"></div>
+  <div class="cur-ring" id="curRing"></div>
+
+  <!-- TOP NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo-portfolio.svg" alt="Davian Harris" />
+    </a>
+    <ul class="nav-center">
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contacts</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="index.html#contact" class="nav-btn">
+        Contact Me
+        <span class="nav-btn-icon">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 15L15 3M15 3H7M15 3v8"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-label">Chapters</div>
+      <ul class="sidebar-nav" id="sidebarNav">
+        <li><a href="#overview" class="active">
+          <span class="sidebar-num">01</span>Overview
+        </a></li>
+        <li><a href="#social">
+          <span class="sidebar-num">02</span>Social Media
+        </a></li>
+        <li><a href="#landing">
+          <span class="sidebar-num">03</span>Landing Page
+        </a></li>
+        <li><a href="#crm">
+          <span class="sidebar-num">04</span>CRM Dashboard
+        </a></li>
+        <li><a href="#impact">
+          <span class="sidebar-num">05</span>Impact Summary
+        </a></li>
+      </ul>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-meta">
+        <div class="sidebar-meta-box">
+          <strong>Client</strong>
+          <p>Lidya Veronika · Indonesia</p>
+        </div>
+        <div class="sidebar-meta-box">
+          <strong>Engagement</strong>
+          <p>3 Months</p>
+        </div>
+        <div class="sidebar-meta-box">
+          <strong>Role</strong>
+          <p>Social Media Management · Landing Page · CRM Dashboard</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+      <!-- ══════════════════════════════════════
+           01 - OVERVIEW
+      ══════════════════════════════════════ -->
+      <section id="overview">
+
+        <!-- HERO -->
+        <div class="hero-ss">
+          <img src="lidya-veronika-bg.jpg" alt="Lidya Veronika" class="hero-ss-img" />
+          <div class="hero-ss-inner">
+            <a href="index.html" class="hero-ss-back">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"/></svg>
+              All Projects
+            </a>
+            <h1 class="hero-ss-title">
+              Lidya Veronika<span class="red">.</span><br>
+              <span class="lime">Personal Brand, Landing Page<br>&amp; CRM, Built From Scratch.</span>
+            </h1>
+            <div class="hero-ss-chips hero-ss-chips-below">
+              <div class="hero-ss-chip">Social Media Management</div>
+              <div class="hero-ss-chip">Landing Page · CRM Dashboard</div>
+              <div class="hero-ss-chip">3 Months</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STATS MARQUEE -->
+        <div class="stats-bar-ss">
+          <div class="stats-inner-ss">
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">6.4M</span><span class="ss-l">Total Views Across Channels</span></div>
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">179</span><span class="ss-l">Leads, Fully Organic</span></div>
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">3</span><span class="ss-l">Channels Managed</span></div>
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">1</span><span class="ss-l">Landing Page Built</span></div>
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">1</span><span class="ss-l">CRM Dashboard Built</span></div>
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">3 mo</span><span class="ss-l">Engagement</span></div>
+            <!-- duplicate for seamless loop -->
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">6.4M</span><span class="ss-l">Total Views Across Channels</span></div>
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">179</span><span class="ss-l">Leads, Fully Organic</span></div>
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">3</span><span class="ss-l">Channels Managed</span></div>
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">1</span><span class="ss-l">Landing Page Built</span></div>
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">1</span><span class="ss-l">CRM Dashboard Built</span></div>
+            <div class="ss-bullet"></div><div class="ss-item"><span class="ss-n">3 mo</span><span class="ss-l">Engagement</span></div>
+          </div>
+        </div>
+
+        <!-- OVERVIEW BODY: subtitle + tags -->
+        <div class="overview-body">
+          <p class="overview-subtitle">
+            Lidya Veronika needed her personal brand run as one connected system, not three separate freelance gigs.
+            <strong>I manage her content across Instagram, Facebook, and TikTok, built the landing page that turns that reach into leads, and built the CRM dashboard that tracks every one of them.</strong>
+          </p>
+          <div class="overview-tags">
+            <span class="overview-tag">Social Media Management</span>
+            <span class="overview-tag">Landing Page</span>
+            <span class="overview-tag">CRM Dashboard</span>
+            <span class="overview-tag">Content Strategy</span>
+            <span class="overview-tag">Organic Lead Generation</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           02 - SOCIAL MEDIA
+      ══════════════════════════════════════ -->
+      <section id="social" class="chapter reveal" style="border-bottom:none; padding-bottom:48px;">
+        <div class="ch-eyebrow">
+          <span class="ch-num">02</span>
+          <span class="ch-tag blue">Social Media</span>
+        </div>
+        <h2 class="ch-title">3 Channels<br><em>One Voice</em></h2>
+        <p class="ch-lead" style="max-width:none;">
+          I manage Instagram, Facebook, and TikTok for Lidya Veronika's personal brand, coordinated as one content system rather than three separate accounts.
+        </p>
+
+        <div class="channel-grid">
+
+          <!-- INSTAGRAM -->
+          <div class="channel-card">
+            <div class="channel-top" style="justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+              <a href="https://www.instagram.com/smartmomvestor" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;">
+                <img src="instagram.png" alt="Instagram" class="channel-icon-img" />
+                <div>
+                  <div class="channel-name">Instagram</div>
+                  <div class="channel-sub">@smartmomvestor</div>
+                </div>
+              </a>
+              <div class="channel-stat-pills">
+                <span class="channel-stat-pill"><strong>2.9M</strong> Total Views</span>
+                <span class="channel-stat-pill"><strong>26.3K</strong> Total Likes</span>
+                <span class="channel-stat-pill"><strong>3K</strong> Total Comments</span>
+                <span class="channel-stat-pill"><strong>763K</strong> Highest Views</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FACEBOOK -->
+          <div class="channel-card">
+            <div class="channel-top" style="justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+              <a href="https://www.facebook.com/profile.php?id=61589583197169" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;">
+                <img src="facebook.png" alt="Facebook" class="channel-icon-img" />
+                <div>
+                  <div class="channel-name">Facebook</div>
+                  <div class="channel-sub">Lidya Veronika</div>
+                </div>
+              </a>
+              <div class="channel-stat-pills">
+                <span class="channel-stat-pill"><strong>3.1M</strong> Total Views</span>
+                <span class="channel-stat-pill"><strong>59.5K</strong> Total Likes</span>
+                <span class="channel-stat-pill"><strong>7.1K</strong> Total Comments</span>
+                <span class="channel-stat-pill"><strong>1.3M</strong> Highest Views</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TIKTOK -->
+          <div class="channel-card">
+            <div class="channel-top" style="justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+              <a href="https://www.tiktok.com/@smartmomvestor" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;">
+                <img src="tiktok.png" alt="TikTok" class="channel-icon-img" />
+                <div>
+                  <div class="channel-name">TikTok</div>
+                  <div class="channel-sub">@smartmomvestor</div>
+                </div>
+              </a>
+              <div class="channel-stat-pills">
+                <span class="channel-stat-pill"><strong>447.1K</strong> Total Views</span>
+                <span class="channel-stat-pill"><strong>7.8K</strong> Total Likes</span>
+                <span class="channel-stat-pill"><strong>1.2K</strong> Total Comments</span>
+                <span class="channel-stat-pill"><strong>243.1K</strong> Highest Views</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="insight dark" style="margin-top:32px;">
+          <div class="insight-label">Combined Reach</div>
+          <div class="insight-text" style="font-size:18px;">
+            Across Instagram, Facebook, and TikTok combined, Lidya Veronika's personal brand generated over <strong>6.4M total views</strong>, roughly <strong>93.6K likes</strong>, and <strong>11.3K comments</strong>, with a single Facebook post alone reaching 1.3M views.
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           03 - LANDING PAGE
+      ══════════════════════════════════════ -->
+      <section id="landing" class="chapter reveal" style="padding-top:48px; border-bottom:none; padding-bottom:48px;">
+        <div class="ch-eyebrow">
+          <span class="ch-num">03</span>
+          <span class="ch-tag red">Landing Page</span>
+        </div>
+        <h2 class="ch-title">A Landing Page<br><em>Built To Convert</em></h2>
+        <p class="ch-lead" style="max-width:none;">
+          Reach on Instagram, Facebook, and TikTok needed somewhere to go. I designed and built the landing page that turns that content reach into actual leads, the entry point that feeds directly into the CRM.
+        </p>
+
+        <!-- Landing Page Screenshot -->
+        <div class="reveal" style="margin-bottom:32px;">
+          <a class="channel-screenshot" href="lidya-landing.png" target="_blank" rel="noopener" style="cursor:zoom-in;">
+            <img src="lidya-landing.png" alt="Lidya Veronika Landing Page" style="width:100%;display:block;border-radius:10px;" />
+          </a>
+          <div class="channel-screenshot-hint">Click to view full size ↗</div>
+        </div>
+
+        <div class="insight dark">
+          <div class="insight-label">Why This Exists</div>
+          <div class="insight-text" style="font-size:18px;">
+            Social content builds attention, but attention alone doesn't convert. The landing page is where that attention becomes a lead: a single, focused destination that funnels traffic from every channel into one pipeline instead of leaving it scattered across DMs and comments.
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           04 - CRM DASHBOARD
+      ══════════════════════════════════════ -->
+      <section id="crm" class="chapter reveal" style="padding-top:48px; border-bottom:none; padding-bottom:48px;">
+        <div class="ch-eyebrow">
+          <span class="ch-num">04</span>
+          <span class="ch-tag">Systems</span>
+        </div>
+        <h2 class="ch-title">179 Leads<br><em>Fully Organic</em></h2>
+        <p class="ch-lead" style="max-width:none;">
+          I built a CRM dashboard to track every lead the landing page captures, no paid ads behind these numbers, just content and a system built to catch what it generates.
+        </p>
+
+        <div class="stat-grid stat-grid-2 reveal">
+          <div class="stat-cell">
+            <div class="stat-label">Total Leads</div>
+            <div class="stat-value" style="font-weight:600;">179</div>
+            <div class="stat-note">Captured via the landing page</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Lead Source</div>
+            <div class="stat-value" style="font-weight:600;">100% Organic</div>
+            <div class="stat-note">Zero paid ad spend</div>
+          </div>
+        </div>
+
+        <!-- CRM Screenshot -->
+        <div class="reveal" style="margin-bottom:32px;">
+          <a class="channel-screenshot" href="lidya-crm-dashboard.png" target="_blank" rel="noopener" style="cursor:zoom-in;">
+            <img src="lidya-crm-dashboard.png" alt="Lidya Veronika CRM Dashboard" style="width:100%;display:block;border-radius:10px;" />
+          </a>
+          <div class="channel-screenshot-hint">Click to view full size ↗</div>
+        </div>
+
+        <div class="insight dark">
+          <div class="insight-label">Why This Number Matters</div>
+          <div class="insight-text" style="font-size:18px;">
+            179 leads with zero ad spend means every one of them came from organic content and a landing page doing its job. No cost-per-lead to justify, just the compounding effect of consistent content and a system that captures what it earns.
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           05 - IMPACT SUMMARY
+      ══════════════════════════════════════ -->
+      <section id="impact" class="chapter reveal" style="padding-top:48px;">
+
+        <div class="ch-eyebrow">
+          <span class="ch-num">05</span>
+          <span class="ch-tag">Impact</span>
+        </div>
+        <div class="ch-header-2col">
+          <h2 class="ch-title">The Full <em>Picture</em></h2>
+          <p class="ch-lead" style="max-width:none;">
+            Three months of building, posting, and iterating. Not just running her socials: I built the system that turns Lidya Veronika's personal brand into tracked, organic leads.
+          </p>
+        </div>
+
+        <div class="impact-hero reveal">
+          <div class="impact-title">
+            One person.<br>
+            <span>The output of a full team.</span>
+          </div>
+          <div class="impact-body">
+            A typical setup would need a social media manager, a web developer, and a CRM tool subscription to cover what I've built here. <strong>I run the content, build the pages, and build the systems that connect them, all at once.</strong>
+          </div>
+        </div>
+
+        <div class="pillars-grid reveal">
+          <div class="pillar-card">
+            <div class="pillar-num">01</div>
+            <div class="pillar-name">3 Channels Managed</div>
+            <div class="pillar-desc">Instagram, Facebook, and TikTok, run as one coordinated content system, not three separate accounts.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-num">02</div>
+            <div class="pillar-name">6.4M+ Total Views</div>
+            <div class="pillar-desc">Combined reach across Instagram, Facebook, and TikTok in 3 months, including a single Facebook post reaching 1.3M views.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-num">03</div>
+            <div class="pillar-name">Landing Page Built</div>
+            <div class="pillar-desc">Designed and built from scratch as the single destination that turns social reach into actual leads.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-num">04</div>
+            <div class="pillar-name">179 Leads, Zero Ad Spend</div>
+            <div class="pillar-desc">Every lead tracked in a custom CRM dashboard, generated entirely organically, with no paid ads behind the numbers.</div>
+          </div>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div class="reveal" style="margin-top:48px; background:#0d0d0d; border-radius:24px; padding:64px 64px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;">
+
+          <!-- Left: headline -->
+          <div>
+            <div style="font-size:11px; font-weight:800; letter-spacing:0.18em; text-transform:uppercase; color:#555; margin-bottom:28px;">Let's Work Together</div>
+            <div style="font-size:clamp(32px,3.6vw,52px); font-weight:900; color:#ffffff; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:16px;">
+              Ready to build your one marketing system with AI automation?
+            </div>
+            <div style="font-size:clamp(28px,3vw,44px); font-weight:900; color:#CCFF00; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:40px;">
+              Let's talk!
+            </div>
+            <a href="mailto:haafizhdfw13@gmail.com" style="display:inline-block; font-size:16px; font-weight:500; color:#ffffff; text-decoration:none; border-bottom:1px solid #333; padding-bottom:4px; letter-spacing:var(--ls-normal); margin-bottom:36px; transition:border-color .2s;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='#333'">haafizhdfw13@gmail.com</a>
+            <div style="display:flex; gap:28px;">
+              <a href="https://www.instagram.com/haafizhdfw/" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#444'">Instagram</a>
+              <a href="#" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#444'">Behance</a>
+              <a href="https://www.linkedin.com/in/haafizhdfw/" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#444'">LinkedIn</a>
+              <a href="https://www.tiktok.com/@haafizhdfw" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#444'">TikTok</a>
+            </div>
+          </div>
+
+          <!-- Right: form -->
+          <form action="https://formspree.io/f/xpwrlknq" method="POST" style="display:flex; flex-direction:column; gap:14px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <input type="text" name="name" placeholder="Full Name" required style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
+              <input type="email" name="email" placeholder="Email Address" required style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
+            </div>
+            <input type="text" name="business" placeholder="Business / Brand Name" style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
+            <input type="text" name="need" placeholder="What do you need?" style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
+            <textarea name="message" placeholder="Tell me about your project..." rows="5" style="width:100%; padding:18px 20px; background:#ffffff; border:none; border-radius:20px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; resize:none; letter-spacing:var(--ls-normal);"></textarea>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-top:8px;">
+              <button type="submit" style="display:inline-flex; align-items:center; gap:0; padding:10px 10px 10px 28px; background:#CCFF00; color:#0d0d0d; font-size:16px; font-weight:700; font-family:inherit; border:none; border-radius:100px; cursor:pointer; letter-spacing:var(--ls-normal); transition:background .2s, transform .15s;" onmouseover="this.style.background='#b8e600';this.style.transform='scale(1.03)'" onmouseout="this.style.background='#CCFF00';this.style.transform='scale(1)'">
+                Let's Build
+                <span style="width:40px;height:40px;background:#0d0d0d;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-left:12px;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#CCFF00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+                </span>
+              </button>
+              <a href="index.html" style="font-size:13px; color:rgba(255,255,255,.35); text-decoration:none; letter-spacing:var(--ls-normal); transition:color .2s;" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.35)'">← Back to Portfolio</a>
+            </div>
+          </form>
+
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    /* ── Custom cursor ── */
+    const dot  = document.getElementById('curDot');
+    const ring = document.getElementById('curRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function raf() {
+      dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top  = ry + 'px';
+      requestAnimationFrame(raf);
+    })();
+
+    /* ── Sidebar active chapter tracking ── */
+    const sections = document.querySelectorAll('.chapter, #overview');
+    const links    = document.querySelectorAll('#sidebarNav a');
+    const NAV_H    = 72;
+
+    function onScroll() {
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY + NAV_H + 80 >= sec.offsetTop) current = sec.id;
+      });
+      links.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ── Scroll reveal ── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ── Role list toggle (accordion) ── */
+    document.querySelectorAll('.role-list').forEach(list => {
+      const rows = list.querySelectorAll('.role-row');
+      rows.forEach(row => {
+        row.querySelector('.role-row-head').addEventListener('click', () => {
+          const isOpen = row.classList.contains('open');
+          rows.forEach(el => el.classList.remove('open'));
+          if (!isOpen) row.classList.add('open');
+        });
+      });
+    });
+  </script>
+
+  <script src="https://bridgely-dashboard.vercel.app/widget.js" data-org-id="" async></script>
+</body>
+</html>
