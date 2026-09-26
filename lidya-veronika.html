@@ -1122,6 +1122,8 @@
       transform: none;
     }
 
+    .show-mobile { display: none; }
+
     /* ─────────────────────────────────────────────
        RESPONSIVE
     ───────────────────────────────────────────── */
@@ -1142,6 +1144,44 @@
       .stat-grid-3 { grid-template-columns: 1fr; }
       .pillars-grid { grid-template-columns: 1fr; }
       .overview-stats-bar { grid-template-columns: repeat(2, 1fr); }
+
+      .hero-ss-inner { padding: 40px 28px; }
+      .hero-ss-back { left: 28px; top: 24px; }
+      .overview-body { padding: 32px 28px 40px; grid-template-columns: 1fr; gap: 24px; }
+      .overview-tags { justify-content: flex-start; }
+
+      .stats-inner-ss { gap: 28px; }
+      .ss-bullet { width: 10px; height: 10px; }
+      .ss-n, .ss-l { font-size: 19px; }
+
+      .hero-ss-title { font-size: clamp(20px, 6.2vw, 40px); }
+      .hero-ss-title .lime { font-size: clamp(18px, 5.8vw, 37px); }
+
+      .channel-top { flex-wrap: wrap !important; }
+      .channel-stat-pills,
+      .channel-stat-pills.compact {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 8px; width: 100%; margin-top: 4px;
+      }
+      .channel-stat-pill,
+      .channel-stat-pills.compact .channel-stat-pill {
+        padding: 8px 14px; font-size: 12px;
+      }
+      .channel-stat-pill strong,
+      .channel-stat-pills.compact .channel-stat-pill strong {
+        font-size: 15px;
+      }
+
+      .hide-mobile { display: none; }
+      .show-mobile { display: inline; }
+
+      .ch-header-2col { grid-template-columns: 1fr; gap: 16px; align-items: start; }
+      .ch-header-2col .ch-title { font-size: clamp(38px, 5.3vw, 78px); }
+
+      .impact-hero { padding: 36px 24px; }
+
+      .cta-box { padding: 40px 24px !important; grid-template-columns: 1fr !important; gap: 32px !important; }
+      .cta-form-row { grid-template-columns: 1fr !important; }
     }
 
   </style>
@@ -1516,12 +1556,12 @@
           <div class="stat-cell">
             <div class="stat-label">Total Leads</div>
             <div class="stat-value" style="font-weight:600;">174</div>
-            <div class="stat-note">Captured via the landing page</div>
+            <div class="stat-note hide-mobile">Captured via the landing page</div>
           </div>
           <div class="stat-cell">
             <div class="stat-label">Lead Source</div>
-            <div class="stat-value" style="font-weight:600;">100% Organic</div>
-            <div class="stat-note">Zero paid ad spend</div>
+            <div class="stat-value" style="font-weight:600;">100%<span class="hide-mobile"> Organic</span></div>
+            <div class="stat-note"><span class="show-mobile">Organic, </span>Zero paid ad spend</div>
           </div>
         </div>
 
@@ -1599,7 +1639,7 @@
         </div>
 
         <!-- CONTACT FORM -->
-        <div class="reveal" style="margin-top:48px; background:#0d0d0d; border-radius:24px; padding:64px 64px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;">
+        <div class="reveal cta-box" style="margin-top:48px; background:#0d0d0d; border-radius:24px; padding:64px 64px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;">
 
           <!-- Left: headline -->
           <div>
@@ -1621,7 +1661,7 @@
 
           <!-- Right: form -->
           <form action="https://formspree.io/f/xpwrlknq" method="POST" style="display:flex; flex-direction:column; gap:14px;">
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div class="cta-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
               <input type="text" name="name" placeholder="Full Name" required style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
               <input type="email" name="email" placeholder="Email Address" required style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
             </div>
