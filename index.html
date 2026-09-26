@@ -242,6 +242,7 @@
     }
     .br-mobile { display: none; }
     .hide-mobile { display: inline; }
+    .br-desktop { display: inline; }
 
     /* Bottom-right copyright block */
     .hero-copyright {
@@ -1241,6 +1242,7 @@
       }
       .br-mobile { display: block; }
       .hide-mobile { display: none; }
+      .br-desktop { display: none; }
       .hero-photo {
         height: 52vh;
         right: -65px;
@@ -1352,7 +1354,7 @@
         margin-bottom: 20px;
       }
       .logo-img { height: 28px; }
-      .logos-inner { gap: 48px; }
+      .logos-inner { gap: 48px; animation-duration: 18s; }
 
       /* ── PROJECTS ── */
       #projects { padding: 56px 0 0; }
@@ -1364,11 +1366,11 @@
       .projects-head {
         padding: 0 20px;
         gap: 16px;
-        margin-bottom: 32px;
+        margin-bottom: 20px;
       }
       .projects-title {
         font-size: clamp(30px, 9vw, 40px);
-        letter-spacing: -0.02em;
+        letter-spacing: -0.09em;
       }
       .projects-meta-row { flex-direction: column; align-items: flex-start; gap: 12px; border-top: none; padding-top: 0; }
       .projects-filmstrip { display: none; }
@@ -1379,9 +1381,9 @@
         gap: 10px;
         flex-wrap: wrap;
       }
-      .cat-num { font-size: 20px; }
-      .cat-name { font-size: 20px; }
-      .cat-desc { font-size: 13px; margin-left: 0; width: 100%; }
+      .cat-num { font-size: 26px; }
+      .cat-name { font-size: 26px; }
+      .cat-desc { font-size: clamp(11px, 3.3vw, 13px); margin-left: 0; width: 100%; white-space: nowrap; }
 
       /* Project grid cards */
       .project-grid { padding: 0 20px 40px; gap: 16px; }
@@ -1391,8 +1393,8 @@
       .proj-card-badge { width: 36px; height: 36px; font-size: 13px; }
       .proj-card-tag { font-size: 11px; padding: 5px 12px; }
       .proj-card-featured { min-height: 400px; }
+      .proj-card-metrics { display: none; }
       .proj-card-tagline { font-size: 12px; margin-bottom: 12px; }
-      .proj-card-metrics .metric-chip { font-size: 9px; padding: 4px 10px; }
 
       /* ── CONTACT ── */
       #contact {
@@ -1405,7 +1407,7 @@
         text-align: left;
       }
       .contact-headline {
-        font-size: clamp(36px, 11vw, 52px);
+        font-size: clamp(24px, 7vw, 34px);
         letter-spacing: -0.07em;
         margin-bottom: 28px;
       }
@@ -1458,7 +1460,7 @@
       .hero-photo { height: 46vh; }
       .about-hi { font-size: clamp(30px, 9.5vw, 42px); }
       .projects-title { font-size: clamp(26px, 9vw, 34px); }
-      .contact-headline { font-size: clamp(32px, 10vw, 46px); }
+      .contact-headline { font-size: clamp(24px, 7.5vw, 32px); }
       .proj-card-featured { min-height: 340px; }
     }
   </style>
@@ -1801,9 +1803,9 @@
   <!-- ══════════════ PROJECTS ══════════════ -->
   <section id="projects">
     <div class="projects-statement reveal">
-      <h2 class="statement-headline">Clear Systems. Creative Execution.<br>Data-Backed. Always Building.</h2>
+      <h2 class="statement-headline">Clear Systems.<span class="br-mobile"></span> Creative Execution.<br>Data-Backed. Always Building.</h2>
       <div class="statement-row">
-        <div class="statement-label">Engineer. Strategize.<br>Create. Optimize.</div>
+        <div class="statement-label">Engineer. Strategize. <br class="br-desktop">Create. Optimize.</div>
         <div class="statement-body">
           <p>Davian Harris, a full-stack digital marketer based in Indonesia. I build the systems, run the channels, and read the data behind every campaign. My process is structured, collaborative, and always curious about what actually moves the needle.</p>
         </div>
@@ -1862,7 +1864,7 @@
           </div>
         </div>
         <div class="proj-card-bottom">
-          <h3 class="proj-card-name">Lidya Veronika - Personal Account</h3>
+          <h3 class="proj-card-name">Lidya Veronika<span class="hide-mobile"> - Personal Account</span></h3>
           <div class="proj-card-tags">
             <span class="proj-card-tag">Social Media</span>
             <span class="proj-card-tag">Landing Page</span>
@@ -1987,7 +1989,7 @@
     <div class="contact-headline-side">
       <div class="contact-eyebrow">Let's Work Together</div>
       <h2 class="contact-headline reveal">
-        Ready to build your<br>one marketing system<br>with AI automation?<br><span class="hl-accent">Let's talk!</span>
+        Ready to build your<br class="br-desktop"> one<br class="br-mobile"> marketing system<br class="br-desktop"> with<br class="br-mobile"> AI automation?<br class="br-desktop"> <span class="hl-accent">Let's talk!</span>
       </h2>
       <a href="mailto:haafizhdfw13@gmail.com" class="contact-email">
         haafizhdfw13@gmail.com
