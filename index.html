@@ -240,6 +240,7 @@
       font-style: italic;
       font-weight: 700;
     }
+    .br-mobile { display: none; }
 
     /* Bottom-right copyright block */
     .hero-copyright {
@@ -1213,11 +1214,11 @@
       /* ── HERO ── */
       #hero {
         padding-top: 64px;
-        min-height: 100svh;
+        min-height: 92svh;
       }
       .hero-name-block {
         left: 20px;
-        top: 48%;
+        top: 38%;
         transform: translateY(-50%);
       }
       .hero-name {
@@ -1227,24 +1228,26 @@
       .hero-subtitle {
         font-size: clamp(28px, 9vw, 44px);
         margin-top: 8px;
+        margin-left: 2px;
       }
+      .br-mobile { display: block; }
       .hero-photo {
         height: 52vh;
-        right: -20px;
+        right: 8px;
       }
       .hero-tagline {
         left: 20px;
-        bottom: 24px;
-        font-size: 13px;
-        max-width: 65vw;
-        line-height: 1.5;
+        bottom: 10px;
+        font-size: 11px;
+        max-width: 80vw;
+        line-height: 1.4;
       }
       .hero-copyright {
         right: 20px;
-        bottom: 24px;
+        bottom: 10px;
       }
       .hero-year { font-size: 18px; }
-      .hero-year-desc { font-size: 11px; max-width: 140px; }
+      .hero-year-desc { font-size: 10px; max-width: 195px; line-height: 1.4; }
 
       /* ── STATS BAR ── */
       .stats-bar { padding: 28px 0; }
@@ -1486,7 +1489,7 @@
 
     <!-- Bottom-left tagline -->
     <div class="hero-tagline">
-      From content to <em>conversion</em>, <em>data-driven</em> decisions,<br />
+      From content to<span class="br-mobile"></span> <em>conversion</em>, <em>data-driven</em> decisions,<br />
       built into <em>one marketing system</em>.
     </div>
 
