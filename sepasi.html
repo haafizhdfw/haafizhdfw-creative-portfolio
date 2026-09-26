@@ -318,8 +318,15 @@
     .site-footer p { font-size: 12px; color: #444; }
 
     @media (max-width: 768px) {
-      nav { padding: 0 24px; }
+      /* ── NAV — matches index.html mobile ── */
+      :root { --nav-h: 64px; }
+      nav { padding: 0 20px; height: 64px; }
       .nav-center { display: none; }
+      .nav-logo img { height: 44px; }
+      .nav-btn { font-size: 14px; padding: 7px 7px 7px 18px; }
+      .nav-btn-icon { width: 32px; height: 32px; margin-left: 10px; }
+      .nav-btn-icon svg { width: 14px; height: 14px; }
+
       .section { padding: 56px 24px; }
       .hero-back { left: 24px; }
       .hero-inner { padding: 40px 24px; }
