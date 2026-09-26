@@ -1126,6 +1126,9 @@
     .show-mobile-block { display: none; }
     .show-mobile-flex { display: none; }
 
+    .cta-select.filled { color: #0d0d0d !important; }
+    .cta-select option { background: #ffffff; color: #0d0d0d; }
+
     /* ─────────────────────────────────────────────
        RESPONSIVE
     ───────────────────────────────────────────── */
@@ -1137,6 +1140,14 @@
       .pillars-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 800px) {
+      nav { padding: 0 20px; height: 64px; }
+      .nav-logo img { height: 44px; }
+      .nav-center { display: none; }
+      .nav-btn { font-size: 14px; padding: 7px 7px 7px 18px; }
+      .nav-btn-icon { width: 32px; height: 32px; margin-left: 10px; }
+      .nav-btn-icon svg { width: 14px; height: 14px; }
+      .layout { padding-top: 64px; }
+
       .sidebar { display: none; }
       .main { margin-left: 0; }
       .chapter { padding: 56px 28px; }
@@ -1167,11 +1178,11 @@
       }
       .channel-stat-pill,
       .channel-stat-pills.compact .channel-stat-pill {
-        padding: 8px 14px; font-size: 12px;
+        padding: 6px 10px; font-size: 10px; gap: 4px;
       }
       .channel-stat-pill strong,
       .channel-stat-pills.compact .channel-stat-pill strong {
-        font-size: 15px;
+        font-size: 12px;
       }
 
       .hide-mobile { display: none; }
@@ -1184,6 +1195,9 @@
       .ch-header-2col .ch-title { font-size: clamp(38px, 5.3vw, 78px); }
 
       .impact-hero { padding: 36px 24px; }
+
+      .insight.dark { padding: 24px; }
+      .insight.dark .insight-label { font-size: 12px; letter-spacing: 0.06em; white-space: nowrap; }
 
       .cta-box { padding: 40px 24px !important; grid-template-columns: 1fr !important; gap: 32px !important; }
       .cta-form-row { grid-template-columns: 1fr !important; }
@@ -1567,7 +1581,7 @@
           <div class="stat-cell">
             <div class="stat-label">Lead Source</div>
             <div class="stat-value" style="font-weight:600;">100%<span class="hide-mobile"> Organic</span></div>
-            <div class="stat-note"><span class="show-mobile">Organic, </span>Zero paid ad<span class="hide-mobile"> spend</span></div>
+            <div class="stat-note"><span class="show-mobile">Organic, </span><span class="hide-mobile">Zero</span><span class="show-mobile">no</span> paid ad<span class="hide-mobile"> spend</span></div>
           </div>
         </div>
 
@@ -1656,7 +1670,7 @@
             <div class="hide-mobile-block" style="font-size:clamp(28px,3vw,44px); font-weight:700; color:#CCFF00; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:40px;">
               Let's talk!
             </div>
-            <div class="show-mobile-block" style="font-size:clamp(28px,7vw,40px); font-weight:700; color:#ffffff; letter-spacing:var(--ls-tight); line-height:1.2; margin-bottom:32px;">
+            <div class="show-mobile-block" style="font-size:clamp(20px,6.5vw,28px); font-weight:700; color:#ffffff; letter-spacing:var(--ls-tight); line-height:1.25; margin-bottom:28px;">
               Ready to build your one marketing system with AI automation? <span style="color:#CCFF00;">Let's talk!</span>
             </div>
             <a href="mailto:haafizhdfw13@gmail.com" style="display:inline-block; font-size:16px; font-weight:500; color:#ffffff; text-decoration:none; border-bottom:1px solid #333; padding-bottom:4px; letter-spacing:var(--ls-normal); margin-bottom:36px; transition:border-color .2s;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='#333'">haafizhdfw13@gmail.com</a>
@@ -1675,7 +1689,15 @@
               <input type="email" name="email" placeholder="Email Address" required style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
             </div>
             <input type="text" name="business" placeholder="Business / Brand Name" style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
-            <input type="text" name="need" placeholder="What do you need?" style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; letter-spacing:var(--ls-normal);" />
+            <select name="need" class="cta-select" onchange="this.classList.add('filled')" style="width:100%; padding:16px 20px; background:#ffffff; border:none; border-radius:100px; font-size:15px; font-family:inherit; color:#aaaaaa; outline:none; letter-spacing:var(--ls-normal); cursor:pointer; -webkit-appearance:none;">
+              <option value="" disabled selected>What do you need?</option>
+              <option>Social Media Management</option>
+              <option>Paid Ads (Meta / Google)</option>
+              <option>SEO &amp; Landing Page Optimization</option>
+              <option>CRM &amp; AI Automation</option>
+              <option>Full-Stack Marketing System</option>
+              <option>Other</option>
+            </select>
             <textarea name="message" placeholder="Tell me about your project..." rows="5" style="width:100%; padding:18px 20px; background:#ffffff; border:none; border-radius:20px; font-size:15px; font-family:inherit; color:#0d0d0d; outline:none; resize:none; letter-spacing:var(--ls-normal);"></textarea>
             <div style="display:flex; align-items:center; justify-content:space-between; margin-top:8px;">
               <button type="submit" style="display:inline-flex; align-items:center; gap:0; padding:10px 10px 10px 28px; background:#CCFF00; color:#0d0d0d; font-size:16px; font-weight:700; font-family:inherit; border:none; border-radius:100px; cursor:pointer; letter-spacing:var(--ls-normal); transition:background .2s, transform .15s;" onmouseover="this.style.background='#b8e600';this.style.transform='scale(1.03)'" onmouseout="this.style.background='#CCFF00';this.style.transform='scale(1)'">
