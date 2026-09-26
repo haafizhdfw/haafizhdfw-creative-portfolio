@@ -241,6 +241,7 @@
       font-weight: 700;
     }
     .br-mobile { display: none; }
+    .hide-mobile { display: inline; }
 
     /* Bottom-right copyright block */
     .hero-copyright {
@@ -368,19 +369,23 @@
       position: relative;
       display: flex;
       align-items: center;
-      gap: clamp(6px, 1vw, 16px);
-      width: max-content;
-      min-width: 100%;
       border-bottom: 1px solid var(--line);
       background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
       background-size: 12.5% 100%;
       background-repeat: repeat-x;
       min-height: clamp(90px, 11.5vw, 205px);
+    }
+    .gs-row-track {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 1vw, 16px);
+      width: max-content;
+      min-width: 100%;
       will-change: transform;
     }
-    .gs-row-2 { padding-left: 16vw; }
-    .gs-row-3 { padding-left: 26vw; }
-    .gs-row-4 { padding-left: 38vw; }
+    .gs-row-2 .gs-row-track { padding-left: 16vw; }
+    .gs-row-3 .gs-row-track { padding-left: 26vw; }
+    .gs-row-4 .gs-row-track { padding-left: 38vw; }
     .gs-word {
       font-size: clamp(64px, 11vw, 190px);
       font-weight: 500;
@@ -427,6 +432,11 @@
       content: ''; width: 22px; height: 22px; border-radius: 50%;
       flex-shrink: 0;
       background: #0000FF; box-shadow: 0 0 10px rgba(0,0,255,0.5);
+      animation: blink-dot 1.4s ease-in-out infinite;
+    }
+    @keyframes blink-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(0,0,255,0.5); }
+      50% { opacity: 0.25; box-shadow: 0 0 4px rgba(0,0,255,0.2); }
     }
 
     /* Big intro heading */
@@ -1164,7 +1174,8 @@
       .hero-copyright { right: 24px; bottom: 90px; }
 
       #about { grid-template-columns: 1fr; padding: 80px 24px; }
-      .about-card-outer { max-width: 420px; position: static; margin-top: 0; }
+      .about-left { order: 2; }
+      .about-card-outer { max-width: 420px; position: static; margin-top: -80px; order: 1; }
       #logos { padding: 40px 0; }
       .logos-label { padding: 0 24px; }
       .projects-statement { padding: 0 24px; margin-bottom: 60px; }
@@ -1180,8 +1191,6 @@
       .gs-pan { position: static; width: 100%; top: auto; left: auto; transform: none !important; }
       .gs-labels { grid-template-columns: repeat(5, 1fr); padding: 0 24px; }
       .gs-grid { margin: 0 24px; }
-      .gs-row { background-size: 20% 100%; }
-      .gs-row-2, .gs-row-3, .gs-row-4 { padding-left: 0; }
       #contact { padding: 80px 24px; }
       footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -1231,6 +1240,7 @@
         margin-left: 2px;
       }
       .br-mobile { display: block; }
+      .hide-mobile { display: none; }
       .hero-photo {
         height: 52vh;
         right: -65px;
@@ -1252,20 +1262,21 @@
 
       /* ── STATS BAR ── */
       .stats-bar { padding: 28px 0; }
-      .stat-item { font-size: 26px; gap: 5px; }
-      .stat-n { font-size: 26px; }
-      .stat-l { font-size: 26px; }
-      .stat-bullet { width: 14px; height: 14px; }
+      .stats-inner { gap: 28px; }
+      .stat-item { font-size: 19px; gap: 5px; }
+      .stat-n { font-size: 19px; }
+      .stat-l { font-size: 19px; }
+      .stat-bullet { width: 10px; height: 10px; }
 
       /* ── ABOUT ── */
       #about {
         grid-template-columns: 1fr;
-        padding: 56px 20px;
+        padding: 56px 20px 24px;
         gap: 48px;
       }
       .available-tag { font-size: 22px; margin-bottom: 20px; }
       .about-hi {
-        font-size: clamp(34px, 10vw, 48px);
+        font-size: clamp(24px, 7.5vw, 34px);
         letter-spacing: -0.07em;
         margin-bottom: 28px;
       }
@@ -1275,17 +1286,18 @@
         margin-bottom: 16px;
       }
       .about-bio {
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.7;
       }
 
       /* Lanyard card */
       .about-card-outer {
         position: static;
-        margin-top: 0;
+        margin-top: -56px;
         width: 100%;
         max-width: 100%;
         align-items: center;
+        order: 1;
       }
       .lanyard-strap { width: 22px; height: 40px; }
       .about-card { border-radius: 24px; }
@@ -1295,22 +1307,42 @@
       }
       .about-card-photo { width: 90px; height: 90px; }
       .about-card-name { font-size: 22px; }
-      .about-card-role { font-size: 13px; }
+      .about-card-role { font-size: 11px; }
       .about-card-socials a { width: 36px; height: 36px; }
       .about-card-body { padding: 16px 24px 24px; }
-      .about-card-services-list li { font-size: 14px; padding: 12px 0; }
+      .about-card-footer { padding: 20px 24px 28px; }
+      .about-card-services-list li { font-size: 14px; padding: 0; }
+      .about-card-services-list li .svc-row { padding: 10px 0; }
+
+      .card-cta-row { flex-direction: row; align-items: center; gap: 10px; margin-bottom: 16px; }
+      .btn-getstarted { font-size: 15px; padding: 6px 6px 6px 16px; flex: 1 1 0; gap: 8px; }
+      .btn-getstarted-icon { width: 28px; height: 28px; }
+      .btn-getstarted-icon svg { width: 14px; height: 14px; }
+      .btn-mywork { font-size: 15px; padding: 0 14px; height: 40px; flex: 1 1 0; width: auto; white-space: nowrap; }
 
       /* ── GRID SHOWCASE ── */
-      .grid-showcase { padding: 48px 0 36px; }
+      .grid-showcase { padding: 8px 0 24px; }
       .gs-labels { display: none; }
-      .gs-grid { margin: 0 20px; border-left: none; border-right: none; }
-      .gs-row {
-        display: flex; flex-wrap: wrap; align-items: center;
-        gap: 8px 12px; background-image: none;
-        min-height: auto; padding: 14px 20px;
+      .gs-grid { margin: 0; position: relative; }
+      .gs-grid::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image: repeating-linear-gradient(
+          to right,
+          var(--line), var(--line) 1px,
+          transparent 1px, transparent 12.5%
+        );
       }
-      .gs-word { font-size: clamp(26px, 9vw, 40px); padding: 0; white-space: normal; }
-      .gs-dot { width: 18px; height: 18px; }
+      .gs-row { background-image: none; min-height: clamp(48px, 10vw, 72px); z-index: 1; }
+      .gs-row-track { width: 100%; min-width: 100%; }
+      .gs-word { font-size: clamp(36px, 10.5vw, 58px); }
+      .gs-dot { width: clamp(24px, 5.5vw, 38px); height: clamp(24px, 5.5vw, 38px); }
+      .gs-row-2 .gs-row-track { padding-left: 10vw; }
+      .gs-row-3 .gs-row-track { padding-left: 16vw; }
+      .gs-row-4 .gs-row-track { padding-left: 24vw; }
 
       /* ── LOGOS ── */
       #logos { padding: 32px 0; }
@@ -1539,10 +1571,9 @@
 
       <div class="about-hi reveal">
         Hi! I'm <span class="pill pill-name">Davian Harris</span><br>
-        a <span class="pill pill-role">Digital Marketing Systems Builder</span><br>
+        a <span class="pill pill-role">Digital Marketing<span class="hide-mobile"> Systems Builder</span></span><br>
         from <span class="pill pill-loc">Indonesia</span><br>
-        I turn strategy into systems,<br>
-        and let the data tell the story.
+        I turn strategy into<span class="br-mobile"></span> systems, and let<span class="br-mobile"></span> the data tell the story.
       </div>
 
       <div class="fun-fact-label reveal">Fun Fact About Me</div>
@@ -1708,26 +1739,34 @@
           <div class="gs-grid">
             <div class="gs-scene gs-scene-a">
               <div class="gs-row gs-row-1">
-                <div class="gs-dot" style="background:#CBFF00;"></div>
-                <div class="gs-word">Engineer</div>
+                <div class="gs-row-track">
+                  <div class="gs-dot" style="background:#CBFF00;"></div>
+                  <div class="gs-word">Engineer</div>
+                </div>
               </div>
               <div class="gs-row gs-row-2">
-                <div class="gs-dot" style="background:#2663FF;"></div>
-                <div class="gs-word">The</div>
-                <div class="gs-dot" style="background:#E6322A;"></div>
-                <div class="gs-word">Growth</div>
+                <div class="gs-row-track">
+                  <div class="gs-dot" style="background:#2663FF;"></div>
+                  <div class="gs-word">The</div>
+                  <div class="gs-dot" style="background:#E6322A;"></div>
+                  <div class="gs-word">Growth</div>
+                </div>
               </div>
             </div>
             <div class="gs-scene gs-scene-b">
               <div class="gs-row gs-row-3">
-                <div class="gs-dot" style="background:#CBFF00;"></div>
-                <div class="gs-word">Of</div>
-                <div class="gs-dot" style="background:#2663FF;"></div>
-                <div class="gs-word">Digital</div>
+                <div class="gs-row-track">
+                  <div class="gs-dot" style="background:#CBFF00;"></div>
+                  <div class="gs-word">Of</div>
+                  <div class="gs-dot" style="background:#2663FF;"></div>
+                  <div class="gs-word">Digital</div>
+                </div>
               </div>
               <div class="gs-row gs-row-4">
-                <div class="gs-dot" style="background:#E6322A;"></div>
-                <div class="gs-word">Marketing.</div>
+                <div class="gs-row-track">
+                  <div class="gs-dot" style="background:#E6322A;"></div>
+                  <div class="gs-word">Marketing.</div>
+                </div>
               </div>
             </div>
           </div>
@@ -2027,19 +2066,15 @@
       const showcase = document.querySelector('.grid-showcase');
       if (!showcase) return;
       const rows = [
-        { el: document.querySelector('.gs-row-1'), speed: -70 },
-        { el: document.querySelector('.gs-row-2'), speed:  55 },
-        { el: document.querySelector('.gs-row-3'), speed: -60 },
-        { el: document.querySelector('.gs-row-4'), speed:  85 }
+        { el: document.querySelector('.gs-row-1 .gs-row-track'), speed: -70 },
+        { el: document.querySelector('.gs-row-2 .gs-row-track'), speed:  55 },
+        { el: document.querySelector('.gs-row-3 .gs-row-track'), speed: -60 },
+        { el: document.querySelector('.gs-row-4 .gs-row-track'), speed:  85 }
       ].filter(r => r.el);
 
       let ticking = false;
       function update(){
         ticking = false;
-        if (window.innerWidth < 700) {
-          rows.forEach(r => { r.el.style.transform = 'none'; });
-          return;
-        }
         const rect = showcase.getBoundingClientRect();
         const vh = window.innerHeight;
         const total = rect.height + vh;
