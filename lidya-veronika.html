@@ -981,7 +981,7 @@
     .impact-hero::before, .impact-hero::after { display: none; content: none; }
     .impact-title {
       font-size: clamp(28px, 3vw, 44px);
-      font-weight: 900;
+      font-weight: 700;
       color: var(--white);
       letter-spacing: var(--ls-tight);
       line-height: 1.05;
@@ -1123,6 +1123,8 @@
     }
 
     .show-mobile { display: none; }
+    .show-mobile-block { display: none; }
+    .show-mobile-flex { display: none; }
 
     /* ─────────────────────────────────────────────
        RESPONSIVE
@@ -1174,6 +1176,9 @@
 
       .hide-mobile { display: none; }
       .show-mobile { display: inline; }
+      .hide-mobile-block { display: none !important; }
+      .show-mobile-block { display: block !important; }
+      .show-mobile-flex { display: flex !important; }
 
       .ch-header-2col { grid-template-columns: 1fr; gap: 16px; align-items: start; }
       .ch-header-2col .ch-title { font-size: clamp(38px, 5.3vw, 78px); }
@@ -1557,11 +1562,12 @@
             <div class="stat-label">Total Leads</div>
             <div class="stat-value" style="font-weight:600;">174</div>
             <div class="stat-note hide-mobile">Captured via the landing page</div>
+            <div class="stat-note show-mobile-block">via landing page</div>
           </div>
           <div class="stat-cell">
             <div class="stat-label">Lead Source</div>
             <div class="stat-value" style="font-weight:600;">100%<span class="hide-mobile"> Organic</span></div>
-            <div class="stat-note"><span class="show-mobile">Organic, </span>Zero paid ad spend</div>
+            <div class="stat-note"><span class="show-mobile">Organic, </span>Zero paid ad<span class="hide-mobile"> spend</span></div>
           </div>
         </div>
 
@@ -1644,14 +1650,17 @@
           <!-- Left: headline -->
           <div>
             <div style="font-size:11px; font-weight:800; letter-spacing:0.18em; text-transform:uppercase; color:#555; margin-bottom:28px;">Let's Work Together</div>
-            <div style="font-size:clamp(32px,3.6vw,52px); font-weight:900; color:#ffffff; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:16px;">
+            <div class="hide-mobile-block" style="font-size:clamp(32px,3.6vw,52px); font-weight:700; color:#ffffff; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:16px;">
               Ready to build your one marketing system with AI automation?
             </div>
-            <div style="font-size:clamp(28px,3vw,44px); font-weight:900; color:#CCFF00; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:40px;">
+            <div class="hide-mobile-block" style="font-size:clamp(28px,3vw,44px); font-weight:700; color:#CCFF00; letter-spacing:var(--ls-tight); line-height:1.05; margin-bottom:40px;">
               Let's talk!
             </div>
+            <div class="show-mobile-block" style="font-size:clamp(28px,7vw,40px); font-weight:700; color:#ffffff; letter-spacing:var(--ls-tight); line-height:1.2; margin-bottom:32px;">
+              Ready to build your one marketing system with AI automation? <span style="color:#CCFF00;">Let's talk!</span>
+            </div>
             <a href="mailto:haafizhdfw13@gmail.com" style="display:inline-block; font-size:16px; font-weight:500; color:#ffffff; text-decoration:none; border-bottom:1px solid #333; padding-bottom:4px; letter-spacing:var(--ls-normal); margin-bottom:36px; transition:border-color .2s;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='#333'">haafizhdfw13@gmail.com</a>
-            <div style="display:flex; gap:28px;">
+            <div class="hide-mobile-block" style="display:flex; gap:28px;">
               <a href="https://www.instagram.com/haafizhdfw/" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#444'">Instagram</a>
               <a href="#" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#444'">Behance</a>
               <a href="https://www.linkedin.com/in/haafizhdfw/" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#444'">LinkedIn</a>
@@ -1678,6 +1687,13 @@
               <a href="index.html" style="font-size:13px; color:rgba(255,255,255,.35); text-decoration:none; letter-spacing:var(--ls-normal); transition:color .2s;" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.35)'">← Back to Portfolio</a>
             </div>
           </form>
+
+          <div class="show-mobile-flex" style="gap:24px; flex-wrap:wrap;">
+            <a href="https://www.instagram.com/haafizhdfw/" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none;">Instagram</a>
+            <a href="#" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none;">Behance</a>
+            <a href="https://www.linkedin.com/in/haafizhdfw/" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none;">LinkedIn</a>
+            <a href="https://www.tiktok.com/@haafizhdfw" target="_blank" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#444; text-decoration:none;">TikTok</a>
+          </div>
 
         </div>
 
