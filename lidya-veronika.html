@@ -492,6 +492,9 @@
       font-size: 21px; font-weight: 800; color: var(--black);
       letter-spacing: -0.02em;
     }
+    .channel-stat-pills.compact { gap: 8px; }
+    .channel-stat-pills.compact .channel-stat-pill { padding: 7px 14px; font-size: 12px; }
+    .channel-stat-pills.compact .channel-stat-pill strong { font-size: 14px; }
     .channel-name {
       font-size: 16px; font-weight: 700;
       letter-spacing: var(--ls-normal);
@@ -1084,7 +1087,7 @@
     ───────────────────────────────────────────── */
     .overview-body {
       background: var(--white); padding: 48px 72px 56px;
-      display: grid; grid-template-columns: 1fr 1fr;
+      display: grid; grid-template-columns: 3fr 2fr;
       gap: 48px; align-items: start;
       border-bottom: 1px solid var(--line);
     }
@@ -1095,7 +1098,7 @@
       margin-bottom: 0;
     }
     .overview-subtitle strong { color: var(--black); font-weight: 600; }
-    .overview-tags { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+    .overview-tags { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; justify-content: flex-end; }
     .overview-tag {
       padding: 6px 16px;
       background: var(--bg);
@@ -1402,15 +1405,15 @@
 
           <!-- TIKTOK -->
           <div class="channel-card">
-            <div class="channel-top" style="justify-content: space-between; flex-wrap: wrap; gap: 20px;">
-              <a href="https://www.tiktok.com/@smartmomvestor" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;">
+            <div class="channel-top" style="justify-content: space-between; flex-wrap: nowrap; gap: 20px;">
+              <a href="https://www.tiktok.com/@smartmomvestor" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; flex-shrink:0;">
                 <img src="tiktok.png" alt="TikTok" class="channel-icon-img" />
                 <div>
                   <div class="channel-name">TikTok</div>
                   <div class="channel-sub">@smartmomvestor</div>
                 </div>
               </a>
-              <div class="channel-stat-pills">
+              <div class="channel-stat-pills compact">
                 <span class="channel-stat-pill"><strong>447.1K</strong> Total Views</span>
                 <span class="channel-stat-pill"><strong>7.8K</strong> Total Likes</span>
                 <span class="channel-stat-pill"><strong>1.2K</strong> Total Comments</span>
